@@ -12,7 +12,7 @@ namespace Capa_Modelo_Seguridad
     {
         public OdbcConnection conectar()
         {
-            OdbcConnection conectar = new OdbcConnection("Dsn=colchoneria");
+            OdbcConnection conectar = new OdbcConnection("Dsn=Spa");
 
             try
             {
