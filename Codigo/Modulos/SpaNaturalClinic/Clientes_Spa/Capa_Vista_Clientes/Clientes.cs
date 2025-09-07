@@ -5,17 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions; // NUEVO: para validar correo
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
 using Capa_Controlador_Cliente;
 using Capa_Modelo_Cliente;
 
@@ -23,8 +15,9 @@ namespace Capa_Vista_Clientes
 {
     public partial class Clientes : Form
     {
-          Controlador cn = new Controlador();
+        Controlador cn = new Controlador();
         private readonly string sTabla = "tbl_clientes";
+        private readonly ToolTip toolTip1 = new ToolTip(); // NUEVO
 
         public Clientes()
         {
@@ -42,6 +35,19 @@ namespace Capa_Vista_Clientes
             // Eventos de tabla
             Dgv_Clientes.CellClick += Dgv_Clientes_CellClick;
             Dgv_Clientes.CellFormatting += Dgv_Clientes_CellFormatting;
+
+            // NUEVO: cuando el cuadro de búsqueda queda vacío, recargar todo
+            Txt_Buscar.TextChanged += Txt_Buscar_TextChanged;
+
+            // NUEVO: ToolTips de botones (se pueden mover al Load si prefieres)
+            toolTip1.SetToolTip(Btn_Nuevo, "Preparar formulario para nuevo cliente");
+            toolTip1.SetToolTip(Btn_Guardar, "Guardar un cliente nuevo");
+            toolTip1.SetToolTip(Btn_Actualizar, "Modificar el cliente seleccionado");
+            toolTip1.SetToolTip(Btn_Buscar, "Buscar clientes por nombre");
+            toolTip1.SetToolTip(Btn_Eliminar, "Eliminar el cliente seleccionado");
+            toolTip1.SetToolTip(Btn_Cancelar, "Cancelar operación y limpiar formulario");
+            toolTip1.SetToolTip(Btn_Reporte, "Generar reporte de clientes");
+            toolTip1.SetToolTip(Btn_Ayuda, "Abrir ayuda del módulo");
         }
 
         private void Clientes_Load(object sender, EventArgs e)
@@ -53,8 +59,22 @@ namespace Capa_Vista_Clientes
             this.AcceptButton = Btn_Guardar;
             this.CancelButton = Btn_Cancelar;
 
-            if (Gpb_Form != null) Gpb_Form.Text = "Formulario";
-            if (Gpb_Lista != null) Gpb_Lista.Text = "Listado";
+            // NUEVO: TabIndex en el orden solicitado
+            Txt_Id.TabIndex = 0;
+            Txt_Nombre.TabIndex = 1;
+            Txt_Telefono.TabIndex = 2;
+            Txt_Correo.TabIndex = 3;
+            Chk_Vip.TabIndex = 4;
+            Txt_Buscar.TabIndex = 5;
+
+            Btn_Nuevo.TabIndex = 6;
+            Btn_Guardar.TabIndex = 7;
+            Btn_Actualizar.TabIndex = 8;
+            Btn_Buscar.TabIndex = 9;
+            Btn_Eliminar.TabIndex = 10;
+            Btn_Cancelar.TabIndex = 11;
+            Btn_Reporte.TabIndex = 12;
+            Btn_Ayuda.TabIndex = 13;
         }
 
         // =================== CARGA Y ESTADO UI ===================
@@ -102,6 +122,9 @@ namespace Capa_Vista_Clientes
 
             // Regresa a modo lectura
             fun_estado_edicion(false);
+
+            // NUEVO: al limpiar, también reiniciamos la grilla completa
+            actualizardatagriew();
         }
 
         private Cliente fun_capturar()
@@ -151,6 +174,44 @@ namespace Capa_Vista_Clientes
             return true;
         }
 
+        // NUEVO: validación de campos obligatorios para Guardar/Actualizar
+        private bool fun_validar_obligatorios()
+        {
+            if (string.IsNullOrWhiteSpace(Txt_Nombre.Text))
+            {
+                MessageBox.Show("El nombre es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_Nombre.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(Txt_Telefono.Text))
+            {
+                MessageBox.Show("El teléfono es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_Telefono.Focus();
+                return false;
+            }
+            if (!Txt_Telefono.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("El teléfono debe contener solo números.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_Telefono.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(Txt_Correo.Text))
+            {
+                MessageBox.Show("El correo es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_Correo.Focus();
+                return false;
+            }
+            // Validación sencilla de correo
+            var patronCorreo = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (!Regex.IsMatch(Txt_Correo.Text.Trim(), patronCorreo))
+            {
+                MessageBox.Show("Ingresa un correo válido (ej. usuario@dominio.com).", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_Correo.Focus();
+                return false;
+            }
+            return true;
+        }
+
         // =================== EVENTOS BOTONES ===================
         private void Btn_Nuevo_Click(object sender, EventArgs e)
         {
@@ -161,13 +222,10 @@ namespace Capa_Vista_Clientes
 
         private void Btn_Guardar_Click(object sender, EventArgs e)
         {
+            // CAMBIO: Validación estricta de todos los obligatorios
+            if (!fun_validar_obligatorios()) return;
+
             var c = fun_capturar();
-            if (string.IsNullOrWhiteSpace(c.sNombre))
-            {
-                MessageBox.Show("El nombre es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Txt_Nombre.Focus();
-                return;
-            }
 
             if (cn.pro_guardar(c))
             {
@@ -183,18 +241,21 @@ namespace Capa_Vista_Clientes
 
         private void Btn_Actualizar_Click(object sender, EventArgs e)
         {
-            var c = fun_capturar();
-            if (c.iId <= 0)
+            if (string.IsNullOrWhiteSpace(Txt_Id.Text))
             {
                 MessageBox.Show("Selecciona un registro a actualizar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if (string.IsNullOrWhiteSpace(c.sNombre))
-            {
-                MessageBox.Show("El nombre es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Txt_Nombre.Focus();
-                return;
-            }
+
+            // CAMBIO: Validación estricta de todos los obligatorios
+            if (!fun_validar_obligatorios()) return;
+
+            // NUEVO: Confirmación de modificación
+            var conf = MessageBox.Show("¿Deseas modificar el cliente seleccionado?", "Confirmación",
+                                       MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (conf != DialogResult.Yes) return;
+
+            var c = fun_capturar();
 
             if (cn.pro_actualizar(c))
             {
@@ -213,6 +274,7 @@ namespace Capa_Vista_Clientes
             if (string.IsNullOrWhiteSpace(Txt_Id.Text)) return;
             int iId = int.Parse(Txt_Id.Text);
 
+            // Mensaje de confirmación de eliminación (ya existía, lo dejamos uniforme)
             if (MessageBox.Show("¿Eliminar el cliente seleccionado?", "Confirmación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -231,7 +293,9 @@ namespace Capa_Vista_Clientes
 
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
+            // CAMBIO: ahora también reinicia la búsqueda/tabla
             fun_limpiar();
+            // actualizardatagriew(); // no es necesario aquí porque fun_limpiar ya la llama
         }
 
         private void Btn_Buscar_Click(object sender, EventArgs e)
@@ -239,9 +303,6 @@ namespace Capa_Vista_Clientes
             // Obliga a buscar por NOMBRE: solo letras + no vacío
             if (!fun_busqueda_valida()) return;
 
-            // Si quieres que realmente SOLO busque por nombre a nivel SQL,
-            // cambia el método del Controlador por uno que filtre por nombre.
-            // Aquí usamos el existente:
             DataTable dt = cn.fun_buscar_clientes(Txt_Buscar.Text.Trim());
             Dgv_Clientes.DataSource = dt;
         }
@@ -280,17 +341,18 @@ namespace Capa_Vista_Clientes
             }
         }
 
-
-
+        // =================== EVENTOS TEXTO ===================
         private void Txt_Buscar_TextChanged(object sender, EventArgs e)
         {
-
+            // NUEVO: si se limpia el texto, restaurar todos los registros
+            if (string.IsNullOrWhiteSpace(Txt_Buscar.Text))
+            {
+                actualizardatagriew();
+            }
         }
 
         private void Dgv_Clientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
     }
 }
-
