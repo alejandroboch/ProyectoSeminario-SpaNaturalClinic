@@ -91,16 +91,3 @@ CREATE TABLE IF NOT EXISTS tbl_pagos (
     FOREIGN KEY (fk_id_cita) REFERENCES tbl_citas(pk_id_cita)
 );
 
-CREATE TABLE IF NOT EXISTS tbl_seguimiento_clientes (
-  pk_id_seguimiento INT AUTO_INCREMENT PRIMARY KEY,
-  fk_id_cliente     INT NOT NULL,
-  fecha             DATE NOT NULL,
-  servicio          VARCHAR(100) NOT NULL,
-  monto             DECIMAL(10,2) NOT NULL,
-  observaciones     VARCHAR(255) NULL,
-  CONSTRAINT fk_seguimiento_cliente
-    FOREIGN KEY (fk_id_cliente) REFERENCES tbl_clientes(pk_id_cliente)
-    ON UPDATE CASCADE ON DELETE RESTRICT,
-  INDEX idx_seguimiento_cliente (fk_id_cliente),
-  INDEX idx_seguimiento_fecha (fecha)
-);
