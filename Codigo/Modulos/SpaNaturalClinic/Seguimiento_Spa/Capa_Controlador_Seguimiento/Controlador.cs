@@ -16,9 +16,9 @@ namespace Capa_Controlador_Seguimiento
     {
         private readonly Sentencias sn = new Sentencias();
 
-        public DataTable fun_obtener_lista_seguimientos()
+        public DataTable fun_cargar_vips(string buscar = "")
         {
-            using (var da = sn.fun_listar_seguimientos())
+            using (var da = sn.fun_obtener_clientes_vip(buscar))
             {
                 var dt = new DataTable();
                 da.Fill(dt);
@@ -26,39 +26,14 @@ namespace Capa_Controlador_Seguimiento
             }
         }
 
-        public DataTable fun_buscar_seguimientos(string texto)
+        public DataTable fun_cargar_top_clientes(string buscar = "")
         {
-            using (var da = sn.fun_buscar_seguimientos(texto))
+            using (var da = sn.fun_obtener_top_clientes(buscar))
             {
                 var dt = new DataTable();
                 da.Fill(dt);
                 return dt;
             }
-        }
-
-        public DataTable fun_obtener_clientes()
-        {
-            using (var da = sn.fun_obtener_clientes_combo())
-            {
-                var dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
-        }
-
-        public bool pro_guardar_seguimiento(Seguimiento s)
-        {
-            return sn.pro_insertar_seguimiento(s) > 0;
-        }
-
-        public bool pro_actualizar_seguimiento(Seguimiento s)
-        {
-            return sn.pro_actualizar_seguimiento(s) > 0;
-        }
-
-        public bool pro_eliminar_seguimiento(int id)
-        {
-            return sn.pro_eliminar_seguimiento(id) > 0;
         }
     }
 }

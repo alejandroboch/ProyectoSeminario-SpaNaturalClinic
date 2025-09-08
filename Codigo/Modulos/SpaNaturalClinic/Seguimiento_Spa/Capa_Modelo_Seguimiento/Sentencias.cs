@@ -13,73 +13,34 @@ namespace Capa_Modelo_Seguimiento
     {
         private readonly Conexion con = new Conexion();
 
-        public OdbcDataAdapter fun_listar_seguimientos()
+        // Obtiene VIPs, ahora con filtro de búsqueda
+        public OdbcDataAdapter fun_obtener_clientes_vip(string textoBusqueda)
         {
-            string sql = @"SELECT s.pk_id_seguimiento, c.pk_id_cliente, c.nombre AS Cliente, s.fecha, s.servicio, s.monto, s.observaciones, c.es_vip 
-                           FROM tbl_seguimiento_clientes s
-                           JOIN tbl_clientes c ON s.fk_id_cliente = c.pk_id_cliente
-                           ORDER BY s.fecha DESC;";
+            // Si el texto está vacío, WHERE 1=1 no hace nada. Si tiene texto, filtra.
+            string filtro = string.IsNullOrWhiteSpace(textoBusqueda) ? "1=1" : $"nombre LIKE '%{textoBusqueda}%'";
+            string sql = $@"SELECT nombre, telefono, correo 
+                            FROM tbl_clientes 
+                            WHERE es_vip = 1 AND {filtro}
+                            ORDER BY nombre;";
             return new OdbcDataAdapter(sql, con.conexion());
         }
 
-        public OdbcDataAdapter fun_buscar_seguimientos(string textoBusqueda)
+        // Obtiene Top Clientes, ahora con MÁS DATOS y filtro de búsqueda
+        public OdbcDataAdapter fun_obtener_top_clientes(string textoBusqueda)
         {
-            string sql = $@"SELECT s.pk_id_seguimiento, c.pk_id_cliente, c.nombre AS Cliente, s.fecha, s.servicio, s.monto, s.observaciones, c.es_vip 
-                             FROM tbl_seguimiento_clientes s
-                             JOIN tbl_clientes c ON s.fk_id_cliente = c.pk_id_cliente
-                             WHERE c.nombre LIKE '%{textoBusqueda}%'
-                             ORDER BY s.fecha DESC;";
+            string filtro = string.IsNullOrWhiteSpace(textoBusqueda) ? "1=1" : $"c.nombre LIKE '%{textoBusqueda}%'";
+            // MEJORA: Ahora también calculamos SUM(t.total) para el gasto y MAX(t.fecha_cita) para la última visita.
+            string sql = $@"SELECT 
+                                c.nombre, 
+                                COUNT(t.pk_id_cita) AS total_citas,
+                                SUM(t.total) AS total_gastado,
+                                MAX(t.fecha_cita) AS ultima_visita
+                            FROM tbl_clientes c
+                            JOIN tbl_citas t ON c.pk_id_cliente = t.fk_id_cliente
+                            WHERE {filtro} AND t.estado = 'Finalizado' -- Solo contamos citas finalizadas
+                            GROUP BY c.pk_id_cliente, c.nombre
+                            ORDER BY total_citas DESC, total_gastado DESC;";
             return new OdbcDataAdapter(sql, con.conexion());
-        }
-
-        public OdbcDataAdapter fun_obtener_clientes_combo()
-        {
-            string sql = "SELECT pk_id_cliente, nombre FROM tbl_clientes ORDER BY nombre;";
-            return new OdbcDataAdapter(sql, con.conexion());
-        }
-
-        public int pro_insertar_seguimiento(Seguimiento s)
-        {
-            string sql = "INSERT INTO tbl_seguimiento_clientes(fk_id_cliente, fecha, servicio, monto, observaciones) VALUES(?, ?, ?, ?, ?);";
-            using (var cn = con.conexion())
-            using (var cmd = new OdbcCommand(sql, cn))
-            {
-                cmd.Parameters.AddWithValue("@p1", s.iIdCliente);
-                cmd.Parameters.AddWithValue("@p2", s.dtFecha.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("@p3", s.sServicio);
-                // CORRECCIÓN FINAL: Convertir decimal a string
-                cmd.Parameters.AddWithValue("@p4", s.dMonto.ToString(CultureInfo.InvariantCulture));
-                cmd.Parameters.AddWithValue("@p5", s.sObservaciones);
-                return cmd.ExecuteNonQuery();
-            }
-        }
-
-        public int pro_actualizar_seguimiento(Seguimiento s)
-        {
-            string sql = "UPDATE tbl_seguimiento_clientes SET fk_id_cliente = ?, fecha = ?, servicio = ?, monto = ?, observaciones = ? WHERE pk_id_seguimiento = ?;";
-            using (var cn = con.conexion())
-            using (var cmd = new OdbcCommand(sql, cn))
-            {
-                cmd.Parameters.AddWithValue("@p1", s.iIdCliente);
-                cmd.Parameters.AddWithValue("@p2", s.dtFecha.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("@p3", s.sServicio);
-                // CORRECCIÓN FINAL: Convertir decimal a string
-                cmd.Parameters.AddWithValue("@p4", s.dMonto.ToString(CultureInfo.InvariantCulture));
-                cmd.Parameters.AddWithValue("@p5", s.sObservaciones);
-                cmd.Parameters.AddWithValue("@p6", s.iIdSeguimiento);
-                return cmd.ExecuteNonQuery();
-            }
-        }
-
-        public int pro_eliminar_seguimiento(int id)
-        {
-            string sql = "DELETE FROM tbl_seguimiento_clientes WHERE pk_id_seguimiento = ?;";
-            using (var cn = con.conexion())
-            using (var cmd = new OdbcCommand(sql, cn))
-            {
-                cmd.Parameters.AddWithValue("@p1", id);
-                return cmd.ExecuteNonQuery();
-            }
         }
     }
 }

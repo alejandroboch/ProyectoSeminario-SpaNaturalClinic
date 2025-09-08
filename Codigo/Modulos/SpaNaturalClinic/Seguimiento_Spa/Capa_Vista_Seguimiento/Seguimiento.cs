@@ -13,267 +13,145 @@ using Capa_Controlador_Seguimiento;
 using Capa_Modelo_Seguimiento;
 using System.Data.Odbc;
 
+
 namespace Capa_Vista_Seguimiento
 {
     public partial class SeguimientoForm : Form
     {
         private readonly Controlador cn = new Controlador();
+        // Componente para mostrar mensajes de ayuda contextuales.
         private readonly ToolTip tt = new ToolTip();
 
         public SeguimientoForm()
         {
             InitializeComponent();
+
+            // Asigna el evento de validación para solo permitir letras en los TextBoxes de búsqueda.
+            this.Txt_BuscarVip.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txt_SoloLetras_KeyPress);
+            this.Txt_BuscarTop.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txt_SoloLetras_KeyPress);
+
+            // Asigna el evento para buscar al presionar la tecla "Enter".
+            this.Txt_BuscarVip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_Buscar_KeyDown);
+            this.Txt_BuscarTop.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_Buscar_KeyDown);
         }
 
         private void SeguimientoForm_Load(object sender, EventArgs e)
         {
-            fun_actualizar_tabla();
-            fun_cargar_combos();
-            fun_limpiar_y_desactivar();
+            cargar_datos_completos();
             fun_configurar_tooltips();
+            fun_configurar_tabindex();
         }
 
-        // --- MÉTODOS PRINCIPALES ---
-
-        private void fun_actualizar_tabla()
+        private void cargar_datos_completos()
         {
-            Dgv_Seguimiento.DataSource = cn.fun_obtener_lista_seguimientos();
-            fun_formatear_dgv();
+            Txt_BuscarVip.Clear();
+            Dgv_Vips.DataSource = cn.fun_cargar_vips();
+            formatear_dgv_vips();
+
+            Txt_BuscarTop.Clear();
+            Dgv_TopClientes.DataSource = cn.fun_cargar_top_clientes();
+            formatear_dgv_top_clientes();
         }
 
-        private void fun_cargar_combos()
+        private void formatear_dgv_vips()
         {
-            Cmb_Cliente.DataSource = cn.fun_obtener_clientes();
-            Cmb_Cliente.DisplayMember = "nombre";
-            Cmb_Cliente.ValueMember = "pk_id_cliente";
+            Dgv_Vips.Columns["nombre"].HeaderText = "Nombre Cliente VIP";
+            Dgv_Vips.Columns["telefono"].HeaderText = "Teléfono";
+            Dgv_Vips.Columns["correo"].HeaderText = "Correo Electrónico";
+
+            Dgv_Vips.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Dgv_Vips.ReadOnly = true;
         }
 
-        private void fun_limpiar_y_desactivar()
+        private void formatear_dgv_top_clientes()
         {
-            Txt_Id.Clear();
-            Txt_Buscar.Clear();
-            Cmb_Cliente.SelectedIndex = -1;
-            Dtp_Fecha.Value = DateTime.Now;
-            Txt_Servicio.Clear();
-            Txt_Monto.Clear();
-            Txt_Obs.Clear();
-            Dgv_Seguimiento.ClearSelection();
+            Dgv_TopClientes.Columns["nombre"].HeaderText = "Nombre Cliente";
+            Dgv_TopClientes.Columns["total_citas"].HeaderText = "N° de Visitas";
+            Dgv_TopClientes.Columns["total_gastado"].HeaderText = "Total Gastado";
+            Dgv_TopClientes.Columns["ultima_visita"].HeaderText = "Última Visita";
 
-            Cmb_Cliente.Enabled = false;
-            Dtp_Fecha.Enabled = false;
-            Txt_Servicio.Enabled = false;
-            Txt_Monto.Enabled = false;
-            Txt_Obs.Enabled = false;
+            Dgv_TopClientes.Columns["total_gastado"].DefaultCellStyle.Format = "c";
 
-            Btn_Guardar.Enabled = false;
-            Btn_Actualizar.Enabled = false;
-            Btn_Eliminar.Enabled = false;
-            Btn_Cancelar.Enabled = false;
-            Btn_Nuevo.Enabled = true;
+            Dgv_TopClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Dgv_TopClientes.ReadOnly = true;
         }
 
-        private void fun_activar_para_edicion()
-        {
-            Cmb_Cliente.Enabled = true;
-            Dtp_Fecha.Enabled = true;
-            Txt_Servicio.Enabled = true;
-            Txt_Monto.Enabled = true;
-            Txt_Obs.Enabled = true;
-            Btn_Cancelar.Enabled = true;
-            Btn_Nuevo.Enabled = false;
-        }
-
-        // --- MÉTODOS DE MEJORA ---
-
-        private void fun_formatear_dgv()
-        {
-            Dgv_Seguimiento.Columns["pk_id_seguimiento"].Visible = false;
-            Dgv_Seguimiento.Columns["pk_id_cliente"].Visible = false;
-            Dgv_Seguimiento.Columns["Cliente"].HeaderText = "Cliente";
-            Dgv_Seguimiento.Columns["fecha"].HeaderText = "Fecha de Visita";
-            Dgv_Seguimiento.Columns["servicio"].HeaderText = "Servicio Realizado";
-            Dgv_Seguimiento.Columns["monto"].HeaderText = "Monto Pagado";
-            Dgv_Seguimiento.Columns["observaciones"].HeaderText = "Notas";
-            Dgv_Seguimiento.Columns["es_vip"].HeaderText = "Es VIP";
-            Dgv_Seguimiento.Columns["monto"].DefaultCellStyle.Format = "c";
-            Dgv_Seguimiento.Columns["monto"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            Dgv_Seguimiento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
+        // --- MÉTODOS DE MEJORA DE USABILIDAD ---
 
         private void fun_configurar_tooltips()
         {
-            tt.SetToolTip(Btn_Nuevo, "Habilita el formulario para ingresar un nuevo seguimiento.");
-            tt.SetToolTip(Btn_Guardar, "Guarda el nuevo registro en la base de datos.");
-            tt.SetToolTip(Btn_Actualizar, "Guarda los cambios hechos al registro seleccionado.");
-            tt.SetToolTip(Btn_Eliminar, "Elimina permanentemente el registro seleccionado.");
-            tt.SetToolTip(Btn_Cancelar, "Descarta los cambios, limpia el formulario y quita los filtros de búsqueda.");
-            tt.SetToolTip(Txt_Buscar, "Escriba el nombre de un cliente para filtrar la tabla.");
-            tt.SetToolTip(Btn_Buscar, "Realiza la búsqueda con el texto escrito.");
-            tt.SetToolTip(Dgv_Seguimiento, "Haga clic en una fila para ver sus detalles y poder editarla o eliminarla.");
+            tt.AutoPopDelay = 5000; // El mensaje dura 5 segundos en pantalla.
+            tt.InitialDelay = 500;  // Aparece después de medio segundo.
+
+            tt.SetToolTip(Txt_BuscarVip, "Escriba el nombre de un cliente VIP para filtrar la lista.");
+            tt.SetToolTip(Btn_BuscarVip, "Realiza la búsqueda en la lista de Clientes VIP.");
+            tt.SetToolTip(Txt_BuscarTop, "Escriba el nombre de un cliente para filtrar el ranking.");
+            tt.SetToolTip(Btn_BuscarTop, "Realiza la búsqueda en el ranking de Top Clientes.");
+            tt.SetToolTip(Btn_LimpiarBusquedas, "Limpia ambos buscadores y muestra las listas completas.");
+            tt.SetToolTip(Dgv_Vips, "Lista de clientes marcados manualmente como VIP.");
+            tt.SetToolTip(Dgv_TopClientes, "Ranking de clientes ordenado por cantidad de visitas y total gastado.");
         }
 
-
-        // --- EVENTOS DE BOTONES ---
-
-        private void Btn_Nuevo_Click(object sender, EventArgs e)
+        private void fun_configurar_tabindex()
         {
-            fun_limpiar_y_desactivar();
-            fun_activar_para_edicion();
-            Btn_Guardar.Enabled = true;
-            Cmb_Cliente.Focus();
+            // Define el orden en que se moverá el cursor al presionar la tecla TAB.
+            Txt_BuscarVip.TabIndex = 0;
+            Btn_BuscarVip.TabIndex = 1;
+            Txt_BuscarTop.TabIndex = 2;
+            Btn_BuscarTop.TabIndex = 3;
+            Btn_LimpiarBusquedas.TabIndex = 4;
+            Dgv_Vips.TabIndex = 5;
+            Dgv_TopClientes.TabIndex = 6;
         }
 
-        // En: Capa_Vista_Seguimiento/SeguimientoForm.cs
-
-        private void Btn_Guardar_Click(object sender, EventArgs e)
+        private void Txt_SoloLetras_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // --- NUEVA VALIDACIÓN MEJORADA ---
-            // 1. Verifica si algo está seleccionado en el ComboBox.
-            if (Cmb_Cliente.SelectedIndex == -1 || Cmb_Cliente.SelectedValue == null)
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsSeparator(e.KeyChar))
             {
-                MessageBox.Show("Debe seleccionar un cliente de la lista.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Cmb_Cliente.Focus(); // Pone el cursor en el ComboBox para que el usuario lo corrija
-                return; // Detiene la ejecución del método aquí mismo
-            }
-
-            // 2. Verifica que los otros campos obligatorios no estén vacíos.
-            if (string.IsNullOrWhiteSpace(Txt_Servicio.Text) || string.IsNullOrWhiteSpace(Txt_Monto.Text))
-            {
-                MessageBox.Show("El servicio y el monto son obligatorios.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Txt_Servicio.Focus();
-                return;
-            }
-
-            // 3. Verifica que el monto sea un número válido.
-            if (!decimal.TryParse(Txt_Monto.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal monto))
-            {
-                MessageBox.Show("El monto ingresado no es un número válido.", "Error de Formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Txt_Monto.Focus();
-                return;
-            }
-            // --- FIN DE LA VALIDACIÓN ---
-
-            // Si pasamos todas las validaciones, procedemos a crear el objeto.
-            var seguimiento = new Seguimiento
-            {
-                iIdCliente = Convert.ToInt32(Cmb_Cliente.SelectedValue),
-                dtFecha = Dtp_Fecha.Value,
-                sServicio = Txt_Servicio.Text,
-                dMonto = monto,
-                sObservaciones = Txt_Obs.Text
-            };
-
-            if (cn.pro_guardar_seguimiento(seguimiento))
-            {
-                MessageBox.Show("Guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                fun_actualizar_tabla();
-                fun_limpiar_y_desactivar();
-            }
-            else
-            {
-                MessageBox.Show("Error al guardar el registro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;
             }
         }
 
-        private void Btn_Actualizar_Click(object sender, EventArgs e)
+        private void Txt_Buscar_KeyDown(object sender, KeyEventArgs e)
         {
-            if (string.IsNullOrEmpty(Txt_Id.Text)) { MessageBox.Show("Debe seleccionar un registro de la tabla."); return; }
-            if (Cmb_Cliente.SelectedValue == null) { MessageBox.Show("Debe seleccionar un cliente."); return; }
-            if (!decimal.TryParse(Txt_Monto.Text, out decimal monto)) { MessageBox.Show("El monto no es válido."); return; }
-
-            // --- AÑADIDO: Pregunta de confirmación antes de modificar ---
-            var confirmacion = MessageBox.Show("¿Está seguro de que desea modificar este registro?", "Confirmar Modificación",
-                                              MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            // Si el usuario presiona "No", detenemos la ejecución del método aquí.
-            if (confirmacion == DialogResult.No)
+            // Si el usuario presiona la tecla Enter...
+            if (e.KeyCode == Keys.Enter)
             {
-                return;
-            }
-            // --- FIN DEL AÑADIDO ---
-
-            var seguimiento = new Seguimiento
-            {
-                iIdSeguimiento = Convert.ToInt32(Txt_Id.Text),
-                iIdCliente = Convert.ToInt32(Cmb_Cliente.SelectedValue),
-                dtFecha = Dtp_Fecha.Value,
-                sServicio = Txt_Servicio.Text,
-                dMonto = monto,
-                sObservaciones = Txt_Obs.Text
-            };
-
-            if (cn.pro_actualizar_seguimiento(seguimiento))
-            {
-                // --- MODIFICADO: Se añade título e icono al mensaje ---
-                MessageBox.Show("Registro actualizado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                fun_actualizar_tabla();
-                fun_limpiar_y_desactivar();
-            }
-            else { MessageBox.Show("Error al actualizar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        }
-
-        private void Btn_Eliminar_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(Txt_Id.Text)) { MessageBox.Show("Debe seleccionar un registro de la tabla."); return; }
-
-            var confirmacion = MessageBox.Show("¿Está seguro de eliminar este registro?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (confirmacion == DialogResult.Yes)
-            {
-                if (cn.pro_eliminar_seguimiento(Convert.ToInt32(Txt_Id.Text)))
+                // Identificamos qué TextBox disparó el evento.
+                TextBox currentTextBox = sender as TextBox;
+                if (currentTextBox == Txt_BuscarVip)
                 {
-                    // --- MODIFICADO: Se añade título e icono al mensaje ---
-                    MessageBox.Show("Registro eliminado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    fun_actualizar_tabla();
-                    fun_limpiar_y_desactivar();
+                    // Simulamos un clic en el botón de búsqueda de VIPs.
+                    Btn_BuscarVip.PerformClick();
                 }
-                else { MessageBox.Show("Error al eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                else if (currentTextBox == Txt_BuscarTop)
+                {
+                    // Simulamos un clic en el botón de búsqueda de Top Clientes.
+                    Btn_BuscarTop.PerformClick();
+                }
+
+                // Suprimimos el sonido "bip" de Windows al presionar Enter en un TextBox.
+                e.SuppressKeyPress = true;
             }
         }
 
-        private void Btn_Cancelar_Click(object sender, EventArgs e)
+        // --- EVENTOS DE LOS BOTONES ---
+
+        private void Btn_BuscarVip_Click(object sender, EventArgs e)
         {
-            fun_limpiar_y_desactivar();
-            fun_actualizar_tabla();
+            Dgv_Vips.DataSource = cn.fun_cargar_vips(Txt_BuscarVip.Text);
+            formatear_dgv_vips();
         }
 
-        private void Btn_Buscar_Click(object sender, EventArgs e)
+        private void Btn_BuscarTop_Click(object sender, EventArgs e)
         {
-            Dgv_Seguimiento.DataSource = cn.fun_buscar_seguimientos(Txt_Buscar.Text);
-            fun_formatear_dgv();
-
-            // CORRECCIÓN 1: Habilitar el botón Cancelar después de una búsqueda
-            Btn_Cancelar.Enabled = true;
+            Dgv_TopClientes.DataSource = cn.fun_cargar_top_clientes(Txt_BuscarTop.Text);
+            formatear_dgv_top_clientes();
         }
 
-        // --- EVENTOS DE LA TABLA ---
-
-        private void Dgv_Seguimiento_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void Btn_LimpiarBusquedas_Click(object sender, EventArgs e)
         {
-
-        }
-
-        // CORRECCIÓN 2: Se movió toda la lógica al evento CellContentClick, que es el que tu diseñador está usando.
-        private void Dgv_Seguimiento_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return; // Evita error al hacer clic en el encabezado
-
-            fun_activar_para_edicion();
-            Btn_Actualizar.Enabled = true;
-            Btn_Eliminar.Enabled = true;
-
-            var fila = Dgv_Seguimiento.Rows[e.RowIndex];
-            Txt_Id.Text = fila.Cells["pk_id_seguimiento"].Value.ToString();
-            Cmb_Cliente.SelectedValue = fila.Cells["pk_id_cliente"].Value;
-            Dtp_Fecha.Value = Convert.ToDateTime(fila.Cells["fecha"].Value);
-            Txt_Servicio.Text = fila.Cells["servicio"].Value.ToString();
-            Txt_Monto.Text = Convert.ToDecimal(fila.Cells["monto"].Value).ToString(CultureInfo.InvariantCulture);
-            Txt_Obs.Text = fila.Cells["observaciones"].Value.ToString();
-        }
-
-        // Método de compatibilidad para el diseñador
-        private void SeguimientoForm_Load_1(object sender, EventArgs e)
-        {
-            SeguimientoForm_Load(sender, e);
+            cargar_datos_completos();
         }
     }
 }
