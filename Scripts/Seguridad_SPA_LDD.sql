@@ -356,3 +356,4 @@ ALTER TABLE `tbl_permisos_aplicacion_perfil`
 
 ALTER TABLE `Tbl_bitacora`
 ADD COLUMN `tabla` VARCHAR(50) NOT NULL;
+
