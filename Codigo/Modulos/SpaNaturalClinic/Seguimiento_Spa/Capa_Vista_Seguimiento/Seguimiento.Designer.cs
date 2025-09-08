@@ -33,7 +33,6 @@ namespace Capa_Vista_Seguimiento
             this.Txt_Buscar = new System.Windows.Forms.TextBox();
             this.Lbl_Clientes = new System.Windows.Forms.Label();
             this.Lbl_Servicio = new System.Windows.Forms.Label();
-            this.Chk_Frecuente = new System.Windows.Forms.CheckBox();
             this.Txt_Servicio = new System.Windows.Forms.TextBox();
             this.Cmb_Cliente = new System.Windows.Forms.ComboBox();
             this.Dtp_Fecha = new System.Windows.Forms.DateTimePicker();
@@ -78,11 +77,11 @@ namespace Capa_Vista_Seguimiento
             // 
             this.Lbl_Clientes.AutoSize = true;
             this.Lbl_Clientes.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Clientes.Location = new System.Drawing.Point(516, 9);
+            this.Lbl_Clientes.Location = new System.Drawing.Point(478, 9);
             this.Lbl_Clientes.Name = "Lbl_Clientes";
-            this.Lbl_Clientes.Size = new System.Drawing.Size(101, 28);
+            this.Lbl_Clientes.Size = new System.Drawing.Size(228, 28);
             this.Lbl_Clientes.TabIndex = 33;
-            this.Lbl_Clientes.Text = "Clientes";
+            this.Lbl_Clientes.Text = "Clientes Frecuentes";
             // 
             // Lbl_Servicio
             // 
@@ -93,18 +92,6 @@ namespace Capa_Vista_Seguimiento
             this.Lbl_Servicio.Size = new System.Drawing.Size(80, 23);
             this.Lbl_Servicio.TabIndex = 37;
             this.Lbl_Servicio.Text = "Servicio";
-            // 
-            // Chk_Frecuente
-            // 
-            this.Chk_Frecuente.AutoSize = true;
-            this.Chk_Frecuente.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Chk_Frecuente.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Chk_Frecuente.Location = new System.Drawing.Point(132, 525);
-            this.Chk_Frecuente.Name = "Chk_Frecuente";
-            this.Chk_Frecuente.Size = new System.Drawing.Size(119, 27);
-            this.Chk_Frecuente.TabIndex = 35;
-            this.Chk_Frecuente.Text = "Frecuente";
-            this.Chk_Frecuente.UseVisualStyleBackColor = true;
             // 
             // Txt_Servicio
             // 
@@ -187,7 +174,7 @@ namespace Capa_Vista_Seguimiento
             // 
             // Btn_Ayuda
             // 
-            this.Btn_Ayuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(185)))), ((int)(((byte)(102)))));
+            this.Btn_Ayuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
             this.Btn_Ayuda.FlatAppearance.BorderSize = 0;
             this.Btn_Ayuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Ayuda.Image = global::Capa_Vista_Seguimiento.Properties.Resources.AYUDA_V4;
@@ -200,7 +187,7 @@ namespace Capa_Vista_Seguimiento
             // 
             // Btn_Reporte
             // 
-            this.Btn_Reporte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(185)))), ((int)(((byte)(102)))));
+            this.Btn_Reporte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
             this.Btn_Reporte.FlatAppearance.BorderSize = 0;
             this.Btn_Reporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Reporte.Image = global::Capa_Vista_Seguimiento.Properties.Resources.impresora;
@@ -213,7 +200,7 @@ namespace Capa_Vista_Seguimiento
             // 
             // Btn_Cancelar
             // 
-            this.Btn_Cancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(185)))), ((int)(((byte)(102)))));
+            this.Btn_Cancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
             this.Btn_Cancelar.FlatAppearance.BorderSize = 0;
             this.Btn_Cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Cancelar.Image = global::Capa_Vista_Seguimiento.Properties.Resources.CANCELAR_V4;
@@ -226,7 +213,7 @@ namespace Capa_Vista_Seguimiento
             // 
             // Btn_Eliminar
             // 
-            this.Btn_Eliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(185)))), ((int)(((byte)(102)))));
+            this.Btn_Eliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
             this.Btn_Eliminar.FlatAppearance.BorderSize = 0;
             this.Btn_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Eliminar.Image = global::Capa_Vista_Seguimiento.Properties.Resources.BORRAR_V4;
@@ -239,7 +226,7 @@ namespace Capa_Vista_Seguimiento
             // 
             // Btn_Actualizar
             // 
-            this.Btn_Actualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(185)))), ((int)(((byte)(102)))));
+            this.Btn_Actualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
             this.Btn_Actualizar.FlatAppearance.BorderSize = 0;
             this.Btn_Actualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Actualizar.Image = global::Capa_Vista_Seguimiento.Properties.Resources.ACTUALIZAR_V4;
@@ -252,7 +239,7 @@ namespace Capa_Vista_Seguimiento
             // 
             // Btn_Guardar
             // 
-            this.Btn_Guardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(185)))), ((int)(((byte)(102)))));
+            this.Btn_Guardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
             this.Btn_Guardar.FlatAppearance.BorderSize = 0;
             this.Btn_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Guardar.Image = global::Capa_Vista_Seguimiento.Properties.Resources.guardar;
@@ -265,7 +252,7 @@ namespace Capa_Vista_Seguimiento
             // 
             // Btn_Nuevo
             // 
-            this.Btn_Nuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(185)))), ((int)(((byte)(102)))));
+            this.Btn_Nuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
             this.Btn_Nuevo.FlatAppearance.BorderSize = 0;
             this.Btn_Nuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Nuevo.Image = global::Capa_Vista_Seguimiento.Properties.Resources.INGRESAR_V4;
@@ -278,7 +265,7 @@ namespace Capa_Vista_Seguimiento
             // 
             // Btn_Buscar
             // 
-            this.Btn_Buscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(185)))), ((int)(((byte)(102)))));
+            this.Btn_Buscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
             this.Btn_Buscar.FlatAppearance.BorderSize = 0;
             this.Btn_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Buscar.Image = global::Capa_Vista_Seguimiento.Properties.Resources.BUCAR_V4;
@@ -316,6 +303,7 @@ namespace Capa_Vista_Seguimiento
             // 
             this.Txt_Id.Location = new System.Drawing.Point(210, 166);
             this.Txt_Id.Name = "Txt_Id";
+            this.Txt_Id.ReadOnly = true;
             this.Txt_Id.Size = new System.Drawing.Size(167, 22);
             this.Txt_Id.TabIndex = 47;
             // 
@@ -336,7 +324,6 @@ namespace Capa_Vista_Seguimiento
             this.Controls.Add(this.Dtp_Fecha);
             this.Controls.Add(this.Cmb_Cliente);
             this.Controls.Add(this.Lbl_Servicio);
-            this.Controls.Add(this.Chk_Frecuente);
             this.Controls.Add(this.Txt_Servicio);
             this.Controls.Add(this.Lbl_Clientes);
             this.Controls.Add(this.Btn_Ayuda);
@@ -351,6 +338,7 @@ namespace Capa_Vista_Seguimiento
             this.Controls.Add(this.Txt_Buscar);
             this.Name = "SeguimientoForm";
             this.Text = "Seguimiento";
+            this.Load += new System.EventHandler(this.SeguimientoForm_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Seguimiento)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -371,7 +359,6 @@ namespace Capa_Vista_Seguimiento
         private System.Windows.Forms.TextBox Txt_Buscar;
         private System.Windows.Forms.Label Lbl_Clientes;
         private System.Windows.Forms.Label Lbl_Servicio;
-        private System.Windows.Forms.CheckBox Chk_Frecuente;
         private System.Windows.Forms.TextBox Txt_Servicio;
         private System.Windows.Forms.ComboBox Cmb_Cliente;
         private System.Windows.Forms.DateTimePicker Dtp_Fecha;
