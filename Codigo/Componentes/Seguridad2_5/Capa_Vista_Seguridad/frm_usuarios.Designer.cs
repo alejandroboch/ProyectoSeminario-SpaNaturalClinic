@@ -29,15 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_usuarios));
-            this.Btn_guardar = new System.Windows.Forms.Button();
-            this.Btn_salir = new System.Windows.Forms.Button();
-            this.Btn_buscar = new System.Windows.Forms.Button();
-            this.Btn_eliminar = new System.Windows.Forms.Button();
             this.Gpb_modificar = new System.Windows.Forms.GroupBox();
             this.Txt_buscar = new System.Windows.Forms.TextBox();
             this.Txt_buscar_id = new System.Windows.Forms.Label();
-            this.Btn_modificar = new System.Windows.Forms.Button();
-            this.Btn_nuevo = new System.Windows.Forms.Button();
+            this.Btn_buscar = new System.Windows.Forms.Button();
             this.Gpb_datospersonalesclave = new System.Windows.Forms.GroupBox();
             this.Cmb_Pregunta = new System.Windows.Forms.ComboBox();
             this.Lbl_preguntausuario = new System.Windows.Forms.Label();
@@ -63,11 +58,15 @@
             this.Txt_contraseniausuario = new System.Windows.Forms.Label();
             this.Txt_clave = new System.Windows.Forms.TextBox();
             this.Dgv_usuarios = new System.Windows.Forms.DataGridView();
-            this.Btn_ayuda = new System.Windows.Forms.Button();
             this.Txt_titulo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Rdb_inactivos = new System.Windows.Forms.RadioButton();
             this.Rdb_activos = new System.Windows.Forms.RadioButton();
+            this.Btn_ayuda = new System.Windows.Forms.Button();
+            this.Btn_nuevo = new System.Windows.Forms.Button();
+            this.Btn_modificar = new System.Windows.Forms.Button();
+            this.Btn_eliminar = new System.Windows.Forms.Button();
+            this.Btn_guardar = new System.Windows.Forms.Button();
             this.Gpb_modificar.SuspendLayout();
             this.Gpb_datospersonalesclave.SuspendLayout();
             this.Gpb_datospersonales.SuspendLayout();
@@ -75,63 +74,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_usuarios)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Btn_guardar
-            // 
-            this.Btn_guardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.Btn_guardar.FlatAppearance.BorderSize = 0;
-            this.Btn_guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_guardar.Image = global::Capa_Vista_Seguridad.Properties.Resources.guardar12;
-            this.Btn_guardar.Location = new System.Drawing.Point(1053, 99);
-            this.Btn_guardar.Margin = new System.Windows.Forms.Padding(4);
-            this.Btn_guardar.Name = "Btn_guardar";
-            this.Btn_guardar.Size = new System.Drawing.Size(69, 57);
-            this.Btn_guardar.TabIndex = 233;
-            this.Btn_guardar.Tag = "5";
-            this.Btn_guardar.UseVisualStyleBackColor = false;
-            this.Btn_guardar.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // Btn_salir
-            // 
-            this.Btn_salir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.Btn_salir.FlatAppearance.BorderSize = 0;
-            this.Btn_salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_salir.Image = global::Capa_Vista_Seguridad.Properties.Resources.salir11;
-            this.Btn_salir.Location = new System.Drawing.Point(1247, 13);
-            this.Btn_salir.Margin = new System.Windows.Forms.Padding(4);
-            this.Btn_salir.Name = "Btn_salir";
-            this.Btn_salir.Size = new System.Drawing.Size(69, 57);
-            this.Btn_salir.TabIndex = 234;
-            this.Btn_salir.UseVisualStyleBackColor = false;
-            this.Btn_salir.Click += new System.EventHandler(this.Btn_salir_Click);
-            // 
-            // Btn_buscar
-            // 
-            this.Btn_buscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.Btn_buscar.FlatAppearance.BorderSize = 0;
-            this.Btn_buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_buscar.Image = global::Capa_Vista_Seguridad.Properties.Resources.buscar11;
-            this.Btn_buscar.Location = new System.Drawing.Point(860, 14);
-            this.Btn_buscar.Margin = new System.Windows.Forms.Padding(4);
-            this.Btn_buscar.Name = "Btn_buscar";
-            this.Btn_buscar.Size = new System.Drawing.Size(69, 57);
-            this.Btn_buscar.TabIndex = 237;
-            this.Btn_buscar.UseVisualStyleBackColor = false;
-            this.Btn_buscar.Click += new System.EventHandler(this.Button1_Click_1);
-            // 
-            // Btn_eliminar
-            // 
-            this.Btn_eliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.Btn_eliminar.FlatAppearance.BorderSize = 0;
-            this.Btn_eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_eliminar.Image = global::Capa_Vista_Seguridad.Properties.Resources.borrar11;
-            this.Btn_eliminar.Location = new System.Drawing.Point(1191, 99);
-            this.Btn_eliminar.Margin = new System.Windows.Forms.Padding(4);
-            this.Btn_eliminar.Name = "Btn_eliminar";
-            this.Btn_eliminar.Size = new System.Drawing.Size(69, 57);
-            this.Btn_eliminar.TabIndex = 238;
-            this.Btn_eliminar.UseVisualStyleBackColor = false;
-            this.Btn_eliminar.Click += new System.EventHandler(this.Button2_Click);
             // 
             // Gpb_modificar
             // 
@@ -169,34 +111,19 @@
             this.Txt_buscar_id.TabIndex = 238;
             this.Txt_buscar_id.Text = "Buscar Id";
             // 
-            // Btn_modificar
+            // Btn_buscar
             // 
-            this.Btn_modificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.Btn_modificar.FlatAppearance.BorderSize = 0;
-            this.Btn_modificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_modificar.Image = global::Capa_Vista_Seguridad.Properties.Resources.editar11;
-            this.Btn_modificar.Location = new System.Drawing.Point(1122, 99);
-            this.Btn_modificar.Margin = new System.Windows.Forms.Padding(4);
-            this.Btn_modificar.Name = "Btn_modificar";
-            this.Btn_modificar.Size = new System.Drawing.Size(69, 57);
-            this.Btn_modificar.TabIndex = 240;
-            this.Btn_modificar.UseVisualStyleBackColor = false;
-            this.Btn_modificar.Click += new System.EventHandler(this.Button3_Click);
-            // 
-            // Btn_nuevo
-            // 
-            this.Btn_nuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.Btn_nuevo.FlatAppearance.BorderSize = 0;
-            this.Btn_nuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_nuevo.Image = global::Capa_Vista_Seguridad.Properties.Resources.agregar11;
-            this.Btn_nuevo.Location = new System.Drawing.Point(984, 99);
-            this.Btn_nuevo.Margin = new System.Windows.Forms.Padding(4);
-            this.Btn_nuevo.Name = "Btn_nuevo";
-            this.Btn_nuevo.Size = new System.Drawing.Size(69, 57);
-            this.Btn_nuevo.TabIndex = 241;
-            this.Btn_nuevo.Tag = "0";
-            this.Btn_nuevo.UseVisualStyleBackColor = false;
-            this.Btn_nuevo.Click += new System.EventHandler(this.Button4_Click);
+            this.Btn_buscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
+            this.Btn_buscar.FlatAppearance.BorderSize = 0;
+            this.Btn_buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_buscar.Image = global::Capa_Vista_Seguridad.Properties.Resources.buscar2;
+            this.Btn_buscar.Location = new System.Drawing.Point(860, 14);
+            this.Btn_buscar.Margin = new System.Windows.Forms.Padding(4);
+            this.Btn_buscar.Name = "Btn_buscar";
+            this.Btn_buscar.Size = new System.Drawing.Size(69, 57);
+            this.Btn_buscar.TabIndex = 237;
+            this.Btn_buscar.UseVisualStyleBackColor = false;
+            this.Btn_buscar.Click += new System.EventHandler(this.Button1_Click_1);
             // 
             // Gpb_datospersonalesclave
             // 
@@ -495,28 +422,14 @@
             this.Dgv_usuarios.TabIndex = 258;
             this.Dgv_usuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_usuarios_CellContentClick);
             // 
-            // Btn_ayuda
-            // 
-            this.Btn_ayuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.Btn_ayuda.FlatAppearance.BorderSize = 0;
-            this.Btn_ayuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_ayuda.Image = global::Capa_Vista_Seguridad.Properties.Resources.ayuda11;
-            this.Btn_ayuda.Location = new System.Drawing.Point(1323, 13);
-            this.Btn_ayuda.Name = "Btn_ayuda";
-            this.Btn_ayuda.Size = new System.Drawing.Size(69, 57);
-            this.Btn_ayuda.TabIndex = 252;
-            this.Btn_ayuda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_ayuda.UseVisualStyleBackColor = false;
-            this.Btn_ayuda.Click += new System.EventHandler(this.Btn_ayuda_Click);
-            // 
             // Txt_titulo
             // 
             this.Txt_titulo.AutoSize = true;
-            this.Txt_titulo.Font = new System.Drawing.Font("Haettenschweiler", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_titulo.ForeColor = System.Drawing.Color.Transparent;
+            this.Txt_titulo.Font = new System.Drawing.Font("Cambria", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txt_titulo.ForeColor = System.Drawing.Color.Black;
             this.Txt_titulo.Location = new System.Drawing.Point(414, 13);
             this.Txt_titulo.Name = "Txt_titulo";
-            this.Txt_titulo.Size = new System.Drawing.Size(521, 62);
+            this.Txt_titulo.Size = new System.Drawing.Size(734, 70);
             this.Txt_titulo.TabIndex = 260;
             this.Txt_titulo.Text = "Mantenimiento de Usuarios";
             // 
@@ -552,11 +465,83 @@
             this.Rdb_activos.Text = "Activos";
             this.Rdb_activos.UseVisualStyleBackColor = true;
             // 
+            // Btn_ayuda
+            // 
+            this.Btn_ayuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
+            this.Btn_ayuda.FlatAppearance.BorderSize = 0;
+            this.Btn_ayuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_ayuda.Image = global::Capa_Vista_Seguridad.Properties.Resources.preguntas;
+            this.Btn_ayuda.Location = new System.Drawing.Point(1275, 12);
+            this.Btn_ayuda.Name = "Btn_ayuda";
+            this.Btn_ayuda.Size = new System.Drawing.Size(69, 57);
+            this.Btn_ayuda.TabIndex = 252;
+            this.Btn_ayuda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_ayuda.UseVisualStyleBackColor = false;
+            this.Btn_ayuda.Click += new System.EventHandler(this.Btn_ayuda_Click);
+            // 
+            // Btn_nuevo
+            // 
+            this.Btn_nuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
+            this.Btn_nuevo.FlatAppearance.BorderSize = 0;
+            this.Btn_nuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_nuevo.Image = global::Capa_Vista_Seguridad.Properties.Resources.nuevo;
+            this.Btn_nuevo.Location = new System.Drawing.Point(984, 99);
+            this.Btn_nuevo.Margin = new System.Windows.Forms.Padding(4);
+            this.Btn_nuevo.Name = "Btn_nuevo";
+            this.Btn_nuevo.Size = new System.Drawing.Size(69, 57);
+            this.Btn_nuevo.TabIndex = 241;
+            this.Btn_nuevo.Tag = "0";
+            this.Btn_nuevo.UseVisualStyleBackColor = false;
+            this.Btn_nuevo.Click += new System.EventHandler(this.Button4_Click);
+            // 
+            // Btn_modificar
+            // 
+            this.Btn_modificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
+            this.Btn_modificar.FlatAppearance.BorderSize = 0;
+            this.Btn_modificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_modificar.Image = global::Capa_Vista_Seguridad.Properties.Resources.editar;
+            this.Btn_modificar.Location = new System.Drawing.Point(1122, 99);
+            this.Btn_modificar.Margin = new System.Windows.Forms.Padding(4);
+            this.Btn_modificar.Name = "Btn_modificar";
+            this.Btn_modificar.Size = new System.Drawing.Size(69, 57);
+            this.Btn_modificar.TabIndex = 240;
+            this.Btn_modificar.UseVisualStyleBackColor = false;
+            this.Btn_modificar.Click += new System.EventHandler(this.Button3_Click);
+            // 
+            // Btn_eliminar
+            // 
+            this.Btn_eliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
+            this.Btn_eliminar.FlatAppearance.BorderSize = 0;
+            this.Btn_eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_eliminar.Image = global::Capa_Vista_Seguridad.Properties.Resources.borrar2;
+            this.Btn_eliminar.Location = new System.Drawing.Point(1191, 99);
+            this.Btn_eliminar.Margin = new System.Windows.Forms.Padding(4);
+            this.Btn_eliminar.Name = "Btn_eliminar";
+            this.Btn_eliminar.Size = new System.Drawing.Size(69, 57);
+            this.Btn_eliminar.TabIndex = 238;
+            this.Btn_eliminar.UseVisualStyleBackColor = false;
+            this.Btn_eliminar.Click += new System.EventHandler(this.Button2_Click);
+            // 
+            // Btn_guardar
+            // 
+            this.Btn_guardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
+            this.Btn_guardar.FlatAppearance.BorderSize = 0;
+            this.Btn_guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_guardar.Image = global::Capa_Vista_Seguridad.Properties.Resources.guardar;
+            this.Btn_guardar.Location = new System.Drawing.Point(1053, 99);
+            this.Btn_guardar.Margin = new System.Windows.Forms.Padding(4);
+            this.Btn_guardar.Name = "Btn_guardar";
+            this.Btn_guardar.Size = new System.Drawing.Size(69, 57);
+            this.Btn_guardar.TabIndex = 233;
+            this.Btn_guardar.Tag = "5";
+            this.Btn_guardar.UseVisualStyleBackColor = false;
+            this.Btn_guardar.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // frm_usuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(133)))), ((int)(((byte)(223)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(237)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1420, 611);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Txt_titulo);
@@ -569,7 +554,6 @@
             this.Controls.Add(this.Btn_modificar);
             this.Controls.Add(this.Gpb_modificar);
             this.Controls.Add(this.Btn_eliminar);
-            this.Controls.Add(this.Btn_salir);
             this.Controls.Add(this.Btn_guardar);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -596,7 +580,6 @@
 
         #endregion
         private System.Windows.Forms.Button Btn_guardar;
-        private System.Windows.Forms.Button Btn_salir;
         private System.Windows.Forms.Button Btn_buscar;
         private System.Windows.Forms.Button Btn_eliminar;
         private System.Windows.Forms.GroupBox Gpb_modificar;

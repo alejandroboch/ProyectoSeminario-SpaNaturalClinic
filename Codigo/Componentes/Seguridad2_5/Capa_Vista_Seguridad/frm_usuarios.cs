@@ -223,7 +223,7 @@ namespace Capa_Vista_Seguridad
                         Txt_respuesta.Enabled = true;
                         Btn_modificar.Enabled = true;
                         Btn_eliminar.Enabled = true;
-                        Btn_salir.Enabled = true;
+               
                         Btn_guardar.Enabled = false;
                         Btn_nuevo.Enabled = true;
                         Rdb_habilitado.Enabled = true;
@@ -252,8 +252,7 @@ namespace Capa_Vista_Seguridad
             tbuscar.SetToolTip(Btn_buscar, "Buscar usuario");
             ToolTip tremover = new ToolTip();
             tremover.SetToolTip(Btn_eliminar, "Eliminar usuario");
-            ToolTip tsalir = new ToolTip();
-            tsalir.SetToolTip(Btn_salir, "Salir");
+
             ToolTip tayuda = new ToolTip();
             tayuda.SetToolTip(Btn_ayuda, "Ayuda");
             ToolTip teditar = new ToolTip();
@@ -288,7 +287,7 @@ namespace Capa_Vista_Seguridad
             Btn_guardar.TabIndex = 2;
             Btn_modificar.TabIndex = 3;
             Btn_eliminar.TabIndex = 4;
-            Btn_salir.TabIndex = 5;
+   
 
             Txt_nombreusername.TabIndex = 6;
             Txt_clave.TabIndex = 7;
@@ -676,7 +675,7 @@ namespace Capa_Vista_Seguridad
                 Btn_eliminar.Enabled = false;
                 Btn_modificar.Enabled = false;
                 Btn_nuevo.Enabled = true;
-                Btn_salir.Enabled = true;
+     
                 Btn_ayuda.Enabled = true;
                 Txt_correo.Enabled = false;
                 txt_estadousuario.Enabled = false;
