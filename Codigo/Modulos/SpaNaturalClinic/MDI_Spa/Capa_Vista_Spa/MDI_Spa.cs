@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Capa_Vista_Spa
 {
     public partial class MDI_Spa : Form
@@ -79,6 +80,13 @@ namespace Capa_Vista_Spa
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+
+        }
+
+
+        private void mantemientosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
 
         }
     }
