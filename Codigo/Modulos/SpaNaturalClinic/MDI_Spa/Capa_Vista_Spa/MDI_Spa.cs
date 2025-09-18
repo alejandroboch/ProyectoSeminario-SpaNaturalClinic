@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Capa_Vista_Citas;
 
 namespace Capa_Vista_Spa
 {
@@ -86,7 +86,10 @@ namespace Capa_Vista_Spa
 
         private void mantemientosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Capa_Vista_Citas.Form_citas GD = new Form_citas();
+            GD.MdiParent = this;
+            CentrarFormulario(GD);
+            GD.Show();
 
         }
     }

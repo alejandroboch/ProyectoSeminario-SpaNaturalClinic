@@ -97,8 +97,8 @@
             // mantemientosToolStripMenuItem
             // 
             this.mantemientosToolStripMenuItem.Name = "mantemientosToolStripMenuItem";
-            this.mantemientosToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.mantemientosToolStripMenuItem.Text = "Mantemientos";
+            this.mantemientosToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
+            this.mantemientosToolStripMenuItem.Text = "Cita";
             this.mantemientosToolStripMenuItem.Click += new System.EventHandler(this.mantemientosToolStripMenuItem_Click);
             // 
             // desarrolloDeCarreraToolStripMenuItem

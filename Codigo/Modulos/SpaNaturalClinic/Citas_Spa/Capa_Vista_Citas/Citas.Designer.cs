@@ -57,7 +57,7 @@ namespace Capa_Vista_Citas
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_titulo.Location = new System.Drawing.Point(388, 21);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(258, 28);
+            this.Lbl_titulo.Size = new System.Drawing.Size(247, 27);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Programación de citas";
             this.Lbl_titulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -134,6 +134,7 @@ namespace Capa_Vista_Citas
             this.Cbo_nombreCliente.Name = "Cbo_nombreCliente";
             this.Cbo_nombreCliente.Size = new System.Drawing.Size(246, 24);
             this.Cbo_nombreCliente.TabIndex = 7;
+            this.Cbo_nombreCliente.SelectedIndexChanged += new System.EventHandler(this.Cbo_nombreCliente_SelectedIndexChanged);
             // 
             // Cbo_estadoCita
             // 
@@ -142,6 +143,7 @@ namespace Capa_Vista_Citas
             this.Cbo_estadoCita.Name = "Cbo_estadoCita";
             this.Cbo_estadoCita.Size = new System.Drawing.Size(246, 24);
             this.Cbo_estadoCita.TabIndex = 8;
+            this.Cbo_estadoCita.SelectedIndexChanged += new System.EventHandler(this.Cbo_estadoCita_SelectedIndexChanged);
             // 
             // Txt_saldoPendiente
             // 
@@ -186,6 +188,7 @@ namespace Capa_Vista_Citas
             this.Btn_cancelar.Size = new System.Drawing.Size(75, 77);
             this.Btn_cancelar.TabIndex = 17;
             this.Btn_cancelar.UseVisualStyleBackColor = false;
+            this.Btn_cancelar.Click += new System.EventHandler(this.Btn_cancelar_Click);
             // 
             // Btn_eliminar
             // 
@@ -195,6 +198,7 @@ namespace Capa_Vista_Citas
             this.Btn_eliminar.Size = new System.Drawing.Size(75, 77);
             this.Btn_eliminar.TabIndex = 16;
             this.Btn_eliminar.UseVisualStyleBackColor = false;
+            this.Btn_eliminar.Click += new System.EventHandler(this.Btn_eliminar_Click);
             // 
             // Btn_buscar
             // 
@@ -204,6 +208,7 @@ namespace Capa_Vista_Citas
             this.Btn_buscar.Size = new System.Drawing.Size(75, 77);
             this.Btn_buscar.TabIndex = 15;
             this.Btn_buscar.UseVisualStyleBackColor = false;
+            this.Btn_buscar.Click += new System.EventHandler(this.Btn_buscar_Click);
             // 
             // Btn_modificar
             // 
@@ -213,6 +218,7 @@ namespace Capa_Vista_Citas
             this.Btn_modificar.Size = new System.Drawing.Size(75, 77);
             this.Btn_modificar.TabIndex = 14;
             this.Btn_modificar.UseVisualStyleBackColor = false;
+            this.Btn_modificar.Click += new System.EventHandler(this.Btn_modificar_Click);
             // 
             // Btn_guardar
             // 
@@ -222,6 +228,7 @@ namespace Capa_Vista_Citas
             this.Btn_guardar.Size = new System.Drawing.Size(75, 77);
             this.Btn_guardar.TabIndex = 13;
             this.Btn_guardar.UseVisualStyleBackColor = false;
+            this.Btn_guardar.Click += new System.EventHandler(this.Btn_guardar_Click);
             // 
             // Btn_nuevoRegistro
             // 
@@ -231,6 +238,7 @@ namespace Capa_Vista_Citas
             this.Btn_nuevoRegistro.Size = new System.Drawing.Size(77, 77);
             this.Btn_nuevoRegistro.TabIndex = 12;
             this.Btn_nuevoRegistro.UseVisualStyleBackColor = false;
+            this.Btn_nuevoRegistro.Click += new System.EventHandler(this.Btn_nuevoRegistro_Click);
             // 
             // Form_citas
             // 
