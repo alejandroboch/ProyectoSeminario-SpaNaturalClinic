@@ -34,6 +34,9 @@
     <Reference Include="Capa_Controlador_Spa">
       <HintPath>..\Capa_Controlador_Spa\bin\Debug\Capa_Controlador_Spa.dll</HintPath>
     </Reference>
+    <Reference Include="Capa_Vista_Citas">
+      <HintPath>..\..\Citas_Spa\Capa_Vista_Citas\bin\Debug\Capa_Vista_Citas.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />

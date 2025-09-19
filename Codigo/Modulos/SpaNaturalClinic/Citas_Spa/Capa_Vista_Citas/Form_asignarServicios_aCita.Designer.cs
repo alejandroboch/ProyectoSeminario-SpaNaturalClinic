@@ -33,11 +33,11 @@ namespace Capa_Vista_Citas
             this.Lbl_servicio = new System.Windows.Forms.Label();
             this.Lbl_paquete = new System.Windows.Forms.Label();
             this.Gpb_paquete = new System.Windows.Forms.GroupBox();
+            this.Nud_numSesion = new System.Windows.Forms.NumericUpDown();
+            this.Cbo_paquete = new System.Windows.Forms.ComboBox();
             this.Lbl_numSesion = new System.Windows.Forms.Label();
             this.Lbl_costo = new System.Windows.Forms.Label();
             this.Cbo_servicios = new System.Windows.Forms.ComboBox();
-            this.Cbo_paquete = new System.Windows.Forms.ComboBox();
-            this.Nud_numSesion = new System.Windows.Forms.NumericUpDown();
             this.Txt_costo = new System.Windows.Forms.TextBox();
             this.Dgv_asignaciones = new System.Windows.Forms.DataGridView();
             this.Btn_nuevoRegistro = new System.Windows.Forms.Button();
@@ -45,6 +45,7 @@ namespace Capa_Vista_Citas
             this.Btn_modificar = new System.Windows.Forms.Button();
             this.Btn_eliminar = new System.Windows.Forms.Button();
             this.Btn_cancelar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.Gpb_paquete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Nud_numSesion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_asignaciones)).BeginInit();
@@ -56,7 +57,7 @@ namespace Capa_Vista_Citas
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_titulo.Location = new System.Drawing.Point(366, 24);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(266, 28);
+            this.Lbl_titulo.Size = new System.Drawing.Size(254, 27);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Asignar servicios a cita";
             // 
@@ -92,6 +93,22 @@ namespace Capa_Vista_Citas
             this.Gpb_paquete.TabIndex = 3;
             this.Gpb_paquete.TabStop = false;
             // 
+            // Nud_numSesion
+            // 
+            this.Nud_numSesion.Location = new System.Drawing.Point(292, 72);
+            this.Nud_numSesion.Name = "Nud_numSesion";
+            this.Nud_numSesion.Size = new System.Drawing.Size(120, 22);
+            this.Nud_numSesion.TabIndex = 6;
+            // 
+            // Cbo_paquete
+            // 
+            this.Cbo_paquete.FormattingEnabled = true;
+            this.Cbo_paquete.Location = new System.Drawing.Point(130, 25);
+            this.Cbo_paquete.Name = "Cbo_paquete";
+            this.Cbo_paquete.Size = new System.Drawing.Size(282, 24);
+            this.Cbo_paquete.TabIndex = 5;
+            this.Cbo_paquete.SelectedIndexChanged += new System.EventHandler(this.Cbo_paquete_SelectedIndexChanged);
+            // 
             // Lbl_numSesion
             // 
             this.Lbl_numSesion.AutoSize = true;
@@ -119,24 +136,11 @@ namespace Capa_Vista_Citas
             this.Cbo_servicios.Name = "Cbo_servicios";
             this.Cbo_servicios.Size = new System.Drawing.Size(282, 24);
             this.Cbo_servicios.TabIndex = 6;
-            // 
-            // Cbo_paquete
-            // 
-            this.Cbo_paquete.FormattingEnabled = true;
-            this.Cbo_paquete.Location = new System.Drawing.Point(130, 25);
-            this.Cbo_paquete.Name = "Cbo_paquete";
-            this.Cbo_paquete.Size = new System.Drawing.Size(282, 24);
-            this.Cbo_paquete.TabIndex = 5;
-            // 
-            // Nud_numSesion
-            // 
-            this.Nud_numSesion.Location = new System.Drawing.Point(292, 72);
-            this.Nud_numSesion.Name = "Nud_numSesion";
-            this.Nud_numSesion.Size = new System.Drawing.Size(120, 22);
-            this.Nud_numSesion.TabIndex = 6;
+            this.Cbo_servicios.SelectedIndexChanged += new System.EventHandler(this.Cbo_servicios_SelectedIndexChanged);
             // 
             // Txt_costo
             // 
+            this.Txt_costo.Enabled = false;
             this.Txt_costo.Location = new System.Drawing.Point(258, 377);
             this.Txt_costo.Name = "Txt_costo";
             this.Txt_costo.ReadOnly = true;
@@ -154,6 +158,7 @@ namespace Capa_Vista_Citas
             this.Dgv_asignaciones.ReadOnly = true;
             this.Dgv_asignaciones.RowHeadersWidth = 51;
             this.Dgv_asignaciones.RowTemplate.Height = 24;
+            this.Dgv_asignaciones.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.Dgv_asignaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.Dgv_asignaciones.Size = new System.Drawing.Size(536, 362);
             this.Dgv_asignaciones.TabIndex = 8;
@@ -166,6 +171,7 @@ namespace Capa_Vista_Citas
             this.Btn_nuevoRegistro.Size = new System.Drawing.Size(77, 77);
             this.Btn_nuevoRegistro.TabIndex = 9;
             this.Btn_nuevoRegistro.UseVisualStyleBackColor = false;
+            this.Btn_nuevoRegistro.Click += new System.EventHandler(this.Btn_nuevoRegistro_Click);
             // 
             // Btn_guardar
             // 
@@ -175,6 +181,7 @@ namespace Capa_Vista_Citas
             this.Btn_guardar.Size = new System.Drawing.Size(77, 77);
             this.Btn_guardar.TabIndex = 10;
             this.Btn_guardar.UseVisualStyleBackColor = false;
+            this.Btn_guardar.Click += new System.EventHandler(this.Btn_guardar_Click);
             // 
             // Btn_modificar
             // 
@@ -202,6 +209,17 @@ namespace Capa_Vista_Citas
             this.Btn_cancelar.Size = new System.Drawing.Size(77, 77);
             this.Btn_cancelar.TabIndex = 13;
             this.Btn_cancelar.UseVisualStyleBackColor = false;
+            this.Btn_cancelar.Click += new System.EventHandler(this.Btn_cancelar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(26, 469);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 16);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Ultimo ID Cita:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Form_asignarServicios_aCita
             // 
@@ -209,6 +227,7 @@ namespace Capa_Vista_Citas
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(237)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1026, 583);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Btn_cancelar);
             this.Controls.Add(this.Btn_eliminar);
             this.Controls.Add(this.Btn_modificar);
@@ -251,5 +270,6 @@ namespace Capa_Vista_Citas
         private System.Windows.Forms.Button Btn_modificar;
         private System.Windows.Forms.Button Btn_eliminar;
         private System.Windows.Forms.Button Btn_cancelar;
+        private System.Windows.Forms.Label label1;
     }
 }

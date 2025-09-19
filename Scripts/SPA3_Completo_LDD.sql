@@ -1,12 +1,15 @@
 -- ===========================================
--- BD simple con paquetes por sesión + pagos
+-- BD SPA con control de paquetes mejorado
+-- Solución para evitar doble cobro en paquetes
 -- ===========================================
+
 CREATE DATABASE IF NOT EXISTS BD_SPADos;
 USE BD_SPADos;
 
 -- ===========================================
 -- 1) Tablas base
 -- ===========================================
+
 CREATE TABLE IF NOT EXISTS tbl_clientes (
     pk_id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
@@ -39,55 +42,69 @@ CREATE TABLE IF NOT EXISTS tbl_paquete_servicio (
     UNIQUE (fk_id_paquete, numero_sesion)
 );
 
-CREATE TABLE tbl_cliente_paquete (
+-- Tabla de control de paquetes del cliente (MEJORADA)
+CREATE TABLE IF NOT EXISTS tbl_cliente_paquete (
     pk_id_cliente_paquete INT PRIMARY KEY AUTO_INCREMENT,
     fk_id_cliente INT NOT NULL,
     fk_id_paquete INT NOT NULL,
     fecha_compra DATE NOT NULL,
     sesiones_usadas INT DEFAULT 0,
-    saldo_pendiente DECIMAL(10,2) NOT NULL,
+    saldo_pendiente DECIMAL(10,2) NOT NULL DEFAULT 0,
     estado ENUM('En uso','Finalizado') DEFAULT 'En uso',
+    fk_id_cita_compra INT NULL, -- Cita donde se compró el paquete
     FOREIGN KEY (fk_id_cliente) REFERENCES tbl_clientes(pk_id_cliente),
-    FOREIGN KEY (fk_id_paquete) REFERENCES tbl_paquetes( pk_id_paquete)
+    FOREIGN KEY (fk_id_paquete) REFERENCES tbl_paquetes(pk_id_paquete),
+    INDEX idx_cliente_paquete_activo (fk_id_cliente, fk_id_paquete, estado)
 );
 
 CREATE TABLE IF NOT EXISTS tbl_citas (
     pk_id_cita INT AUTO_INCREMENT PRIMARY KEY,
     fk_id_cliente INT,
     fecha_cita DATE,
-    estado VARCHAR(50),
-    total DECIMAL(10,2),             -- suma de servicios y/o paquetes
-    saldo_pendiente DECIMAL(10,2),   -- se va reduciendo con pagos
+    estado VARCHAR(50) DEFAULT 'Pendiente',
+    total DECIMAL(10,2) DEFAULT 0,             -- suma de montos a cobrar (NO precios originales)
+    saldo_pendiente DECIMAL(10,2) DEFAULT 0,   -- se va reduciendo con pagos
     FOREIGN KEY (fk_id_cliente) REFERENCES tbl_clientes(pk_id_cliente)
 );
 
--- Detalle de la cita
+-- Detalle de la cita (MEJORADA con control de cobro)
 CREATE TABLE IF NOT EXISTS tbl_cita_servicio (
     pk_id_cita_servicio INT AUTO_INCREMENT PRIMARY KEY,
-    fk_id_cita INT,
-    fk_id_servicio INT,
-    fk_id_paquete INT NULL,
-    numero_sesion INT NULL,  -- número de sesión del paquete (si aplica)
-    costo DECIMAL(10,2),
+    fk_id_cita INT NOT NULL,
+    fk_id_servicio INT NULL,        -- Para servicios individuales
+    fk_id_paquete INT NULL,         -- Para paquetes
+    numero_sesion INT NULL,         -- Número de sesión del paquete (si aplica)
+    costo_referencia DECIMAL(10,2) NOT NULL, -- Precio "teórico" del servicio/paquete
+    monto_a_cobrar DECIMAL(10,2) NOT NULL DEFAULT 0, -- Lo que realmente se cobra al cliente
+    fk_id_cliente_paquete INT NULL, -- Referencia al paquete del cliente (si aplica)
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
     FOREIGN KEY (fk_id_cita) REFERENCES tbl_citas(pk_id_cita),
     FOREIGN KEY (fk_id_servicio) REFERENCES tbl_servicios(pk_id_servicio),
     FOREIGN KEY (fk_id_paquete) REFERENCES tbl_paquetes(pk_id_paquete),
+    FOREIGN KEY (fk_id_cliente_paquete) REFERENCES tbl_cliente_paquete(pk_id_cliente_paquete),
+    
+    -- Constraint para asegurar que sea O servicio individual O paquete
     CHECK (
-        (fk_id_servicio IS NOT NULL AND fk_id_paquete IS NULL AND numero_sesion IS NULL) OR
+        (fk_id_servicio IS NOT NULL AND fk_id_paquete IS NULL AND numero_sesion IS NULL AND fk_id_cliente_paquete IS NULL) OR
         (fk_id_servicio IS NULL AND fk_id_paquete IS NOT NULL AND numero_sesion IS NOT NULL)
-    )
+    ),
+    
+    INDEX idx_cita_servicio (fk_id_cita),
+    INDEX idx_paquete_sesion (fk_id_paquete, numero_sesion)
 );
 
 -- ===========================================
 -- 2) PAGOS
 -- ===========================================
+
 CREATE TABLE IF NOT EXISTS tbl_pagos (
     pk_id_pago INT AUTO_INCREMENT PRIMARY KEY,
-    fk_id_cita INT NULL,        -- pago por servicios sueltos de la cita
+    fk_id_cita INT NOT NULL,
     monto DECIMAL(10,2) NOT NULL,
     metodo_pago VARCHAR(50) NOT NULL,
     fecha_pago DATE NOT NULL,
     nota TEXT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (fk_id_cita) REFERENCES tbl_citas(pk_id_cita)
 );
-

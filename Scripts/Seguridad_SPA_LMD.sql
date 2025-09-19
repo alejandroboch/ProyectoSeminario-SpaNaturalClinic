@@ -399,3 +399,5 @@ DELETE FROM `tbl_usuarios` WHERE `Pk_id_usuario` = 2;
 UPDATE tbl_usuarios
 SET password_usuario = SHA2('HO0aGo4nM94=', 256) 
 WHERE username_usuario = 'admin';
+
+select* from tbl_cita_servicio;
