@@ -57,7 +57,7 @@ namespace Capa_Vista_Citas
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_titulo.Location = new System.Drawing.Point(388, 21);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(247, 27);
+            this.Lbl_titulo.Size = new System.Drawing.Size(258, 28);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Programación de citas";
             this.Lbl_titulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -118,7 +118,7 @@ namespace Capa_Vista_Citas
             this.Dgv_citas.AllowUserToDeleteRows = false;
             this.Dgv_citas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Dgv_citas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgv_citas.Location = new System.Drawing.Point(436, 205);
+            this.Dgv_citas.Location = new System.Drawing.Point(438, 206);
             this.Dgv_citas.Name = "Dgv_citas";
             this.Dgv_citas.ReadOnly = true;
             this.Dgv_citas.RowHeadersWidth = 51;
