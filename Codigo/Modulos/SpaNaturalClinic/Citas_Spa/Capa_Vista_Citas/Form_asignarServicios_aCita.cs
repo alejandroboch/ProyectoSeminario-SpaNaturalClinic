@@ -343,45 +343,49 @@ namespace Capa_Vista_Citas
         private void Btn_guardar_Click(object sender, EventArgs e)
         {
 
+
             //try
             //{
-            //    // Validación de campos vacíos
-            //    if (
-            //       Cbo_paquete.SelectedIndex == -1 || Cbo_servicios.SelectedIndex == -1
-            //       )
+            //    if (Cbo_paquete.SelectedIndex == -1 && Cbo_servicios.SelectedIndex == -1)
             //    {
-            //        MessageBox.Show("Porfavor seleccione Cliente o Estado");
+            //        MessageBox.Show("Seleccione un servicio o un paquete");
             //        return;
             //    }
 
-            //    // Obtener valores de los campos
-            //    //string empleado = cmb_empleado.SelectedItem.ToString();
-            //    string sServicio = valorSeleccionado;
-            //    string sPaquete = valorSeleccionado2;
+            //    int? idServicio = null;
+            //    int? idPaquete = null;
+            //    int? numeroSesion = null;
+            //    decimal costoReferencia = 0;
 
-            //    int iServicio = Convert.ToInt32(sServicio);
-            //    int iPaquete = Convert.ToInt32(sPaquete);
+            //    if (Cbo_servicios.SelectedIndex != -1)
+            //    {
+            //        idServicio = Convert.ToInt32(valorSeleccionado);
+            //        DataRow datos = logica2.ObtenerPrecioServicio(valorSeleccionado);
+            //        costoReferencia = datos != null ? Convert.ToDecimal(datos["Precio"]) : 0;
+            //    }
+            //    else if (Cbo_paquete.SelectedIndex != -1)
+            //    {
+            //        idPaquete = Convert.ToInt32(valorSeleccionado2);
+            //        numeroSesion = Convert.ToInt32(Nud_numSesion.Value);
+            //        DataRow datos = logica2.ObtenerPrecioPaquete(valorSeleccionado2);
+            //        costoReferencia = datos != null ? Convert.ToDecimal(datos["PrecioTotal"]) : 0;
+            //    }
 
-            //    int iSesion = Convert.ToInt32(Nud_numSesion.Value);
+            //    // Obtener el último ID de cita
+            //    int ultimoIdCita = logica2.ObtenerUltimoIdCita();
 
-
-            //    // Insertar nuevo registro
-            //    logica2.funcInsertarDetalle(iServicio, iPaquete, iSesion);
+            //    // Insertar detalle
+            //    logica2.funcInsertarDetalle(ultimoIdCita, idServicio, idPaquete, numeroSesion, costoReferencia);
             //    MessageBox.Show("Registro insertado exitosamente");
-            //    //logicaSeg.funinsertarabitacora(idUsuario, "Ingreso una promocion", "Tbl_promociones", "12001");
+
             //    CargarDatos();
-
-
-
             //    LimpiarFormulario();
-            //    ConfigurarControles(false); // Deshabilitar controles después de guardar
-            //    CargarDatos();
+            //    ConfigurarControles(false);
             //}
             //catch (Exception ex)
             //{
             //    MessageBox.Show("Error al guardar: " + ex.Message);
             //}
-
             try
             {
                 if (Cbo_paquete.SelectedIndex == -1 && Cbo_servicios.SelectedIndex == -1)
@@ -390,9 +394,9 @@ namespace Capa_Vista_Citas
                     return;
                 }
 
-                int? idServicio = null;
-                int? idPaquete = null;
-                int? numeroSesion = null;
+                int idServicio = 0;
+                int idPaquete = 0;
+                int numeroSesion = 0;
                 decimal costoReferencia = 0;
 
                 if (Cbo_servicios.SelectedIndex != -1)
@@ -406,14 +410,14 @@ namespace Capa_Vista_Citas
                     idPaquete = Convert.ToInt32(valorSeleccionado2);
                     numeroSesion = Convert.ToInt32(Nud_numSesion.Value);
                     DataRow datos = logica2.ObtenerPrecioPaquete(valorSeleccionado2);
-                    costoReferencia = datos != null ? Convert.ToDecimal(datos["PrecioTotal"]) : 0;
+                    //costoReferencia = datos != null ? Convert.ToDecimal(datos["PrecioTotal"]) : 0;
                 }
 
                 // Obtener el último ID de cita
                 int ultimoIdCita = logica2.ObtenerUltimoIdCita();
 
                 // Insertar detalle
-                logica2.funcInsertarDetalle(ultimoIdCita, idServicio, idPaquete, numeroSesion, costoReferencia);
+                logica2.funcInsertarDetalle(ultimoIdCita, idServicio, idPaquete, numeroSesion);
                 MessageBox.Show("Registro insertado exitosamente");
 
                 CargarDatos();
@@ -424,6 +428,7 @@ namespace Capa_Vista_Citas
             {
                 MessageBox.Show("Error al guardar: " + ex.Message);
             }
+
 
 
 

@@ -70,7 +70,10 @@ namespace Capa_Vista_Spa
 
         private void gestiónFaltasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Capa_Vista_Pagos.Form_pagos GD = new Capa_Vista_Pagos.Form_pagos();
+            GD.MdiParent = this;
+            CentrarFormulario(GD);
+            GD.Show();
         }
 
         private void postulanteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -91,6 +94,22 @@ namespace Capa_Vista_Spa
             CentrarFormulario(GD);
             GD.Show();
 
+        }
+
+        private void desarrolloDeCarreraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Capa_Vista_Clientes.Clientes GD = new Capa_Vista_Clientes.Clientes();
+            GD.MdiParent = this;
+            CentrarFormulario(GD);
+            GD.Show();
+        }
+
+        private void reclutamientoYSelecciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Capa_Vista_Seguimiento.SeguimientoForm GD = new Capa_Vista_Seguimiento.SeguimientoForm();
+            GD.MdiParent = this;
+            CentrarFormulario(GD);
+            GD.Show();
         }
     }
 

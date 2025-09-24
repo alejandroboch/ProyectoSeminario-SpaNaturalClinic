@@ -37,6 +37,15 @@
     <Reference Include="Capa_Vista_Citas">
       <HintPath>..\..\Citas_Spa\Capa_Vista_Citas\bin\Debug\Capa_Vista_Citas.dll</HintPath>
     </Reference>
+    <Reference Include="Capa_Vista_Clientes">
+      <HintPath>..\..\Clientes_Spa\Capa_Vista_Clientes\bin\Debug\Capa_Vista_Clientes.dll</HintPath>
+    </Reference>
+    <Reference Include="Capa_Vista_Pagos">
+      <HintPath>..\..\Pagos_Spa\Capa_Vista_Pagos\bin\Debug\Capa_Vista_Pagos.dll</HintPath>
+    </Reference>
+    <Reference Include="Capa_Vista_Seguimiento">
+      <HintPath>..\..\Seguimiento_Spa\Capa_Vista_Seguimiento\bin\Debug\Capa_Vista_Seguimiento.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
