@@ -33,15 +33,12 @@
             this.nóminaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantemientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desarrolloDeCarreraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.carreraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reclutamientoYSelecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mantenimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capacitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantenimientosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gestiónDisciplinariaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestiónFaltasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pagosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.evaluacionDesempeñoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Pnl_inferior = new System.Windows.Forms.Panel();
@@ -97,39 +94,25 @@
             // mantemientosToolStripMenuItem
             // 
             this.mantemientosToolStripMenuItem.Name = "mantemientosToolStripMenuItem";
-            this.mantemientosToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
+            this.mantemientosToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
             this.mantemientosToolStripMenuItem.Text = "Cita";
             this.mantemientosToolStripMenuItem.Click += new System.EventHandler(this.mantemientosToolStripMenuItem_Click);
             // 
             // desarrolloDeCarreraToolStripMenuItem
             // 
-            this.desarrolloDeCarreraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.carreraToolStripMenuItem});
             this.desarrolloDeCarreraToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.desarrolloDeCarreraToolStripMenuItem.Name = "desarrolloDeCarreraToolStripMenuItem";
             this.desarrolloDeCarreraToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.desarrolloDeCarreraToolStripMenuItem.Text = "Clientes";
-            // 
-            // carreraToolStripMenuItem
-            // 
-            this.carreraToolStripMenuItem.Name = "carreraToolStripMenuItem";
-            this.carreraToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
-            this.carreraToolStripMenuItem.Text = "Mantenimientos";
+            this.desarrolloDeCarreraToolStripMenuItem.Click += new System.EventHandler(this.desarrolloDeCarreraToolStripMenuItem_Click);
             // 
             // reclutamientoYSelecciónToolStripMenuItem
             // 
-            this.reclutamientoYSelecciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mantenimientosToolStripMenuItem});
             this.reclutamientoYSelecciónToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.reclutamientoYSelecciónToolStripMenuItem.Name = "reclutamientoYSelecciónToolStripMenuItem";
             this.reclutamientoYSelecciónToolStripMenuItem.Size = new System.Drawing.Size(163, 24);
             this.reclutamientoYSelecciónToolStripMenuItem.Text = "Seguimiento Clientes";
-            // 
-            // mantenimientosToolStripMenuItem
-            // 
-            this.mantenimientosToolStripMenuItem.Name = "mantenimientosToolStripMenuItem";
-            this.mantenimientosToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
-            this.mantenimientosToolStripMenuItem.Text = "Mantenimientos";
+            this.reclutamientoYSelecciónToolStripMenuItem.Click += new System.EventHandler(this.reclutamientoYSelecciónToolStripMenuItem_Click);
             // 
             // capacitacionesToolStripMenuItem
             // 
@@ -164,19 +147,11 @@
             // 
             // gestiónFaltasToolStripMenuItem
             // 
-            this.gestiónFaltasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pagosToolStripMenuItem});
             this.gestiónFaltasToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.gestiónFaltasToolStripMenuItem.Name = "gestiónFaltasToolStripMenuItem";
             this.gestiónFaltasToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.gestiónFaltasToolStripMenuItem.Text = "Pagos";
             this.gestiónFaltasToolStripMenuItem.Click += new System.EventHandler(this.gestiónFaltasToolStripMenuItem_Click);
-            // 
-            // pagosToolStripMenuItem
-            // 
-            this.pagosToolStripMenuItem.Name = "pagosToolStripMenuItem";
-            this.pagosToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
-            this.pagosToolStripMenuItem.Text = "Pagos";
             // 
             // evaluacionDesempeñoToolStripMenuItem
             // 
@@ -303,7 +278,6 @@
         private System.Windows.Forms.ToolStripMenuItem nóminaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mantemientosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem desarrolloDeCarreraToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem carreraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reclutamientoYSelecciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem capacitacionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestiónDisciplinariaToolStripMenuItem;
@@ -316,10 +290,8 @@
         private System.Windows.Forms.Panel Pnl_Usuario;
         public System.Windows.Forms.Label lbl_nombreUsuario;
         private System.Windows.Forms.Label Lbl_Usuario;
-        private System.Windows.Forms.ToolStripMenuItem mantenimientosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mantenimientosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pagosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuarioToolStripMenuItem;
     }
 }

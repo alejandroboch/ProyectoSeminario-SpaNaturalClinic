@@ -132,11 +132,27 @@ namespace Capa_Controlador_Citas
         //        return false; // En caso de error
         //    }
         //}
-        public bool funcInsertarDetalle(int fk_id_cita, int? fk_id_servicio, int? fk_id_paquete, int? numero_sesion, decimal costoReferencia)
+        //public bool funcInsertarDetalle(int fk_id_cita, int? fk_id_servicio, int? fk_id_paquete, int? numero_sesion, decimal costoReferencia)
+        //{
+        //    try
+        //    {
+        //        sn.funcInsertarDetalle(fk_id_cita, fk_id_servicio, fk_id_paquete, numero_sesion, costoReferencia);
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error en insertar detalle: {ex.Message}");
+        //        throw new Exception($"Error al insertar el registro: {ex.Message}");
+        //    }
+        //}
+
+
+        /************************************************************************/
+        public bool funcInsertarDetalle(int fk_id_cita, int fk_id_servicio, int fk_id_paquete, int numero_sesion)
         {
             try
             {
-                sn.funcInsertarDetalle(fk_id_cita, fk_id_servicio, fk_id_paquete, numero_sesion, costoReferencia);
+                sn.funcInsertarDetalle(fk_id_cita, fk_id_servicio, fk_id_paquete, numero_sesion);
                 return true;
             }
             catch (Exception ex)
@@ -145,6 +161,8 @@ namespace Capa_Controlador_Citas
                 throw new Exception($"Error al insertar el registro: {ex.Message}");
             }
         }
+
+        /************************************************************************/
 
 
         public int ObtenerUltimoIdCita()
