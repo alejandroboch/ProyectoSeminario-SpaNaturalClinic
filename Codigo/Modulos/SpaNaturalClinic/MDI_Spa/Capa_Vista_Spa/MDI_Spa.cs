@@ -111,6 +111,24 @@ namespace Capa_Vista_Spa
             CentrarFormulario(GD);
             GD.Show();
         }
+
+        private void capacitacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Capa_Vista_Servicios.Servicios GD = new Capa_Vista_Servicios.Servicios();
+            GD.MdiParent = this;
+            CentrarFormulario(GD);
+            GD.Show();
+        }
+
+        private void evaluacionDesempeñoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void usuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

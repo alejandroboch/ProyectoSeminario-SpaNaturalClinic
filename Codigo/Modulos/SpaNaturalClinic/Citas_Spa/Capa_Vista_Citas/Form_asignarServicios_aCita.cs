@@ -343,49 +343,6 @@ namespace Capa_Vista_Citas
         private void Btn_guardar_Click(object sender, EventArgs e)
         {
 
-
-            //try
-            //{
-            //    if (Cbo_paquete.SelectedIndex == -1 && Cbo_servicios.SelectedIndex == -1)
-            //    {
-            //        MessageBox.Show("Seleccione un servicio o un paquete");
-            //        return;
-            //    }
-
-            //    int? idServicio = null;
-            //    int? idPaquete = null;
-            //    int? numeroSesion = null;
-            //    decimal costoReferencia = 0;
-
-            //    if (Cbo_servicios.SelectedIndex != -1)
-            //    {
-            //        idServicio = Convert.ToInt32(valorSeleccionado);
-            //        DataRow datos = logica2.ObtenerPrecioServicio(valorSeleccionado);
-            //        costoReferencia = datos != null ? Convert.ToDecimal(datos["Precio"]) : 0;
-            //    }
-            //    else if (Cbo_paquete.SelectedIndex != -1)
-            //    {
-            //        idPaquete = Convert.ToInt32(valorSeleccionado2);
-            //        numeroSesion = Convert.ToInt32(Nud_numSesion.Value);
-            //        DataRow datos = logica2.ObtenerPrecioPaquete(valorSeleccionado2);
-            //        costoReferencia = datos != null ? Convert.ToDecimal(datos["PrecioTotal"]) : 0;
-            //    }
-
-            //    // Obtener el último ID de cita
-            //    int ultimoIdCita = logica2.ObtenerUltimoIdCita();
-
-            //    // Insertar detalle
-            //    logica2.funcInsertarDetalle(ultimoIdCita, idServicio, idPaquete, numeroSesion, costoReferencia);
-            //    MessageBox.Show("Registro insertado exitosamente");
-
-            //    CargarDatos();
-            //    LimpiarFormulario();
-            //    ConfigurarControles(false);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Error al guardar: " + ex.Message);
-            //}
             try
             {
                 if (Cbo_paquete.SelectedIndex == -1 && Cbo_servicios.SelectedIndex == -1)
@@ -408,7 +365,7 @@ namespace Capa_Vista_Citas
                 else if (Cbo_paquete.SelectedIndex != -1)
                 {
                     idPaquete = Convert.ToInt32(valorSeleccionado2);
-                    numeroSesion = Convert.ToInt32(Nud_numSesion.Value);
+                    numeroSesion = 1/*Convert.ToInt32(Nud_numSesion.Value)*/;
                     DataRow datos = logica2.ObtenerPrecioPaquete(valorSeleccionado2);
                     //costoReferencia = datos != null ? Convert.ToDecimal(datos["PrecioTotal"]) : 0;
                 }
@@ -428,11 +385,6 @@ namespace Capa_Vista_Citas
             {
                 MessageBox.Show("Error al guardar: " + ex.Message);
             }
-
-
-
-
-
         }
 
         private void Btn_nuevoRegistro_Click(object sender, EventArgs e)
