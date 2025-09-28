@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Capa_Modelo_Servicios;
+using Capa_Modelo_Paquetes;
 using System.Data.Odbc;
 using System.Data;
 
-namespace Capa_Controlador_Serv
+namespace Capa_Controlador_Paquetes
 {
     public class Controlador
     {
@@ -20,18 +20,18 @@ namespace Capa_Controlador_Serv
             return dt;
         }
 
-        public bool pro_guardar(Servicio s) => fun_validar(s) && sn.pro_insertar_servicio(s) > 0;
-        public bool pro_actualizar(Servicio s) => s.iId > 0 && fun_validar(s) && sn.pro_actualizar_servicio(s) > 0;
-        public bool pro_eliminar(int iId) => iId > 0 && sn.pro_eliminar_servicio(iId) > 0;
-        private bool fun_validar(Servicio s)
+        public bool pro_guardar(Paquete p) => fun_validar(p) && sn.pro_insertar_paquete(p) > 0;
+        public bool pro_actualizar(Paquete p) => p.iId > 0 && fun_validar(p) && sn.pro_actualizar_paquete(p) > 0;
+        public bool pro_eliminar(int iId) => iId > 0 && sn.pro_eliminar_paquete(iId) > 0;
+        private bool fun_validar(Paquete p)
         {
-            if (string.IsNullOrWhiteSpace(s.sNombreServicio)) return false;
+            if (string.IsNullOrWhiteSpace(p.sNombrePaquete)) return false;
             return true;
         }
 
-        public DataTable fun_buscar_servicio(string sTexto)
+        public DataTable fun_buscar_paquetes(string sTexto)
         {
-            var da = sn.fun_buscar_servicio(sTexto ?? "");
+            var da = sn.fun_buscar_paquete(sTexto ?? "");
             var dt = new DataTable();
             da.Fill(dt);
             return dt;

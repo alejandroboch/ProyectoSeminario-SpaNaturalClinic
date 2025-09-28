@@ -40,7 +40,7 @@ namespace Capa_Vista_Servicios
             this.Btn_Cancelar = new System.Windows.Forms.Button();
             this.Btn_Reporte = new System.Windows.Forms.Button();
             this.Btn_Ayuda = new System.Windows.Forms.Button();
-            this.Lbl_Bucar = new System.Windows.Forms.Label();
+            this.Lbl_Buscar = new System.Windows.Forms.Label();
             this.Lbl_IdServicio = new System.Windows.Forms.Label();
             this.Lbl_NombreServicio = new System.Windows.Forms.Label();
             this.Lbl_Precio = new System.Windows.Forms.Label();
@@ -162,15 +162,15 @@ namespace Capa_Vista_Servicios
             this.Btn_Ayuda.TabIndex = 9;
             this.Btn_Ayuda.UseVisualStyleBackColor = false;
             // 
-            // Lbl_Bucar
+            // Lbl_Buscar
             // 
-            this.Lbl_Bucar.AutoSize = true;
-            this.Lbl_Bucar.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Bucar.Location = new System.Drawing.Point(332, 106);
-            this.Lbl_Bucar.Name = "Lbl_Bucar";
-            this.Lbl_Bucar.Size = new System.Drawing.Size(57, 19);
-            this.Lbl_Bucar.TabIndex = 10;
-            this.Lbl_Bucar.Text = "Buscar";
+            this.Lbl_Buscar.AutoSize = true;
+            this.Lbl_Buscar.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Buscar.Location = new System.Drawing.Point(332, 106);
+            this.Lbl_Buscar.Name = "Lbl_Buscar";
+            this.Lbl_Buscar.Size = new System.Drawing.Size(57, 19);
+            this.Lbl_Buscar.TabIndex = 10;
+            this.Lbl_Buscar.Text = "Buscar";
             // 
             // Lbl_IdServicio
             // 
@@ -243,7 +243,7 @@ namespace Capa_Vista_Servicios
             this.Controls.Add(this.Lbl_Precio);
             this.Controls.Add(this.Lbl_NombreServicio);
             this.Controls.Add(this.Lbl_IdServicio);
-            this.Controls.Add(this.Lbl_Bucar);
+            this.Controls.Add(this.Lbl_Buscar);
             this.Controls.Add(this.Btn_Ayuda);
             this.Controls.Add(this.Btn_Reporte);
             this.Controls.Add(this.Btn_Cancelar);
@@ -274,7 +274,7 @@ namespace Capa_Vista_Servicios
         private System.Windows.Forms.Button Btn_Cancelar;
         private System.Windows.Forms.Button Btn_Reporte;
         private System.Windows.Forms.Button Btn_Ayuda;
-        private System.Windows.Forms.Label Lbl_Bucar;
+        private System.Windows.Forms.Label Lbl_Buscar;
         private System.Windows.Forms.Label Lbl_IdServicio;
         private System.Windows.Forms.Label Lbl_NombreServicio;
         private System.Windows.Forms.Label Lbl_Precio;
