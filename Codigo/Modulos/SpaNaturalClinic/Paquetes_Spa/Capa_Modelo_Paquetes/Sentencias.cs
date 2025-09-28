@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Odbc;
 
-namespace Capa_Modelo_Servicios
+namespace Capa_Modelo_Paquetes
 {
     public class Sentencias
     {
-      
         Conexion con = new Conexion();
 
         //////// 1) “obtener datos de una tabla”  ////////
@@ -20,44 +19,44 @@ namespace Capa_Modelo_Servicios
             return da;
         }
 
-        public int pro_insertar_servicio(Servicio s)
+        public int pro_insertar_paquete(Paquete p)
         {
-            string sSql = @"INSERT INTO tbl_servicios(nombre, precio) VALUES(?, ?);";
+            string sSql = @"INSERT INTO tbl_paquetes(nombre, precio_total, numero_sesiones) VALUES(?, ?, ?);";
 
             using (OdbcConnection cn = con.conexion())
             using (OdbcCommand cmd = new OdbcCommand(sSql, cn))
             {
-                cmd.Parameters.Add("@nombre", OdbcType.VarChar).Value = s.sNombreServicio ?? "";
+                cmd.Parameters.Add("@nombre", OdbcType.VarChar).Value = p.sNombrePaquete ?? "";
                 // Convertimos a double para asegurar compatibilidad ODBC
-                cmd.Parameters.Add("@precio", OdbcType.Double).Value = (double)s.dPrecioServicio;
+                cmd.Parameters.Add("@precio_total", OdbcType.Double).Value = (double)p.dPrecioPaquete;
+                cmd.Parameters.Add("@numero_sesiones", OdbcType.Int).Value = (int)p.iNumSesiones;
 
                 return cmd.ExecuteNonQuery();
             }
         }
 
-
-
-        public int pro_actualizar_servicio(Servicio s)
+        public int pro_actualizar_paquete(Paquete p)
         {
-            string sSql = @"UPDATE tbl_servicios
-                    SET nombre = ?, precio = ?
-                    WHERE pk_id_servicio = ?;";
+            string sSql = @"UPDATE tbl_paquetes
+                    SET nombre = ?, precio_total = ?, numero_sesiones = ?
+                    WHERE pk_id_paquete = ?;";
 
             using (OdbcConnection cn = con.conexion())
             using (OdbcCommand cmd = new OdbcCommand(sSql, cn))
             {
                 // Orden de parámetros = orden de los '?'
-                cmd.Parameters.Add("@nombre", OdbcType.VarChar).Value = s.sNombreServicio ?? "";
-                cmd.Parameters.Add("@precio", OdbcType.Double).Value = (double)s.dPrecioServicio;
-                cmd.Parameters.Add("@id", OdbcType.Int).Value = s.iId;
+                cmd.Parameters.Add("@nombre", OdbcType.VarChar).Value = p.sNombrePaquete ?? "";
+                cmd.Parameters.Add("@precio_total", OdbcType.Double).Value = (double)p.dPrecioPaquete;
+                cmd.Parameters.Add("@numero_sesiones", OdbcType.Int).Value = (int)p.iNumSesiones;
+                cmd.Parameters.Add("@id", OdbcType.Int).Value = p.iId;
 
                 return cmd.ExecuteNonQuery();
             }
         }
 
-        public int pro_eliminar_servicio(int iId)
+        public int pro_eliminar_paquete(int iId)
         {
-            string sSql = "DELETE FROM tbl_servicios WHERE pk_id_servicio = ?;";
+            string sSql = "DELETE FROM tbl_paquetes WHERE pk_id_paquete = ?;";
             using (OdbcConnection cn = con.conexion())
             using (OdbcCommand cmd = new OdbcCommand(sSql, cn))
             {
@@ -66,15 +65,14 @@ namespace Capa_Modelo_Servicios
             }
         }
 
-        public OdbcDataAdapter fun_buscar_servicio(string sTexto)
+        public OdbcDataAdapter fun_buscar_paquete(string sTexto)
         {
             // En ODBC con DataAdapter es práctico usar LIKE directo (cuidado con comillas).
-            string sSql = $@"SELECT pk_id_servicio, nombre, precio
-                             FROM tbl_servicios
+            string sSql = $@"SELECT pk_id_paquete, nombre, precio_total, numero_sesiones
+                             FROM tbl_paquetes
                              WHERE nombre LIKE '%{sTexto.Replace("'", "''")}%'                        
                              ORDER BY nombre;";
             return new OdbcDataAdapter(sSql, con.conexion());
         }
-
     }
 }
