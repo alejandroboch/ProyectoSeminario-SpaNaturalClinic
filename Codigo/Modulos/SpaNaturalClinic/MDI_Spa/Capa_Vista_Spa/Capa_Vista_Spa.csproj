@@ -46,6 +46,9 @@
     <Reference Include="Capa_Vista_Seguimiento">
       <HintPath>..\..\Seguimiento_Spa\Capa_Vista_Seguimiento\bin\Debug\Capa_Vista_Seguimiento.dll</HintPath>
     </Reference>
+    <Reference Include="Capa_Vista_Servicios">
+      <HintPath>..\..\Catalogo_Servicios\Capa_Vista_Servicios\bin\Debug\Capa_Vista_Servicios.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />

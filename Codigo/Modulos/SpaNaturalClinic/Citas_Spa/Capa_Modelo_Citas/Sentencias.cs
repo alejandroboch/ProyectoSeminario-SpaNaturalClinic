@@ -584,178 +584,1168 @@ namespace Capa_Modelo_Citas
         //    }
         //}
 
+        //public void funcInsertarDetalle(int fk_id_cita, int fk_id_servicio, int fk_id_paquete, int numero_sesion)
+        //{
+        //    try
+        //    {
+        //        using (OdbcConnection conexion = con.conexion())
+        //        {
+        //            conexion.Open();
+        //            using (OdbcTransaction transaction = conexion.BeginTransaction())
+        //            {
+        //                // 1. Obtener cliente de la cita
+        //                int fk_id_cliente = 0;
+        //                using (OdbcCommand cmdCliente = new OdbcCommand(
+        //                    "SELECT fk_id_cliente FROM tbl_citas WHERE pk_id_cita = ?", conexion, transaction))
+        //                {
+        //                    cmdCliente.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //                    object result = cmdCliente.ExecuteScalar();
+        //                    if (result == DBNull.Value)
+        //                        throw new Exception($"No se encontró la cita con ID {fk_id_cita}");
+        //                    fk_id_cliente = Convert.ToInt32(result);
+        //                }
+
+        //                decimal costoReferencia = 0;
+        //                decimal montoACobrar = 0;
+        //                int clientePaqueteId = 0;
+
+        //                // ===============================
+        //                // Manejo de paquetes
+        //                // ===============================
+        //                if (fk_id_paquete > 0 && numero_sesion > 0)
+        //                {
+        //                    int sesionesTotales = 0;
+
+        //                    // 1. Obtener info del paquete
+        //                    using (OdbcCommand cmdPaquete = new OdbcCommand(
+        //                        "SELECT precio_total, numero_sesiones FROM tbl_paquetes WHERE pk_id_paquete = ?", conexion, transaction))
+        //                    {
+        //                        cmdPaquete.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+        //                        using (OdbcDataReader reader = cmdPaquete.ExecuteReader())
+        //                        {
+        //                            if (reader.Read())
+        //                            {
+        //                                costoReferencia = Convert.ToDecimal(reader[0]);
+        //                                sesionesTotales = Convert.ToInt32(reader[1]);
+        //                            }
+        //                            else
+        //                                throw new Exception($"Paquete con ID {fk_id_paquete} no encontrado");
+        //                        }
+        //                    }
+
+        //                    // 2. Buscar paquete activo del cliente
+        //                    using (OdbcCommand cmdVerificar = new OdbcCommand(
+        //                        @"SELECT pk_id_cliente_paquete, sesiones_usadas
+        //                  FROM tbl_cliente_paquete
+        //                  WHERE fk_id_cliente = ? AND fk_id_paquete = ? AND estado = 'En uso'
+        //                  ORDER BY fecha_compra ASC
+        //                  LIMIT 1", conexion, transaction))
+        //                    {
+        //                        cmdVerificar.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+        //                        cmdVerificar.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+
+        //                        using (OdbcDataReader reader = cmdVerificar.ExecuteReader())
+        //                        {
+        //                            if (reader.Read())
+        //                            {
+        //                                clientePaqueteId = Convert.ToInt32(reader[0]);
+        //                                int sesionesUsadas = Convert.ToInt32(reader[1]);
+        //                                montoACobrar = 0; // Continuidad: no cobrar nuevamente
+        //                            }
+        //                            else
+        //                            {
+        //                                // No hay paquete activo, crear uno nuevo
+        //                                montoACobrar = costoReferencia;
+        //                                using (OdbcCommand cmdNuevo = new OdbcCommand(
+        //                                    @"INSERT INTO tbl_cliente_paquete 
+        //                              (fk_id_cliente, fk_id_paquete, fecha_compra, sesiones_usadas, saldo_pendiente, fk_id_cita_compra)
+        //                              VALUES (?, ?, ?, 0, 0, ?)", conexion, transaction))
+        //                                {
+        //                                    cmdNuevo.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+        //                                    cmdNuevo.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+        //                                    cmdNuevo.Parameters.AddWithValue("@fecha", DateTime.Now.Date);
+        //                                    cmdNuevo.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //                                    cmdNuevo.ExecuteNonQuery();
+        //                                }
+
+        //                                // Obtener ID del nuevo paquete
+        //                                using (OdbcCommand cmdUltimo = new OdbcCommand(
+        //                                    "SELECT LAST_INSERT_ID()", conexion, transaction))
+        //                                {
+        //                                    clientePaqueteId = Convert.ToInt32(cmdUltimo.ExecuteScalar());
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+
+        //                    // 3. Insertar detalle de cita (paquete)
+        //                    using (OdbcCommand cmdInsertar = new OdbcCommand(
+        //                        @"INSERT INTO tbl_cita_servicio 
+        //                  (fk_id_cita, fk_id_paquete, numero_sesion, costo_referencia, monto_a_cobrar, fk_id_cliente_paquete)
+        //                  VALUES (?, ?, ?, ?, ?, ?)", conexion, transaction))
+        //                    {
+        //                        cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
+        //                        cmdInsertar.Parameters.AddWithValue("@fk_id_paquete", fk_id_paquete);
+        //                        cmdInsertar.Parameters.AddWithValue("@numero_sesion", numero_sesion);
+        //                        cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
+        //                        cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
+        //                        cmdInsertar.Parameters.AddWithValue("@fk_id_cliente_paquete", clientePaqueteId);
+        //                        cmdInsertar.ExecuteNonQuery();
+        //                    }
+
+        //                    // 4. Actualizar sesiones usadas y finalizar si aplica
+        //                    using (OdbcCommand cmdActualizar = new OdbcCommand(
+        //                        @"UPDATE tbl_cliente_paquete
+        //                  SET sesiones_usadas = sesiones_usadas + 1,
+        //                      estado = CASE WHEN sesiones_usadas + 1 >= ? THEN 'Finalizado' ELSE 'En uso' END
+        //                  WHERE pk_id_cliente_paquete = ?", conexion, transaction))
+        //                    {
+        //                        cmdActualizar.Parameters.AddWithValue("@sesiones_totales", sesionesTotales);
+        //                        cmdActualizar.Parameters.AddWithValue("@id_cliente_paquete", clientePaqueteId);
+        //                        cmdActualizar.ExecuteNonQuery();
+        //                    }
+        //                }
+        //                // ===============================
+        //                // Manejo de servicios individuales
+        //                // ===============================
+        //                else if (fk_id_servicio > 0)
+        //                {
+        //                    using (OdbcCommand cmdServicio = new OdbcCommand(
+        //                        "SELECT precio FROM tbl_servicios WHERE pk_id_servicio = ?", conexion, transaction))
+        //                    {
+        //                        cmdServicio.Parameters.AddWithValue("@id_servicio", fk_id_servicio);
+        //                        object result = cmdServicio.ExecuteScalar();
+        //                        if (result == DBNull.Value)
+        //                            throw new Exception($"Servicio con ID {fk_id_servicio} no encontrado");
+
+        //                        costoReferencia = Convert.ToDecimal(result);
+        //                        montoACobrar = costoReferencia;
+        //                    }
+
+        //                    using (OdbcCommand cmdInsertar = new OdbcCommand(
+        //                        @"INSERT INTO tbl_cita_servicio 
+        //                  (fk_id_cita, fk_id_servicio, costo_referencia, monto_a_cobrar)
+        //                  VALUES (?, ?, ?, ?)", conexion, transaction))
+        //                    {
+        //                        cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
+        //                        cmdInsertar.Parameters.AddWithValue("@fk_id_servicio", fk_id_servicio);
+        //                        cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
+        //                        cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
+        //                        cmdInsertar.ExecuteNonQuery();
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    throw new Exception("Debe especificar un servicio o un paquete con número de sesión.");
+        //                }
+
+        //                // 5. Actualizar totales de la cita
+        //                funcActualizarTotalesCita(fk_id_cita, conexion, transaction);
+
+        //                transaction.Commit();
+        //                Console.WriteLine("Detalle insertado correctamente con continuidad de paquetes.");
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error en funcInsertarDetalle: {ex.Message}\n{ex.StackTrace}");
+        //        MessageBox.Show("Error al insertar detalle:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        throw;
+        //    }
+        //}
+
+
+
+        ///// <summary>
+        ///// Método interno para actualizar totales de cita (simula el trigger)
+        ///// </summary>
+        //private void funcActualizarTotalesCita(int fk_id_cita, OdbcConnection conexion, OdbcTransaction transaction)
+        //{
+        //    try
+        //    {
+        //        // Calcular nuevo total
+        //        string sqlTotal = "SELECT COALESCE(SUM(monto_a_cobrar), 0) AS total FROM tbl_cita_servicio WHERE fk_id_cita = ?";
+        //        decimal nuevoTotal = 0;
+
+        //        using (OdbcCommand cmdTotal = new OdbcCommand(sqlTotal, conexion, transaction))
+        //        {
+        //            cmdTotal.Parameters.Add("@id_cita", OdbcType.Int).Value = fk_id_cita;
+        //            object result = cmdTotal.ExecuteScalar();
+        //            if (result != DBNull.Value)
+        //            {
+        //                nuevoTotal = Convert.ToDecimal(result);
+        //            }
+        //        }
+
+        //        // Calcular saldo pendiente (total - pagos)
+        //        string sqlPagos = "SELECT COALESCE(SUM(monto), 0) AS pagado FROM tbl_pagos WHERE fk_id_cita = ?";
+        //        decimal totalPagado = 0;
+
+        //        using (OdbcCommand cmdPagos = new OdbcCommand(sqlPagos, conexion, transaction))
+        //        {
+        //            cmdPagos.Parameters.Add("@id_cita", OdbcType.Int).Value = fk_id_cita;
+        //            object result = cmdPagos.ExecuteScalar();
+        //            if (result != DBNull.Value)
+        //            {
+        //                totalPagado = Convert.ToDecimal(result);
+        //            }
+        //        }
+
+        //        decimal saldoPendiente = nuevoTotal - totalPagado;
+
+        //        // Actualizar la cita
+        //        string sqlActualizar = "UPDATE tbl_citas SET total = ?, saldo_pendiente = ? WHERE pk_id_cita = ?";
+        //        using (OdbcCommand cmdActualizar = new OdbcCommand(sqlActualizar, conexion, transaction))
+        //        {
+        //            cmdActualizar.Parameters.Add("@total", OdbcType.Decimal).Value = nuevoTotal;
+        //            cmdActualizar.Parameters.Add("@saldo", OdbcType.Decimal).Value = saldoPendiente;
+        //            cmdActualizar.Parameters.Add("@id_cita", OdbcType.Int).Value = fk_id_cita;
+
+        //            cmdActualizar.ExecuteNonQuery();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Error al actualizar totales de cita: {ex.Message}");
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Verificar si un cliente tiene un paquete activo (lógica en C#)
+        ///// </summary>
+        //public bool funcVerificarPaqueteActivo(int fk_id_cliente, int fk_id_paquete)
+        //{
+        //    try
+        //    {
+        //        using (OdbcConnection conexion = con.conexion())
+        //        {
+        //            string sql = @"
+        //        SELECT COUNT(*) as cuenta
+        //        FROM tbl_cliente_paquete cp
+        //        INNER JOIN tbl_paquetes p ON cp.fk_id_paquete = p.pk_id_paquete
+        //        WHERE cp.fk_id_cliente = ? 
+        //          AND cp.fk_id_paquete = ?
+        //          AND cp.estado = 'En uso'
+        //          AND cp.sesiones_usadas < p.numero_sesiones";
+
+        //            using (OdbcCommand cmd = new OdbcCommand(sql, conexion))
+        //            {
+        //                cmd.Parameters.Add("@id_cliente", OdbcType.Int).Value = fk_id_cliente;
+        //                cmd.Parameters.Add("@id_paquete", OdbcType.Int).Value = fk_id_paquete;
+
+        //                object result = cmd.ExecuteScalar();
+        //                int cuenta = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+
+        //                return cuenta > 0;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al verificar paquete activo: {ex.Message}");
+        //        return false;
+        //    }
+        //}
+
+        /***********************Codigo Agregado Ismar Cortez - 23/9/25
+      /********************************************************************************************************************/
+
+        //public void funcInsertarDetalle(int fk_id_cita, int fk_id_servicio, int fk_id_paquete, int numero_sesion)
+        //{
+        //    OdbcConnection conexion = null;
+        //    OdbcTransaction transaction = null;
+
+        //    try
+        //    {
+        //        conexion = con.conexion();
+
+        //        // NO ABRIR SI YA ESTÁ ABIERTA
+        //        if (conexion.State == ConnectionState.Closed)
+        //        {
+        //            conexion.Open();
+        //        }
+
+        //        transaction = conexion.BeginTransaction();
+
+        //        // 1. Obtener cliente de la cita
+        //        int fk_id_cliente = 0;
+        //        using (OdbcCommand cmdCliente = new OdbcCommand(
+        //            "SELECT fk_id_cliente FROM tbl_citas WHERE pk_id_cita = ?", conexion, transaction))
+        //        {
+        //            cmdCliente.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //            object result = cmdCliente.ExecuteScalar();
+        //            if (result == DBNull.Value)
+        //                throw new Exception($"No se encontró la cita con ID {fk_id_cita}");
+        //            fk_id_cliente = Convert.ToInt32(result);
+        //        }
+
+        //        decimal costoReferencia = 0;
+        //        decimal montoACobrar = 0;
+        //        int clientePaqueteId = 0;
+
+        //        // ===============================
+        //        // Manejo de paquetes
+        //        // ===============================
+        //        if (fk_id_paquete > 0 && numero_sesion > 0)
+        //        {
+        //            int sesionesTotales = 0;
+
+        //            // 1. Obtener info del paquete
+        //            using (OdbcCommand cmdPaquete = new OdbcCommand(
+        //                "SELECT precio_total, numero_sesiones FROM tbl_paquetes WHERE pk_id_paquete = ?", conexion, transaction))
+        //            {
+        //                cmdPaquete.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+        //                using (OdbcDataReader reader = cmdPaquete.ExecuteReader())
+        //                {
+        //                    if (reader.Read())
+        //                    {
+        //                        costoReferencia = Convert.ToDecimal(reader[0]);
+        //                        sesionesTotales = Convert.ToInt32(reader[1]);
+        //                    }
+        //                    else
+        //                        throw new Exception($"Paquete con ID {fk_id_paquete} no encontrado");
+        //                }
+        //            }
+
+        //            // 2. Buscar paquete activo del cliente
+        //            using (OdbcCommand cmdVerificar = new OdbcCommand(
+        //                @"SELECT pk_id_cliente_paquete, sesiones_usadas
+        //          FROM tbl_cliente_paquete
+        //          WHERE fk_id_cliente = ? AND fk_id_paquete = ? AND estado = 'En uso'
+        //          ORDER BY fecha_compra ASC
+        //          LIMIT 1", conexion, transaction))
+        //            {
+        //                cmdVerificar.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+        //                cmdVerificar.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+
+        //                using (OdbcDataReader reader = cmdVerificar.ExecuteReader())
+        //                {
+        //                    if (reader.Read())
+        //                    {
+        //                        clientePaqueteId = Convert.ToInt32(reader[0]);
+        //                        int sesionesUsadas = Convert.ToInt32(reader[1]);
+        //                        montoACobrar = 0; // Continuidad: no cobrar nuevamente
+        //                    }
+        //                    else
+        //                    {
+        //                        // No hay paquete activo, crear uno nuevo
+        //                        montoACobrar = costoReferencia;
+        //                        using (OdbcCommand cmdNuevo = new OdbcCommand(
+        //                            @"INSERT INTO tbl_cliente_paquete 
+        //                      (fk_id_cliente, fk_id_paquete, fecha_compra, sesiones_usadas, saldo_pendiente, fk_id_cita_compra)
+        //                      VALUES (?, ?, ?, 0, 0, ?)", conexion, transaction))
+        //                        {
+        //                            cmdNuevo.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+        //                            cmdNuevo.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+        //                            cmdNuevo.Parameters.AddWithValue("@fecha", DateTime.Now.Date);
+        //                            cmdNuevo.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //                            cmdNuevo.ExecuteNonQuery();
+        //                        }
+
+        //                        // Obtener ID del nuevo paquete
+        //                        using (OdbcCommand cmdUltimo = new OdbcCommand(
+        //                            "SELECT LAST_INSERT_ID()", conexion, transaction))
+        //                        {
+        //                            clientePaqueteId = Convert.ToInt32(cmdUltimo.ExecuteScalar());
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+        //            // 3. Insertar detalle de cita (paquete)
+        //            using (OdbcCommand cmdInsertar = new OdbcCommand(
+        //                @"INSERT INTO tbl_cita_servicio 
+        //          (fk_id_cita, fk_id_paquete, numero_sesion, costo_referencia, monto_a_cobrar, fk_id_cliente_paquete)
+        //          VALUES (?, ?, ?, ?, ?, ?)", conexion, transaction))
+        //            {
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_paquete", fk_id_paquete);
+        //                cmdInsertar.Parameters.AddWithValue("@numero_sesion", numero_sesion);
+        //                cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
+        //                cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_cliente_paquete", clientePaqueteId);
+        //                cmdInsertar.ExecuteNonQuery();
+        //            }
+
+        //            // 4. Actualizar sesiones usadas y finalizar si aplica
+        //            using (OdbcCommand cmdActualizar = new OdbcCommand(
+        //                @"UPDATE tbl_cliente_paquete
+        //          SET sesiones_usadas = sesiones_usadas + 1,
+        //              estado = CASE WHEN sesiones_usadas + 1 >= ? THEN 'Finalizado' ELSE 'En uso' END
+        //          WHERE pk_id_cliente_paquete = ?", conexion, transaction))
+        //            {
+        //                cmdActualizar.Parameters.AddWithValue("@sesiones_totales", sesionesTotales);
+        //                cmdActualizar.Parameters.AddWithValue("@id_cliente_paquete", clientePaqueteId);
+        //                cmdActualizar.ExecuteNonQuery();
+        //            }
+        //        }
+        //        // ===============================
+        //        // Manejo de servicios individuales
+        //        // ===============================
+        //        else if (fk_id_servicio > 0)
+        //        {
+        //            using (OdbcCommand cmdServicio = new OdbcCommand(
+        //                "SELECT precio FROM tbl_servicios WHERE pk_id_servicio = ?", conexion, transaction))
+        //            {
+        //                cmdServicio.Parameters.AddWithValue("@id_servicio", fk_id_servicio);
+        //                object result = cmdServicio.ExecuteScalar();
+        //                if (result == DBNull.Value)
+        //                    throw new Exception($"Servicio con ID {fk_id_servicio} no encontrado");
+
+        //                costoReferencia = Convert.ToDecimal(result);
+        //                montoACobrar = costoReferencia;
+        //            }
+
+        //            using (OdbcCommand cmdInsertar = new OdbcCommand(
+        //                @"INSERT INTO tbl_cita_servicio 
+        //          (fk_id_cita, fk_id_servicio, costo_referencia, monto_a_cobrar)
+        //          VALUES (?, ?, ?, ?)", conexion, transaction))
+        //            {
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_servicio", fk_id_servicio);
+        //                cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
+        //                cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
+        //                cmdInsertar.ExecuteNonQuery();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("Debe especificar un servicio o un paquete con número de sesión.");
+        //        }
+
+        //        // 5. Actualizar totales de la cita
+        //        funcActualizarTotalesCita(fk_id_cita, conexion, transaction);
+
+        //        transaction.Commit();
+        //        Console.WriteLine("Detalle insertado correctamente con continuidad de paquetes.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Rollback en caso de error
+        //        if (transaction != null)
+        //        {
+        //            try
+        //            {
+        //                transaction.Rollback();
+        //                transaction.Dispose();
+        //            }
+        //            catch { }
+        //        }
+
+        //        Console.WriteLine($"Error en funcInsertarDetalle: {ex.Message}");
+        //        MessageBox.Show("Error al insertar detalle:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        // Cleanup en finally
+        //        if (transaction != null)
+        //        {
+        //            try { transaction.Dispose(); } catch { }
+        //        }
+
+        //        // NO CERRAR LA CONEXIÓN AQUÍ porque puede ser una conexión global
+        //        // Solo dispose si fue creada localmente
+        //        conexion = null;
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Método interno para actualizar totales de cita (simula el trigger)
+        ///// </summary>
+        //private void funcActualizarTotalesCita(int fk_id_cita, OdbcConnection conexion, OdbcTransaction transaction)
+        //{
+        //    try
+        //    {
+        //        // Calcular nuevo total
+        //        string sqlTotal = "SELECT COALESCE(SUM(monto_a_cobrar), 0) AS total FROM tbl_cita_servicio WHERE fk_id_cita = ?";
+        //        decimal nuevoTotal = 0;
+
+        //        using (OdbcCommand cmdTotal = new OdbcCommand(sqlTotal, conexion, transaction))
+        //        {
+        //            cmdTotal.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //            object result = cmdTotal.ExecuteScalar();
+        //            if (result != DBNull.Value)
+        //            {
+        //                nuevoTotal = Convert.ToDecimal(result);
+        //            }
+        //        }
+
+        //        // Calcular saldo pendiente (total - pagos)  
+        //        string sqlPagos = "SELECT COALESCE(SUM(monto), 0) AS pagado FROM tbl_pagos WHERE fk_id_cita = ?";
+        //        decimal totalPagado = 0;
+
+        //        using (OdbcCommand cmdPagos = new OdbcCommand(sqlPagos, conexion, transaction))
+        //        {
+        //            cmdPagos.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //            object result = cmdPagos.ExecuteScalar();
+        //            if (result != DBNull.Value)
+        //            {
+        //                totalPagado = Convert.ToDecimal(result);
+        //            }
+        //        }
+
+        //        decimal saldoPendiente = nuevoTotal - totalPagado;
+
+        //        // Actualizar la cita
+        //        string sqlActualizar = "UPDATE tbl_citas SET total = ?, saldo_pendiente = ? WHERE pk_id_cita = ?";
+        //        using (OdbcCommand cmdActualizar = new OdbcCommand(sqlActualizar, conexion, transaction))
+        //        {
+        //            cmdActualizar.Parameters.AddWithValue("@total", nuevoTotal);
+        //            cmdActualizar.Parameters.AddWithValue("@saldo", saldoPendiente);
+        //            cmdActualizar.Parameters.AddWithValue("@id_cita", fk_id_cita);
+
+        //            cmdActualizar.ExecuteNonQuery();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Error al actualizar totales de cita: {ex.Message}");
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Verificar si un cliente tiene un paquete activo (lógica en C#)
+        ///// </summary>
+        //public bool funcVerificarPaqueteActivo(int fk_id_cliente, int fk_id_paquete)
+        //{
+        //    try
+        //    {
+        //        using (OdbcConnection conexion = con.conexion())
+        //        {
+        //            // Solo abrir si está cerrada
+        //            if (conexion.State == ConnectionState.Closed)
+        //            {
+        //                conexion.Open();
+        //            }
+
+        //            string sql = @"
+        //        SELECT COUNT(*) as cuenta
+        //        FROM tbl_cliente_paquete cp
+        //        INNER JOIN tbl_paquetes p ON cp.fk_id_paquete = p.pk_id_paquete
+        //        WHERE cp.fk_id_cliente = ? 
+        //          AND cp.fk_id_paquete = ?
+        //          AND cp.estado = 'En uso'
+        //          AND cp.sesiones_usadas < p.numero_sesiones";
+
+        //            using (OdbcCommand cmd = new OdbcCommand(sql, conexion))
+        //            {
+        //                cmd.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+        //                cmd.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+
+        //                object result = cmd.ExecuteScalar();
+        //                int cuenta = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+
+        //                return cuenta > 0;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al verificar paquete activo: {ex.Message}");
+        //        return false;
+        //    }
+        //}
+
+        /********************************************************************************************************************/
+        //public void funcInsertarDetalle(int fk_id_cita, int fk_id_servicio, int fk_id_paquete, int numero_sesion)
+        //{
+        //    // Validaciones al inicio
+        //    if (fk_id_cita <= 0)
+        //        throw new ArgumentException("ID de cita debe ser mayor a 0");
+
+        //    if (fk_id_servicio <= 0 && fk_id_paquete <= 0)
+        //        throw new ArgumentException("Debe especificar un servicio o un paquete");
+
+        //    if (fk_id_paquete > 0 && numero_sesion <= 0)
+        //        throw new ArgumentException("Número de sesión debe ser mayor a 0 para paquetes");
+
+        //    OdbcConnection conexion = null;
+        //    OdbcTransaction transaction = null;
+
+        //    try
+        //    {
+        //        conexion = con.conexion();
+
+        //        // NO ABRIR SI YA ESTÁ ABIERTA
+        //        if (conexion.State == ConnectionState.Closed)
+        //        {
+        //            conexion.Open();
+        //        }
+
+        //        transaction = conexion.BeginTransaction();
+
+        //        // 1. Obtener cliente de la cita
+        //        int fk_id_cliente = 0;
+        //        using (OdbcCommand cmdCliente = new OdbcCommand(
+        //            "SELECT fk_id_cliente FROM tbl_citas WHERE pk_id_cita = ?", conexion, transaction))
+        //        {
+        //            cmdCliente.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //            object result = cmdCliente.ExecuteScalar();
+        //            if (result == DBNull.Value)
+        //                throw new Exception($"No se encontró la cita con ID {fk_id_cita}");
+        //            fk_id_cliente = Convert.ToInt32(result);
+        //        }
+
+        //        decimal costoReferencia = 0;
+        //        decimal montoACobrar = 0;
+        //        int clientePaqueteId = 0;
+
+        //        // ===============================
+        //        // Manejo de paquetes
+        //        // ===============================
+        //        if (fk_id_paquete > 0 && numero_sesion > 0)
+        //        {
+        //            int sesionesTotales = 0;
+
+        //            // 1. Obtener info del paquete
+        //            using (OdbcCommand cmdPaquete = new OdbcCommand(
+        //                "SELECT precio_total, numero_sesiones FROM tbl_paquetes WHERE pk_id_paquete = ?", conexion, transaction))
+        //            {
+        //                cmdPaquete.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+        //                using (OdbcDataReader reader = cmdPaquete.ExecuteReader())
+        //                {
+        //                    if (reader.Read())
+        //                    {
+        //                        costoReferencia = Convert.ToDecimal(reader[0]);
+        //                        sesionesTotales = Convert.ToInt32(reader[1]);
+        //                    }
+        //                    else
+        //                        throw new Exception($"Paquete con ID {fk_id_paquete} no encontrado");
+        //                }
+        //            }
+
+        //            // 2. Buscar paquete activo del cliente (SOLO 'En uso')
+        //            using (OdbcCommand cmdVerificar = new OdbcCommand(
+        //                @"SELECT pk_id_cliente_paquete, sesiones_usadas
+        //          FROM tbl_cliente_paquete
+        //          WHERE fk_id_cliente = ? AND fk_id_paquete = ? AND estado = 'En uso'
+        //          ORDER BY fecha_compra ASC
+        //          LIMIT 1", conexion, transaction))
+        //            {
+        //                cmdVerificar.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+        //                cmdVerificar.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+
+        //                using (OdbcDataReader reader = cmdVerificar.ExecuteReader())
+        //                {
+        //                    if (reader.Read())
+        //                    {
+        //                        clientePaqueteId = Convert.ToInt32(reader[0]);
+        //                        int sesionesUsadas = Convert.ToInt32(reader[1]);
+
+        //                        // Verificar si el paquete puede continuar
+        //                        if (sesionesUsadas < sesionesTotales)
+        //                        {
+        //                            montoACobrar = 0; // Continuidad: no cobrar nuevamente
+        //                        }
+        //                        else
+        //                        {
+        //                            // El paquete está completamente usado, crear uno nuevo
+        //                            montoACobrar = costoReferencia;
+        //                            using (OdbcCommand cmdNuevo = new OdbcCommand(
+        //                                @"INSERT INTO tbl_cliente_paquete 
+        //                          (fk_id_cliente, fk_id_paquete, fecha_compra, sesiones_usadas, saldo_pendiente, fk_id_cita_compra)
+        //                          VALUES (?, ?, ?, 0, 0, ?)", conexion, transaction))
+        //                            {
+        //                                cmdNuevo.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+        //                                cmdNuevo.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+        //                                cmdNuevo.Parameters.AddWithValue("@fecha", DateTime.Now.Date);
+        //                                cmdNuevo.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //                                cmdNuevo.ExecuteNonQuery();
+        //                            }
+
+        //                            // Obtener ID del nuevo paquete
+        //                            using (OdbcCommand cmdUltimo = new OdbcCommand(
+        //                                "SELECT LAST_INSERT_ID()", conexion, transaction))
+        //                            {
+        //                                clientePaqueteId = Convert.ToInt32(cmdUltimo.ExecuteScalar());
+        //                            }
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        // No hay paquete activo, crear uno nuevo
+        //                        montoACobrar = costoReferencia;
+        //                        using (OdbcCommand cmdNuevo = new OdbcCommand(
+        //                            @"INSERT INTO tbl_cliente_paquete 
+        //                      (fk_id_cliente, fk_id_paquete, fecha_compra, sesiones_usadas, saldo_pendiente, fk_id_cita_compra)
+        //                      VALUES (?, ?, ?, 0, 0, ?)", conexion, transaction))
+        //                        {
+        //                            cmdNuevo.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+        //                            cmdNuevo.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+        //                            cmdNuevo.Parameters.AddWithValue("@fecha", DateTime.Now.Date);
+        //                            cmdNuevo.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //                            cmdNuevo.ExecuteNonQuery();
+        //                        }
+
+        //                        // Obtener ID del nuevo paquete
+        //                        using (OdbcCommand cmdUltimo = new OdbcCommand(
+        //                            "SELECT LAST_INSERT_ID()", conexion, transaction))
+        //                        {
+        //                            clientePaqueteId = Convert.ToInt32(cmdUltimo.ExecuteScalar());
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+        //            // 3. Insertar detalle de cita (paquete)
+        //            using (OdbcCommand cmdInsertar = new OdbcCommand(
+        //                @"INSERT INTO tbl_cita_servicio 
+        //          (fk_id_cita, fk_id_paquete, numero_sesion, costo_referencia, monto_a_cobrar, fk_id_cliente_paquete)
+        //          VALUES (?, ?, ?, ?, ?, ?)", conexion, transaction))
+        //            {
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_paquete", fk_id_paquete);
+        //                cmdInsertar.Parameters.AddWithValue("@numero_sesion", numero_sesion);
+        //                cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
+        //                cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_cliente_paquete", clientePaqueteId);
+        //                cmdInsertar.ExecuteNonQuery();
+        //            }
+
+        //            // 4. Actualizar sesiones usadas - LÓGICA CORREGIDA
+        //            using (OdbcCommand cmdActualizar = new OdbcCommand(
+        //                @"UPDATE tbl_cliente_paquete
+        //          SET sesiones_usadas = sesiones_usadas + 1,
+        //              estado = CASE WHEN (sesiones_usadas + 1) >= ? THEN 'Finalizado' ELSE 'En uso' END
+        //          WHERE pk_id_cliente_paquete = ?", conexion, transaction))
+        //            {
+        //                cmdActualizar.Parameters.AddWithValue("@sesiones_totales", sesionesTotales);
+        //                cmdActualizar.Parameters.AddWithValue("@id_cliente_paquete", clientePaqueteId);
+        //                cmdActualizar.ExecuteNonQuery();
+        //            }
+        //        }
+        //        // ===============================
+        //        // Manejo de servicios individuales
+        //        // ===============================
+        //        else if (fk_id_servicio > 0)
+        //        {
+        //            using (OdbcCommand cmdServicio = new OdbcCommand(
+        //                "SELECT precio FROM tbl_servicios WHERE pk_id_servicio = ?", conexion, transaction))
+        //            {
+        //                cmdServicio.Parameters.AddWithValue("@id_servicio", fk_id_servicio);
+        //                object result = cmdServicio.ExecuteScalar();
+        //                if (result == DBNull.Value)
+        //                    throw new Exception($"Servicio con ID {fk_id_servicio} no encontrado");
+
+        //                costoReferencia = Convert.ToDecimal(result);
+        //                montoACobrar = costoReferencia;
+        //            }
+
+        //            using (OdbcCommand cmdInsertar = new OdbcCommand(
+        //                @"INSERT INTO tbl_cita_servicio 
+        //          (fk_id_cita, fk_id_servicio, costo_referencia, monto_a_cobrar)
+        //          VALUES (?, ?, ?, ?)", conexion, transaction))
+        //            {
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
+        //                cmdInsertar.Parameters.AddWithValue("@fk_id_servicio", fk_id_servicio);
+        //                cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
+        //                cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
+        //                cmdInsertar.ExecuteNonQuery();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("Debe especificar un servicio o un paquete con número de sesión.");
+        //        }
+
+        //        // 5. Actualizar totales de la cita
+        //        funcActualizarTotalesCita(fk_id_cita, conexion, transaction);
+
+        //        transaction.Commit();
+        //        Console.WriteLine("Detalle insertado correctamente con continuidad de paquetes.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Rollback en caso de error
+        //        if (transaction != null)
+        //        {
+        //            try
+        //            {
+        //                transaction.Rollback();
+        //                transaction.Dispose();
+        //            }
+        //            catch { }
+        //        }
+
+        //        Console.WriteLine($"Error en funcInsertarDetalle: {ex.Message}");
+        //        MessageBox.Show("Error al insertar detalle:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        // Cleanup en finally
+        //        if (transaction != null)
+        //        {
+        //            try { transaction.Dispose(); } catch { }
+        //        }
+
+        //        // NO CERRAR LA CONEXIÓN AQUÍ porque puede ser una conexión global
+        //        // Solo dispose si fue creada localmente
+        //        conexion = null;
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Método interno para actualizar totales de cita (simula el trigger)
+        ///// </summary>
+        //private void funcActualizarTotalesCita(int fk_id_cita, OdbcConnection conexion, OdbcTransaction transaction)
+        //{
+        //    try
+        //    {
+        //        // Calcular nuevo total
+        //        string sqlTotal = "SELECT COALESCE(SUM(monto_a_cobrar), 0) AS total FROM tbl_cita_servicio WHERE fk_id_cita = ?";
+        //        decimal nuevoTotal = 0;
+
+        //        using (OdbcCommand cmdTotal = new OdbcCommand(sqlTotal, conexion, transaction))
+        //        {
+        //            cmdTotal.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //            object result = cmdTotal.ExecuteScalar();
+        //            if (result != DBNull.Value)
+        //            {
+        //                nuevoTotal = Convert.ToDecimal(result);
+        //            }
+        //        }
+
+        //        // Calcular saldo pendiente (total - pagos)  
+        //        string sqlPagos = "SELECT COALESCE(SUM(monto), 0) AS pagado FROM tbl_pagos WHERE fk_id_cita = ?";
+        //        decimal totalPagado = 0;
+
+        //        using (OdbcCommand cmdPagos = new OdbcCommand(sqlPagos, conexion, transaction))
+        //        {
+        //            cmdPagos.Parameters.AddWithValue("@id_cita", fk_id_cita);
+        //            object result = cmdPagos.ExecuteScalar();
+        //            if (result != DBNull.Value)
+        //            {
+        //                totalPagado = Convert.ToDecimal(result);
+        //            }
+        //        }
+
+        //        decimal saldoPendiente = nuevoTotal - totalPagado;
+
+        //        // Actualizar la cita
+        //        string sqlActualizar = "UPDATE tbl_citas SET total = ?, saldo_pendiente = ? WHERE pk_id_cita = ?";
+        //        using (OdbcCommand cmdActualizar = new OdbcCommand(sqlActualizar, conexion, transaction))
+        //        {
+        //            cmdActualizar.Parameters.AddWithValue("@total", nuevoTotal);
+        //            cmdActualizar.Parameters.AddWithValue("@saldo", saldoPendiente);
+        //            cmdActualizar.Parameters.AddWithValue("@id_cita", fk_id_cita);
+
+        //            cmdActualizar.ExecuteNonQuery();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Error al actualizar totales de cita: {ex.Message}");
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Verificar si un cliente tiene un paquete activo (lógica en C#)
+        ///// </summary>
+        //public bool funcVerificarPaqueteActivo(int fk_id_cliente, int fk_id_paquete)
+        //{
+        //    try
+        //    {
+        //        using (OdbcConnection conexion = con.conexion())
+        //        {
+        //            // Solo abrir si está cerrada
+        //            if (conexion.State == ConnectionState.Closed)
+        //            {
+        //                conexion.Open();
+        //            }
+
+        //            string sql = @"
+        //        SELECT COUNT(*) as cuenta
+        //        FROM tbl_cliente_paquete cp
+        //        INNER JOIN tbl_paquetes p ON cp.fk_id_paquete = p.pk_id_paquete
+        //        WHERE cp.fk_id_cliente = ? 
+        //          AND cp.fk_id_paquete = ?
+        //          AND cp.estado = 'En uso'
+        //          AND cp.sesiones_usadas < p.numero_sesiones";
+
+        //            using (OdbcCommand cmd = new OdbcCommand(sql, conexion))
+        //            {
+        //                cmd.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+        //                cmd.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+
+        //                object result = cmd.ExecuteScalar();
+        //                int cuenta = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+
+        //                return cuenta > 0;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al verificar paquete activo: {ex.Message}");
+        //        return false;
+        //    }
+        //}
+
         public void funcInsertarDetalle(int fk_id_cita, int fk_id_servicio, int fk_id_paquete, int numero_sesion)
         {
+            // Validaciones al inicio
+            if (fk_id_cita <= 0)
+                throw new ArgumentException("ID de cita debe ser mayor a 0");
+
+            if (fk_id_servicio <= 0 && fk_id_paquete <= 0)
+                throw new ArgumentException("Debe especificar un servicio o un paquete");
+
+            if (fk_id_paquete > 0 && numero_sesion <= 0)
+                throw new ArgumentException("Número de sesión debe ser mayor a 0 para paquetes");
+
+            OdbcConnection conexion = null;
+            OdbcTransaction transaction = null;
+
             try
             {
-                using (OdbcConnection conexion = con.conexion())
+                conexion = con.conexion();
+
+                // NO ABRIR SI YA ESTÁ ABIERTA
+                if (conexion.State == ConnectionState.Closed)
                 {
                     conexion.Open();
-                    using (OdbcTransaction transaction = conexion.BeginTransaction())
+                }
+
+                transaction = conexion.BeginTransaction();
+
+                // 1. Obtener cliente de la cita
+                int fk_id_cliente = 0;
+                using (OdbcCommand cmdCliente = new OdbcCommand(
+                    "SELECT fk_id_cliente FROM tbl_citas WHERE pk_id_cita = ?", conexion, transaction))
+                {
+                    cmdCliente.Parameters.AddWithValue("@id_cita", fk_id_cita);
+                    object result = cmdCliente.ExecuteScalar();
+                    if (result == DBNull.Value)
+                        throw new Exception($"No se encontró la cita con ID {fk_id_cita}");
+                    fk_id_cliente = Convert.ToInt32(result);
+                }
+
+                decimal costoReferencia = 0;
+                decimal montoACobrar = 0;
+                int clientePaqueteId = 0;
+
+                // ===============================
+                // Manejo de paquetes
+                // ===============================
+                if (fk_id_paquete > 0 && numero_sesion > 0)
+                {
+                    int sesionesTotales = 0;
+
+                    // 1. Obtener info del paquete
+                    using (OdbcCommand cmdPaquete = new OdbcCommand(
+                        "SELECT precio_total, numero_sesiones FROM tbl_paquetes WHERE pk_id_paquete = ?", conexion, transaction))
                     {
-                        // 1. Obtener cliente de la cita
-                        int fk_id_cliente = 0;
-                        using (OdbcCommand cmdCliente = new OdbcCommand(
-                            "SELECT fk_id_cliente FROM tbl_citas WHERE pk_id_cita = ?", conexion, transaction))
+                        cmdPaquete.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+                        using (OdbcDataReader reader = cmdPaquete.ExecuteReader())
                         {
-                            cmdCliente.Parameters.AddWithValue("@id_cita", fk_id_cita);
-                            object result = cmdCliente.ExecuteScalar();
-                            if (result == DBNull.Value)
-                                throw new Exception($"No se encontró la cita con ID {fk_id_cita}");
-                            fk_id_cliente = Convert.ToInt32(result);
-                        }
-
-                        decimal costoReferencia = 0;
-                        decimal montoACobrar = 0;
-                        int clientePaqueteId = 0;
-
-                        // ===============================
-                        // Manejo de paquetes
-                        // ===============================
-                        if (fk_id_paquete > 0 && numero_sesion > 0)
-                        {
-                            int sesionesTotales = 0;
-
-                            // 1. Obtener info del paquete
-                            using (OdbcCommand cmdPaquete = new OdbcCommand(
-                                "SELECT precio_total, numero_sesiones FROM tbl_paquetes WHERE pk_id_paquete = ?", conexion, transaction))
+                            if (reader.Read())
                             {
-                                cmdPaquete.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
-                                using (OdbcDataReader reader = cmdPaquete.ExecuteReader())
-                                {
-                                    if (reader.Read())
-                                    {
-                                        costoReferencia = Convert.ToDecimal(reader[0]);
-                                        sesionesTotales = Convert.ToInt32(reader[1]);
-                                    }
-                                    else
-                                        throw new Exception($"Paquete con ID {fk_id_paquete} no encontrado");
-                                }
+                                costoReferencia = Convert.ToDecimal(reader[0]);
+                                sesionesTotales = Convert.ToInt32(reader[1]);
                             }
+                            else
+                                throw new Exception($"Paquete con ID {fk_id_paquete} no encontrado");
+                        }
+                    }
 
-                            // 2. Buscar paquete activo del cliente
-                            using (OdbcCommand cmdVerificar = new OdbcCommand(
-                                @"SELECT pk_id_cliente_paquete, sesiones_usadas
-                          FROM tbl_cliente_paquete
-                          WHERE fk_id_cliente = ? AND fk_id_paquete = ? AND estado = 'En uso'
-                          ORDER BY fecha_compra ASC
-                          LIMIT 1", conexion, transaction))
+                    // 2. Buscar paquete activo del cliente (SOLO 'En uso')
+                    using (OdbcCommand cmdVerificar = new OdbcCommand(
+                        @"SELECT pk_id_cliente_paquete, sesiones_usadas
+                  FROM tbl_cliente_paquete
+                  WHERE fk_id_cliente = ? AND fk_id_paquete = ? AND estado = 'En uso'
+                  ORDER BY fecha_compra ASC
+                  LIMIT 1", conexion, transaction))
+                    {
+                        cmdVerificar.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+                        cmdVerificar.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+
+                        using (OdbcDataReader reader = cmdVerificar.ExecuteReader())
+                        {
+                            if (reader.Read())
                             {
-                                cmdVerificar.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
-                                cmdVerificar.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+                                clientePaqueteId = Convert.ToInt32(reader[0]);
+                                int sesionesUsadas = Convert.ToInt32(reader[1]);
 
-                                using (OdbcDataReader reader = cmdVerificar.ExecuteReader())
+                                // Verificar si el paquete puede continuar
+                                if (sesionesUsadas < sesionesTotales)
                                 {
-                                    if (reader.Read())
+                                    montoACobrar = 0; // Continuidad: no cobrar nuevamente
+                                }
+                                else
+                                {
+                                    // El paquete está completamente usado, crear uno nuevo
+                                    montoACobrar = costoReferencia;
+                                    using (OdbcCommand cmdNuevo = new OdbcCommand(
+                                        @"INSERT INTO tbl_cliente_paquete 
+                                  (fk_id_cliente, fk_id_paquete, fecha_compra, sesiones_usadas, saldo_pendiente, fk_id_cita_compra)
+                                  VALUES (?, ?, ?, 0, 0, ?)", conexion, transaction))
                                     {
-                                        clientePaqueteId = Convert.ToInt32(reader[0]);
-                                        int sesionesUsadas = Convert.ToInt32(reader[1]);
-                                        montoACobrar = 0; // Continuidad: no cobrar nuevamente
+                                        cmdNuevo.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+                                        cmdNuevo.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+                                        cmdNuevo.Parameters.AddWithValue("@fecha", DateTime.Now.Date);
+                                        cmdNuevo.Parameters.AddWithValue("@id_cita", fk_id_cita);
+                                        cmdNuevo.ExecuteNonQuery();
                                     }
-                                    else
-                                    {
-                                        // No hay paquete activo, crear uno nuevo
-                                        montoACobrar = costoReferencia;
-                                        using (OdbcCommand cmdNuevo = new OdbcCommand(
-                                            @"INSERT INTO tbl_cliente_paquete 
-                                      (fk_id_cliente, fk_id_paquete, fecha_compra, sesiones_usadas, saldo_pendiente, fk_id_cita_compra)
-                                      VALUES (?, ?, ?, 0, 0, ?)", conexion, transaction))
-                                        {
-                                            cmdNuevo.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
-                                            cmdNuevo.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
-                                            cmdNuevo.Parameters.AddWithValue("@fecha", DateTime.Now.Date);
-                                            cmdNuevo.Parameters.AddWithValue("@id_cita", fk_id_cita);
-                                            cmdNuevo.ExecuteNonQuery();
-                                        }
 
-                                        // Obtener ID del nuevo paquete
-                                        using (OdbcCommand cmdUltimo = new OdbcCommand(
-                                            "SELECT LAST_INSERT_ID()", conexion, transaction))
-                                        {
-                                            clientePaqueteId = Convert.ToInt32(cmdUltimo.ExecuteScalar());
-                                        }
+                                    // Obtener ID del nuevo paquete
+                                    using (OdbcCommand cmdUltimo = new OdbcCommand(
+                                        "SELECT LAST_INSERT_ID()", conexion, transaction))
+                                    {
+                                        clientePaqueteId = Convert.ToInt32(cmdUltimo.ExecuteScalar());
                                     }
                                 }
                             }
-
-                            // 3. Insertar detalle de cita (paquete)
-                            using (OdbcCommand cmdInsertar = new OdbcCommand(
-                                @"INSERT INTO tbl_cita_servicio 
-                          (fk_id_cita, fk_id_paquete, numero_sesion, costo_referencia, monto_a_cobrar, fk_id_cliente_paquete)
-                          VALUES (?, ?, ?, ?, ?, ?)", conexion, transaction))
+                            else
                             {
-                                cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
-                                cmdInsertar.Parameters.AddWithValue("@fk_id_paquete", fk_id_paquete);
-                                cmdInsertar.Parameters.AddWithValue("@numero_sesion", numero_sesion);
-                                cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
-                                cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
-                                cmdInsertar.Parameters.AddWithValue("@fk_id_cliente_paquete", clientePaqueteId);
-                                cmdInsertar.ExecuteNonQuery();
-                            }
-
-                            // 4. Actualizar sesiones usadas y finalizar si aplica
-                            using (OdbcCommand cmdActualizar = new OdbcCommand(
-                                @"UPDATE tbl_cliente_paquete
-                          SET sesiones_usadas = sesiones_usadas + 1,
-                              estado = CASE WHEN sesiones_usadas + 1 >= ? THEN 'Finalizado' ELSE 'En uso' END
-                          WHERE pk_id_cliente_paquete = ?", conexion, transaction))
-                            {
-                                cmdActualizar.Parameters.AddWithValue("@sesiones_totales", sesionesTotales);
-                                cmdActualizar.Parameters.AddWithValue("@id_cliente_paquete", clientePaqueteId);
-                                cmdActualizar.ExecuteNonQuery();
-                            }
-                        }
-                        // ===============================
-                        // Manejo de servicios individuales
-                        // ===============================
-                        else if (fk_id_servicio > 0)
-                        {
-                            using (OdbcCommand cmdServicio = new OdbcCommand(
-                                "SELECT precio FROM tbl_servicios WHERE pk_id_servicio = ?", conexion, transaction))
-                            {
-                                cmdServicio.Parameters.AddWithValue("@id_servicio", fk_id_servicio);
-                                object result = cmdServicio.ExecuteScalar();
-                                if (result == DBNull.Value)
-                                    throw new Exception($"Servicio con ID {fk_id_servicio} no encontrado");
-
-                                costoReferencia = Convert.ToDecimal(result);
+                                // No hay paquete activo, crear uno nuevo
                                 montoACobrar = costoReferencia;
-                            }
+                                using (OdbcCommand cmdNuevo = new OdbcCommand(
+                                    @"INSERT INTO tbl_cliente_paquete 
+                              (fk_id_cliente, fk_id_paquete, fecha_compra, sesiones_usadas, saldo_pendiente, fk_id_cita_compra)
+                              VALUES (?, ?, ?, 0, 0, ?)", conexion, transaction))
+                                {
+                                    cmdNuevo.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+                                    cmdNuevo.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
+                                    cmdNuevo.Parameters.AddWithValue("@fecha", DateTime.Now.Date);
+                                    cmdNuevo.Parameters.AddWithValue("@id_cita", fk_id_cita);
+                                    cmdNuevo.ExecuteNonQuery();
+                                }
 
-                            using (OdbcCommand cmdInsertar = new OdbcCommand(
-                                @"INSERT INTO tbl_cita_servicio 
-                          (fk_id_cita, fk_id_servicio, costo_referencia, monto_a_cobrar)
-                          VALUES (?, ?, ?, ?)", conexion, transaction))
-                            {
-                                cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
-                                cmdInsertar.Parameters.AddWithValue("@fk_id_servicio", fk_id_servicio);
-                                cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
-                                cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
-                                cmdInsertar.ExecuteNonQuery();
+                                // Obtener ID del nuevo paquete
+                                using (OdbcCommand cmdUltimo = new OdbcCommand(
+                                    "SELECT LAST_INSERT_ID()", conexion, transaction))
+                                {
+                                    clientePaqueteId = Convert.ToInt32(cmdUltimo.ExecuteScalar());
+                                }
                             }
                         }
-                        else
+                    }
+
+                    // 3. Insertar detalle de cita (paquete) - CON NÚMERO DE SESIÓN INCREMENTAL
+                    // Primero obtener el número de sesión actual
+                    int numeroSesionReal = 0;
+                    using (OdbcCommand cmdObtenerSesion = new OdbcCommand(
+                        "SELECT sesiones_usadas FROM tbl_cliente_paquete WHERE pk_id_cliente_paquete = ?",
+                        conexion, transaction))
+                    {
+                        cmdObtenerSesion.Parameters.AddWithValue("@id_cliente_paquete", clientePaqueteId);
+                        object result = cmdObtenerSesion.ExecuteScalar();
+                        if (result != DBNull.Value)
                         {
-                            throw new Exception("Debe especificar un servicio o un paquete con número de sesión.");
+                            numeroSesionReal = Convert.ToInt32(result) + 1; // +1 porque es la próxima sesión
                         }
+                    }
 
-                        // 5. Actualizar totales de la cita
-                        funcActualizarTotalesCita(fk_id_cita, conexion, transaction);
+                    // Insertar detalle con el número de sesión real
+                    using (OdbcCommand cmdInsertar = new OdbcCommand(
+                        @"INSERT INTO tbl_cita_servicio 
+                  (fk_id_cita, fk_id_paquete, numero_sesion, costo_referencia, monto_a_cobrar, fk_id_cliente_paquete)
+                  VALUES (?, ?, ?, ?, ?, ?)", conexion, transaction))
+                    {
+                        cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
+                        cmdInsertar.Parameters.AddWithValue("@fk_id_paquete", fk_id_paquete);
+                        cmdInsertar.Parameters.AddWithValue("@numero_sesion", numeroSesionReal); // ✅ Número real
+                        cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
+                        cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
+                        cmdInsertar.Parameters.AddWithValue("@fk_id_cliente_paquete", clientePaqueteId);
+                        cmdInsertar.ExecuteNonQuery();
+                    }
 
-                        transaction.Commit();
-                        Console.WriteLine("Detalle insertado correctamente con continuidad de paquetes.");
+                    // 4. Actualizar sesiones usadas - LÓGICA CORREGIDA
+                    // Primero: Incrementar las sesiones
+                    using (OdbcCommand cmdIncrementar = new OdbcCommand(
+                        @"UPDATE tbl_cliente_paquete
+                  SET sesiones_usadas = sesiones_usadas + 1
+                  WHERE pk_id_cliente_paquete = ?", conexion, transaction))
+                    {
+                        cmdIncrementar.Parameters.AddWithValue("@id_cliente_paquete", clientePaqueteId);
+                        cmdIncrementar.ExecuteNonQuery();
+                    }
+
+                    // Segundo: Verificar si debe finalizarse basándose en el valor ACTUAL
+                    using (OdbcCommand cmdVerificarFinal = new OdbcCommand(
+                        @"UPDATE tbl_cliente_paquete
+                  SET estado = CASE WHEN sesiones_usadas >= ? THEN 'Finalizado' ELSE 'En uso' END
+                  WHERE pk_id_cliente_paquete = ?", conexion, transaction))
+                    {
+                        cmdVerificarFinal.Parameters.AddWithValue("@sesiones_totales", sesionesTotales);
+                        cmdVerificarFinal.Parameters.AddWithValue("@id_cliente_paquete", clientePaqueteId);
+                        cmdVerificarFinal.ExecuteNonQuery();
                     }
                 }
+                // ===============================
+                // Manejo de servicios individuales
+                // ===============================
+                else if (fk_id_servicio > 0)
+                {
+                    using (OdbcCommand cmdServicio = new OdbcCommand(
+                        "SELECT precio FROM tbl_servicios WHERE pk_id_servicio = ?", conexion, transaction))
+                    {
+                        cmdServicio.Parameters.AddWithValue("@id_servicio", fk_id_servicio);
+                        object result = cmdServicio.ExecuteScalar();
+                        if (result == DBNull.Value)
+                            throw new Exception($"Servicio con ID {fk_id_servicio} no encontrado");
+
+                        costoReferencia = Convert.ToDecimal(result);
+                        montoACobrar = costoReferencia;
+                    }
+
+                    using (OdbcCommand cmdInsertar = new OdbcCommand(
+                        @"INSERT INTO tbl_cita_servicio 
+                  (fk_id_cita, fk_id_servicio, costo_referencia, monto_a_cobrar)
+                  VALUES (?, ?, ?, ?)", conexion, transaction))
+                    {
+                        cmdInsertar.Parameters.AddWithValue("@fk_id_cita", fk_id_cita);
+                        cmdInsertar.Parameters.AddWithValue("@fk_id_servicio", fk_id_servicio);
+                        cmdInsertar.Parameters.AddWithValue("@costo_referencia", costoReferencia);
+                        cmdInsertar.Parameters.AddWithValue("@monto_a_cobrar", montoACobrar);
+                        cmdInsertar.ExecuteNonQuery();
+                    }
+                }
+                else
+                {
+                    throw new Exception("Debe especificar un servicio o un paquete con número de sesión.");
+                }
+
+                // 5. Actualizar totales de la cita
+                funcActualizarTotalesCita(fk_id_cita, conexion, transaction);
+
+                transaction.Commit();
+                Console.WriteLine("Detalle insertado correctamente con continuidad de paquetes.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error en funcInsertarDetalle: {ex.Message}\n{ex.StackTrace}");
+                // Rollback en caso de error
+                if (transaction != null)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+                        transaction.Dispose();
+                    }
+                    catch { }
+                }
+
+                Console.WriteLine($"Error en funcInsertarDetalle: {ex.Message}");
                 MessageBox.Show("Error al insertar detalle:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
             }
+            finally
+            {
+                // Cleanup en finally
+                if (transaction != null)
+                {
+                    try { transaction.Dispose(); } catch { }
+                }
+
+                // NO CERRAR LA CONEXIÓN AQUÍ porque puede ser una conexión global
+                // Solo dispose si fue creada localmente
+                conexion = null;
+            }
         }
-
-
 
         /// <summary>
         /// Método interno para actualizar totales de cita (simula el trigger)
@@ -770,7 +1760,7 @@ namespace Capa_Modelo_Citas
 
                 using (OdbcCommand cmdTotal = new OdbcCommand(sqlTotal, conexion, transaction))
                 {
-                    cmdTotal.Parameters.Add("@id_cita", OdbcType.Int).Value = fk_id_cita;
+                    cmdTotal.Parameters.AddWithValue("@id_cita", fk_id_cita);
                     object result = cmdTotal.ExecuteScalar();
                     if (result != DBNull.Value)
                     {
@@ -778,13 +1768,13 @@ namespace Capa_Modelo_Citas
                     }
                 }
 
-                // Calcular saldo pendiente (total - pagos)
+                // Calcular saldo pendiente (total - pagos)  
                 string sqlPagos = "SELECT COALESCE(SUM(monto), 0) AS pagado FROM tbl_pagos WHERE fk_id_cita = ?";
                 decimal totalPagado = 0;
 
                 using (OdbcCommand cmdPagos = new OdbcCommand(sqlPagos, conexion, transaction))
                 {
-                    cmdPagos.Parameters.Add("@id_cita", OdbcType.Int).Value = fk_id_cita;
+                    cmdPagos.Parameters.AddWithValue("@id_cita", fk_id_cita);
                     object result = cmdPagos.ExecuteScalar();
                     if (result != DBNull.Value)
                     {
@@ -798,9 +1788,9 @@ namespace Capa_Modelo_Citas
                 string sqlActualizar = "UPDATE tbl_citas SET total = ?, saldo_pendiente = ? WHERE pk_id_cita = ?";
                 using (OdbcCommand cmdActualizar = new OdbcCommand(sqlActualizar, conexion, transaction))
                 {
-                    cmdActualizar.Parameters.Add("@total", OdbcType.Decimal).Value = nuevoTotal;
-                    cmdActualizar.Parameters.Add("@saldo", OdbcType.Decimal).Value = saldoPendiente;
-                    cmdActualizar.Parameters.Add("@id_cita", OdbcType.Int).Value = fk_id_cita;
+                    cmdActualizar.Parameters.AddWithValue("@total", nuevoTotal);
+                    cmdActualizar.Parameters.AddWithValue("@saldo", saldoPendiente);
+                    cmdActualizar.Parameters.AddWithValue("@id_cita", fk_id_cita);
 
                     cmdActualizar.ExecuteNonQuery();
                 }
@@ -820,6 +1810,12 @@ namespace Capa_Modelo_Citas
             {
                 using (OdbcConnection conexion = con.conexion())
                 {
+                    // Solo abrir si está cerrada
+                    if (conexion.State == ConnectionState.Closed)
+                    {
+                        conexion.Open();
+                    }
+
                     string sql = @"
                 SELECT COUNT(*) as cuenta
                 FROM tbl_cliente_paquete cp
@@ -831,8 +1827,8 @@ namespace Capa_Modelo_Citas
 
                     using (OdbcCommand cmd = new OdbcCommand(sql, conexion))
                     {
-                        cmd.Parameters.Add("@id_cliente", OdbcType.Int).Value = fk_id_cliente;
-                        cmd.Parameters.Add("@id_paquete", OdbcType.Int).Value = fk_id_paquete;
+                        cmd.Parameters.AddWithValue("@id_cliente", fk_id_cliente);
+                        cmd.Parameters.AddWithValue("@id_paquete", fk_id_paquete);
 
                         object result = cmd.ExecuteScalar();
                         int cuenta = result != DBNull.Value ? Convert.ToInt32(result) : 0;
@@ -848,7 +1844,6 @@ namespace Capa_Modelo_Citas
             }
         }
 
-        /********************************************************************************************************************/
 
 
 

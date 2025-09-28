@@ -29,6 +29,7 @@ namespace Interfac_V3
     {
         string idUsuario;
         public FormModulos(string idUsuario)
+
         {
 
             InitializeComponent();
