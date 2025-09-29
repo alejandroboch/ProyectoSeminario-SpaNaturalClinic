@@ -22,6 +22,7 @@ namespace Capa_Vista_Servicios
         public Servicios()
         {
             InitializeComponent();
+            fun_limpiar();
             Txt_IdServicio.Enabled = false;
             // Tabla
             Dgv_Servicios.AutoGenerateColumns = true;
