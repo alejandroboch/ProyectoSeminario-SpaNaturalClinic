@@ -20,6 +20,7 @@ namespace Capa_Vista_Paquetes
         public Paquetes()
         {
             InitializeComponent();
+            fun_limpiar();
             Txt_IdPaquete.Enabled = false;
             // Tabla
             Dgv_Paquetes.AutoGenerateColumns = true;
