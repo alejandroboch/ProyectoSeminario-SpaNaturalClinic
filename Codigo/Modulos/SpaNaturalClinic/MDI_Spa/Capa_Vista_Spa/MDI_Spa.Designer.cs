@@ -47,6 +47,9 @@
             this.Pnl_Usuario = new System.Windows.Forms.Panel();
             this.lbl_nombreUsuario = new System.Windows.Forms.Label();
             this.Lbl_Usuario = new System.Windows.Forms.Label();
+            this.serviciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paquetesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviciosEnPaquetesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.Pnl_inferior.SuspendLayout();
             this.Pnl_Fecha.SuspendLayout();
@@ -115,6 +118,10 @@
             // 
             // capacitacionesToolStripMenuItem
             // 
+            this.capacitacionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.serviciosToolStripMenuItem,
+            this.paquetesToolStripMenuItem,
+            this.serviciosEnPaquetesToolStripMenuItem});
             this.capacitacionesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.capacitacionesToolStripMenuItem.Name = "capacitacionesToolStripMenuItem";
             this.capacitacionesToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
@@ -134,7 +141,7 @@
             // reportesToolStripMenuItem
             // 
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
             this.reportesToolStripMenuItem.Text = "Reportes";
             // 
             // gestiónFaltasToolStripMenuItem
@@ -158,7 +165,7 @@
             // usuarioToolStripMenuItem
             // 
             this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
-            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
             this.usuarioToolStripMenuItem.Text = "Usuario";
             this.usuarioToolStripMenuItem.Click += new System.EventHandler(this.usuarioToolStripMenuItem_Click);
             // 
@@ -240,6 +247,27 @@
             this.Lbl_Usuario.TabIndex = 0;
             this.Lbl_Usuario.Text = "Usuario:";
             // 
+            // serviciosToolStripMenuItem
+            // 
+            this.serviciosToolStripMenuItem.Name = "serviciosToolStripMenuItem";
+            this.serviciosToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            this.serviciosToolStripMenuItem.Text = "Servicios";
+            this.serviciosToolStripMenuItem.Click += new System.EventHandler(this.serviciosToolStripMenuItem_Click);
+            // 
+            // paquetesToolStripMenuItem
+            // 
+            this.paquetesToolStripMenuItem.Name = "paquetesToolStripMenuItem";
+            this.paquetesToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            this.paquetesToolStripMenuItem.Text = "Paquetes";
+            this.paquetesToolStripMenuItem.Click += new System.EventHandler(this.paquetesToolStripMenuItem_Click);
+            // 
+            // serviciosEnPaquetesToolStripMenuItem
+            // 
+            this.serviciosEnPaquetesToolStripMenuItem.Name = "serviciosEnPaquetesToolStripMenuItem";
+            this.serviciosEnPaquetesToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
+            this.serviciosEnPaquetesToolStripMenuItem.Text = "Servicios en Paquetes";
+            this.serviciosEnPaquetesToolStripMenuItem.Click += new System.EventHandler(this.serviciosEnPaquetesToolStripMenuItem_Click);
+            // 
             // MDI_Spa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -286,5 +314,8 @@
         private System.Windows.Forms.Label Lbl_Usuario;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serviciosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paquetesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serviciosEnPaquetesToolStripMenuItem;
     }
 }

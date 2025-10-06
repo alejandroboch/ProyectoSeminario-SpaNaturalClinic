@@ -43,6 +43,12 @@
     <Reference Include="Capa_Vista_Pagos">
       <HintPath>..\..\Pagos_Spa\Capa_Vista_Pagos\bin\Debug\Capa_Vista_Pagos.dll</HintPath>
     </Reference>
+    <Reference Include="Capa_Vista_PaqServ">
+      <HintPath>..\..\Paq_Serv_Spa\Capa_Vista_PaqServ\bin\Debug\Capa_Vista_PaqServ.dll</HintPath>
+    </Reference>
+    <Reference Include="Capa_Vista_Paquetes">
+      <HintPath>..\..\Paquetes_Spa\Capa_Vista_Paquetes\bin\Debug\Capa_Vista_Paquetes.dll</HintPath>
+    </Reference>
     <Reference Include="Capa_Vista_Seguimiento">
       <HintPath>..\..\Seguimiento_Spa\Capa_Vista_Seguimiento\bin\Debug\Capa_Vista_Seguimiento.dll</HintPath>
     </Reference>
