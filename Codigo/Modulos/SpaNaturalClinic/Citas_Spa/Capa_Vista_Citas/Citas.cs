@@ -97,7 +97,7 @@ namespace Capa_Vista_Citas
                 var selectedItem = (ComboBoxItem)Cbo_nombreCliente.SelectedItem;
                 valorSeleccionado = selectedItem.Value;
                 // Mostrar el valor en un MessageBox
-                MessageBox.Show($"Valor seleccionado: {valorSeleccionado}", "Valor Seleccionado");
+                //MessageBox.Show($"Valor seleccionado: {valorSeleccionado}", "Valor Seleccionado");
             }
         }
 
@@ -234,13 +234,32 @@ namespace Capa_Vista_Citas
                 float.TryParse(Txt_saldoPendiente.Text, out SaldoPendiente);
                 //string fecha = dtp_fecha.Value.ToString("yyyy-MM-dd");
 
-                // Insertar nuevo registro
-                logica2.funcInsertarCita(Cliente,fecha, EstadoCita, Total, SaldoPendiente);
+
+
+                if (idSeleccionado == 0)
+                {
+                    // Insertar nuevo registro
+                    logica2.funcInsertarCita(Cliente, fecha, EstadoCita, Total, SaldoPendiente);
                     MessageBox.Show("Registro insertado exitosamente");
                     //logicaSeg.funinsertarabitacora(idUsuario, "Ingreso una promocion", "Tbl_promociones", "12001");
                     CargarDatos();
+                }
 
-        
+                else
+                {
+                    //// Actualizar registro existente
+                    //cn.funcActualizarLogicaDeduPerp(idSeleccionado, clase, concepto, tipo, aplicacion, excepcionActiva, monto);
+                    //MessageBox.Show("Registro actualizado exitosamente");
+                    //// Inicializar los botones de excepción y estado como activos
+                    //excepcionActiva = 1;
+                    //estadoActivo = 1;
+                    // Actualizar registro existente
+                    logica2.ActualizarCita(idSeleccionado, Cliente, fecha, EstadoCita);
+                    MessageBox.Show("Registro actualizado exitosamente");
+
+
+                }
+
 
                 LimpiarFormulario();
                 ConfigurarControles(false); // Deshabilitar controles después de guardar
@@ -259,12 +278,50 @@ namespace Capa_Vista_Citas
 
         private void Btn_modificar_Click(object sender, EventArgs e)
         {
+            if (idSeleccionado == 0)
+            {
+                MessageBox.Show("Debe seleccionar un registro para editar");
+                return;
+            }
+            //.Focus();
+            Cbo_nombreCliente.Enabled = true;
+            Dtp_fechaCita.Enabled = true;
+            Cbo_estadoCita.Enabled = true;
+            Btn_guardar.Enabled = true;
 
         }
 
         private void Btn_eliminar_Click(object sender, EventArgs e)
         {
+            if (idSeleccionado != 0)
+            {
+                if (MessageBox.Show("¿Está seguro de eliminar este registro? Esta acción cancelará la cita y todos sus servicios asociados.",
+                    "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        // Llamar al método de eliminación lógica
+                        logica2.EliminarCita(idSeleccionado);
 
+                        // Limpiar formulario y recargar datos
+                        LimpiarFormulario();
+                        CargarDatos();
+
+                        MessageBox.Show("Registro eliminado exitosamente");
+
+                        // Opcional: registrar en bitácora
+                        // logicaSeg.funinsertarabitacora(idUsuario, "Se eliminó una cita", "tbl_citas", "12001");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al eliminar: " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un registro para eliminar");
+            }
         }
 
         private void Btn_cancelar_Click(object sender, EventArgs e)
@@ -294,6 +351,50 @@ namespace Capa_Vista_Citas
                 estadoSeleccionado = Cbo_estadoCita.SelectedItem.ToString();
        
             }
+        }
+
+        private void Dgv_citas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                try
+                {
+                    idSeleccionado = Convert.ToInt32(Dgv_citas.Rows[e.RowIndex].Cells["ID"].Value);
+                    //txt_ID.Text = idSeleccionado.ToString(); // Añadir esta línea
+
+
+                    Cbo_nombreCliente.SelectedItem = Dgv_citas.Rows[e.RowIndex].Cells["Cliente"].Value.ToString();
+
+                    // Obtener el valor de la celda y asignarlo al DateTimePicker
+                    if (Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value != null)
+                    {
+                        DateTime fecha;
+                        if (DateTime.TryParse(Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value.ToString(), out fecha))
+                        {
+                            Dtp_fechaCita.Value = fecha;
+                        }
+                    }
+
+                    Cbo_estadoCita.SelectedItem = Dgv_citas.Rows[e.RowIndex].Cells["Estado"].Value.ToString();
+
+                    //Cbo_clase.SelectedItem = Dgv_perp_dec.Rows[e.RowIndex].Cells["Clase"].Value.ToString();
+
+                    //excepcionActiva = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Excepcion"].Value);
+                    //estadoActivo = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Estado"].Value);
+
+                    //ActualizarBotonExcepcion();
+                    //ActualizarBotonEstado();
+
+                    //Txt_monto.Text = Dgv_perp_dec.Rows[e.RowIndex].Cells["Monto"].Value.ToString();
+                    Btn_modificar.Enabled = true;
+                    Btn_eliminar.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al seleccionar registro: " + ex.Message);
+                }
+            }
+
         }
     }
 }
