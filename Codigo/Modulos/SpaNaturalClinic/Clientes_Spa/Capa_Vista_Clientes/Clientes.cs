@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Controlador_Cliente;
 using Capa_Modelo_Cliente;
+using System.Drawing.Imaging;
+
 
 namespace Capa_Vista_Clientes
 {
@@ -47,11 +49,13 @@ namespace Capa_Vista_Clientes
             toolTip1.SetToolTip(Btn_Eliminar, "Eliminar el cliente seleccionado");
             toolTip1.SetToolTip(Btn_Cancelar, "Cancelar operación y limpiar formulario");
             toolTip1.SetToolTip(Btn_Reporte, "Generar reporte de clientes");
-            toolTip1.SetToolTip(Btn_Ayuda, "Abrir ayuda del módulo");
         }
+
 
         private void Clientes_Load(object sender, EventArgs e)
         {
+            Txt_Buscar.Focus(); // o el control que quieras
+
             actualizardatagriew();
             fun_estado_edicion(false);
 
@@ -74,7 +78,8 @@ namespace Capa_Vista_Clientes
             Btn_Eliminar.TabIndex = 10;
             Btn_Cancelar.TabIndex = 11;
             Btn_Reporte.TabIndex = 12;
-            Btn_Ayuda.TabIndex = 13;
+
+            this.ActiveControl = Txt_Buscar;
         }
 
         // =================== CARGA Y ESTADO UI ===================
@@ -106,6 +111,8 @@ namespace Capa_Vista_Clientes
             Btn_Guardar.Enabled = bActivo && string.IsNullOrWhiteSpace(Txt_Id.Text);
             Btn_Actualizar.Enabled = bActivo && !string.IsNullOrWhiteSpace(Txt_Id.Text);
             Btn_Eliminar.Enabled = bActivo && !string.IsNullOrWhiteSpace(Txt_Id.Text);
+
+
 
             // AcceptButton dinámico
             this.AcceptButton = string.IsNullOrWhiteSpace(Txt_Id.Text) ? Btn_Guardar : Btn_Actualizar;
@@ -354,5 +361,7 @@ namespace Capa_Vista_Clientes
         private void Dgv_Clientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
+
+
     }
 }
