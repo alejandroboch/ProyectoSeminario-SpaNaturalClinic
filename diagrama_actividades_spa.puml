@@ -1,0 +1,165 @@
+@startuml Diagrama de Actividades - Sistema SPA Natural Clinic
+
+title Diagrama de Actividades - Sistema SPA Natural Clinic
+
+start
+
+:Usuario inicia sesión;
+note right: Autenticación en el sistema
+
+if (Credenciales válidas?) then (Sí)
+  :Acceso al MDI Principal;
+  note right: Menú principal con opciones del SPA
+else (No)
+  :Mostrar error de autenticación;
+  stop
+endif
+
+partition "Gestión de Clientes" {
+  :Acceder a módulo de Clientes;
+  :Mostrar lista de clientes;
+  
+  fork
+    :Nuevo Cliente;
+    :Validar datos del cliente;
+    if (Datos válidos?) then (Sí)
+      :Guardar cliente en BD;
+      :Actualizar lista de clientes;
+    else (No)
+      :Mostrar errores de validación;
+    endif
+  
+  fork again
+    :Editar Cliente;
+    :Cargar datos del cliente;
+    :Modificar información;
+    :Validar cambios;
+    if (Cambios válidos?) then (Sí)
+      :Actualizar cliente en BD;
+    else (No)
+      :Mostrar errores;
+    endif
+  
+  fork again
+    :Buscar Cliente;
+    :Ingresar criterio de búsqueda;
+    :Ejecutar búsqueda;
+    :Mostrar resultados;
+  end fork
+}
+
+partition "Gestión de Servicios y Paquetes" {
+  :Acceder a módulo de Servicios;
+  
+  fork
+    :Gestionar Servicios Individuales;
+    :Crear/Editar/Eliminar servicios;
+    :Definir precios;
+    :Guardar en catálogo;
+  
+  fork again
+    :Gestionar Paquetes;
+    :Crear nuevo paquete;
+    :Definir número de sesiones;
+    :Establecer precio total;
+    :Asignar servicios al paquete;
+    note right: Configurar secuencia de servicios
+    :Guardar paquete;
+  end fork
+}
+
+partition "Gestión de Citas" {
+  :Acceder a módulo de Citas;
+  :Mostrar calendario de citas;
+  
+  fork
+    :Nueva Cita;
+    :Seleccionar cliente;
+    :Seleccionar fecha y hora;
+    :Asignar servicios o paquetes;
+    
+    if (Es servicio individual?) then (Sí)
+      :Seleccionar servicio del catálogo;
+      :Calcular precio;
+    else (Es paquete?)
+      :Seleccionar paquete del cliente;
+      :Verificar sesiones disponibles;
+      if (Sesiones disponibles?) then (Sí)
+        :Asignar siguiente sesión del paquete;
+        :Calcular monto a cobrar;
+      else (No)
+        :Mostrar error - paquete agotado;
+        stop
+      endif
+    endif
+    
+    :Crear cita en BD;
+    :Actualizar calendario;
+  
+  fork again
+    :Consultar Citas;
+    :Filtrar por fecha/cliente;
+    :Mostrar detalles de cita;
+    :Ver servicios asignados;
+  end fork
+}
+
+partition "Gestión de Pagos" {
+  :Acceder a módulo de Pagos;
+  :Mostrar citas pendientes de pago;
+  
+  :Seleccionar cita;
+  :Mostrar detalle de servicios;
+  :Mostrar monto total;
+  :Mostrar saldo pendiente;
+  
+  :Registrar pago;
+  :Validar monto del pago;
+  
+  if (Pago válido?) then (Sí)
+    :Actualizar saldo pendiente;
+    
+    if (Saldo = 0?) then (Sí)
+      :Marcar cita como pagada;
+      if (Es sesión de paquete?) then (Sí)
+        :Incrementar sesiones usadas del paquete;
+        if (Paquete completado?) then (Sí)
+          :Marcar paquete como finalizado;
+        endif
+      endif
+    endif
+    
+    :Guardar pago en BD;
+    :Actualizar historial de pagos;
+  else (No)
+    :Mostrar error de pago;
+  endif
+}
+
+partition "Seguimiento y Reportes" {
+  :Acceder a módulo de Seguimiento;
+  
+  fork
+    :Seguimiento de Clientes;
+    :Mostrar historial de servicios;
+    :Mostrar paquetes activos;
+    :Mostrar estado de pagos;
+  
+  fork again
+    :Generar Reportes;
+    :Reporte de citas por período;
+    :Reporte de ventas;
+    :Reporte de clientes frecuentes;
+    :Exportar reportes;
+  end fork
+}
+
+:Usuario cierra sesión;
+stop
+
+@enduml
+
+
+
+
+

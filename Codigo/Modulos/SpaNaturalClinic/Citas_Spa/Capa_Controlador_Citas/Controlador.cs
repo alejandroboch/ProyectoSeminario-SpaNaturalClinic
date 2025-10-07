@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Capa_Modelo_Citas;
 using System.Data;
 using System.Data.Odbc;
+using System.Reflection;
 
 namespace Capa_Controlador_Citas
 {
@@ -179,6 +180,46 @@ namespace Capa_Controlador_Citas
         }
 
 
+        public void ActualizarCita(int idCita, int cliente, DateTime fecha, string estadoCita)
+        {
+            try
+            {
+                // Validaciones de negocio
+                if (idCita <= 0)
+                    throw new ArgumentException("ID de cita inválido");
+
+                if (cliente <= 0)
+                    throw new ArgumentException("Cliente inválido");
+
+                if (string.IsNullOrEmpty(estadoCita))
+                    throw new ArgumentException("Estado de cita requerido");
+
+                // Llamar al modelo
+                sn.funcActualizarCita(idCita, cliente, fecha, estadoCita);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en ActualizarCita (Controlador): {ex.Message}");
+                throw;
+            }
+        }
+        public void EliminarCita(int idCita)
+        {
+            try
+            {
+                // Validaciones de negocio
+                if (idCita <= 0)
+                    throw new ArgumentException("ID de cita inválido");
+
+                // Llamar al modelo
+               sn.funcEliminarCita(idCita);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en EliminarCita (Controlador): {ex.Message}");
+                throw;
+            }
+        }
 
     }
 }

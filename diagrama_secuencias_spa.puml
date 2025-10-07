@@ -1,0 +1,167 @@
+@startuml Diagrama de Secuencias - Sistema SPA Natural Clinic
+
+title Sistema de Gestión de SPA - Flujo de Trabajo
+
+actor "Usuario del SPA" as Usuario
+participant "Pantalla Principal" as Pantalla
+participant "Módulo Clientes" as Clientes
+participant "Lógica Clientes" as LogicaClientes
+participant "Datos Clientes" as DatosClientes
+participant "Base de Datos" as BD
+participant "Módulo Citas" as Citas
+participant "Lógica Citas" as LogicaCitas
+participant "Datos Citas" as DatosCitas
+
+== Ingreso al Sistema ==
+
+Usuario -> Pantalla: Ingresar usuario y contraseña
+Pantalla -> Pantalla: Verificar credenciales
+alt Credenciales correctas
+    Pantalla --> Usuario: Bienvenido al sistema
+else Credenciales incorrectas
+    Pantalla --> Usuario: Error: Acceso denegado
+end
+
+== Gestionar Clientes ==
+
+Usuario -> Pantalla: Abrir "Gestión de Clientes"
+Pantalla -> Clientes: Mostrar pantalla de clientes
+
+Clientes -> LogicaClientes: Solicitar lista de clientes
+LogicaClientes -> DatosClientes: Buscar clientes
+DatosClientes -> BD: Obtener información de clientes
+BD --> DatosClientes: Información de clientes
+DatosClientes --> LogicaClientes: Lista de clientes
+LogicaClientes --> Clientes: Lista de clientes
+Clientes --> Usuario: Mostrar clientes en pantalla
+
+== Agregar Nuevo Cliente ==
+
+Usuario -> Clientes: Hacer clic en "Nuevo Cliente"
+Clientes -> Clientes: Mostrar formulario vacío
+
+Usuario -> Clientes: Llenar datos del cliente
+Clientes -> LogicaClientes: Guardar nuevo cliente
+LogicaClientes -> LogicaClientes: Verificar que los datos estén completos
+alt Datos completos y válidos
+    LogicaClientes -> DatosClientes: Guardar cliente
+    DatosClientes -> BD: Insertar nuevo cliente
+    BD --> DatosClientes: Cliente guardado exitosamente
+    DatosClientes --> LogicaClientes: Confirmación
+    LogicaClientes --> Clientes: Cliente guardado
+    Clientes -> Clientes: Mostrar mensaje "Cliente agregado"
+    Clientes -> LogicaClientes: Actualizar lista
+    LogicaClientes -> DatosClientes: Obtener lista actualizada
+    DatosClientes -> BD: Consultar clientes
+    BD --> DatosClientes: Lista actualizada
+    DatosClientes --> LogicaClientes: Lista actualizada
+    LogicaClientes --> Clientes: Lista actualizada
+    Clientes -> Clientes: Refrescar pantalla con nuevos datos
+else Datos incompletos o inválidos
+    LogicaClientes --> Clientes: Error en los datos
+    Clientes -> Clientes: Mostrar mensaje de error
+end
+
+== Modificar Cliente Existente ==
+
+Usuario -> Clientes: Seleccionar cliente de la lista
+Clientes -> Clientes: Cargar datos del cliente en el formulario
+
+Usuario -> Clientes: Modificar información del cliente
+Clientes -> LogicaClientes: Actualizar cliente
+LogicaClientes -> LogicaClientes: Verificar datos modificados
+alt Cambios válidos
+    LogicaClientes -> DatosClientes: Guardar cambios
+    DatosClientes -> BD: Actualizar cliente
+    BD --> DatosClientes: Cliente actualizado
+    DatosClientes --> LogicaClientes: Confirmación
+    LogicaClientes --> Clientes: Cliente actualizado
+    Clientes -> Clientes: Mostrar mensaje "Cambios guardados"
+    Clientes -> LogicaClientes: Actualizar lista
+    LogicaClientes -> DatosClientes: Obtener lista actualizada
+    DatosClientes -> BD: Consultar clientes
+    BD --> DatosClientes: Lista actualizada
+    DatosClientes --> LogicaClientes: Lista actualizada
+    LogicaClientes --> Clientes: Lista actualizada
+    Clientes -> Clientes: Refrescar pantalla
+else Cambios inválidos
+    LogicaClientes --> Clientes: Error en los cambios
+    Clientes -> Clientes: Mostrar mensaje de error
+end
+
+== Crear Nueva Cita ==
+
+Usuario -> Pantalla: Abrir "Gestión de Citas"
+Pantalla -> Citas: Mostrar pantalla de citas
+
+Citas -> LogicaCitas: Solicitar lista de clientes
+LogicaCitas -> DatosCitas: Obtener clientes
+DatosCitas -> BD: Consultar clientes disponibles
+BD --> DatosCitas: Lista de clientes
+DatosCitas --> LogicaCitas: Lista de clientes
+LogicaCitas --> Citas: Lista de clientes
+Citas -> Citas: Mostrar clientes en lista desplegable
+
+Usuario -> Citas: Seleccionar cliente y fecha
+Usuario -> Citas: Elegir servicios o paquetes
+
+alt Es un servicio individual
+    Citas -> LogicaCitas: Consultar precio del servicio
+    LogicaCitas -> DatosCitas: Obtener precio
+    DatosCitas -> BD: Buscar precio del servicio
+    BD --> DatosCitas: Precio del servicio
+    DatosCitas --> LogicaCitas: Precio
+    LogicaCitas --> Citas: Precio del servicio
+else Es un paquete de servicios
+    Citas -> LogicaCitas: Consultar precio del paquete
+    LogicaCitas -> DatosCitas: Obtener precio
+    DatosCitas -> BD: Buscar precio del paquete
+    BD --> DatosCitas: Precio del paquete
+    DatosCitas --> LogicaCitas: Precio
+    LogicaCitas --> Citas: Precio del paquete
+end
+
+Usuario -> Citas: Confirmar creación de la cita
+Citas -> LogicaCitas: Crear nueva cita
+LogicaCitas -> DatosCitas: Guardar cita
+DatosCitas -> BD: Insertar nueva cita
+BD --> DatosCitas: Cita creada
+DatosCitas --> LogicaCitas: Cita guardada
+
+LogicaCitas -> DatosCitas: Obtener número de cita
+DatosCitas -> BD: Obtener último número de cita
+BD --> DatosCitas: Número de cita
+DatosCitas --> LogicaCitas: Número de cita
+
+LogicaCitas -> DatosCitas: Guardar detalles de servicios
+DatosCitas -> BD: Insertar servicios de la cita
+BD --> DatosCitas: Servicios guardados
+DatosCitas --> LogicaCitas: Servicios guardados
+LogicaCitas --> Citas: Cita creada exitosamente
+Citas -> Citas: Mostrar mensaje "Cita programada"
+
+Citas -> LogicaCitas: Actualizar lista de citas
+LogicaCitas -> DatosCitas: Obtener citas actuales
+DatosCitas -> BD: Consultar todas las citas
+BD --> DatosCitas: Lista de citas
+DatosCitas --> LogicaCitas: Lista de citas
+LogicaCitas --> Citas: Lista de citas
+Citas -> Citas: Refrescar pantalla con citas
+
+== Ver Citas Existentes ==
+
+Usuario -> Citas: Hacer clic en "Ver Citas"
+Citas -> LogicaCitas: Solicitar lista de citas
+LogicaCitas -> DatosCitas: Obtener citas
+DatosCitas -> BD: Consultar citas
+BD --> DatosCitas: Lista de citas
+DatosCitas --> LogicaCitas: Lista de citas
+LogicaCitas --> Citas: Lista de citas
+Citas --> Usuario: Mostrar citas en pantalla
+
+== Salir del Sistema ==
+
+Usuario -> Pantalla: Cerrar sesión
+Pantalla --> Usuario: Sesión finalizada
+
+@enduml

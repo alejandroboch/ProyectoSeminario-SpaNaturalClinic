@@ -216,9 +216,9 @@ namespace Capa_Vista_Citas
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(26, 469);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 16);
+            this.label1.Size = new System.Drawing.Size(49, 16);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Ultimo ID Cita:";
+            this.label1.Text = "ID Cita:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Form_asignarServicios_aCita
