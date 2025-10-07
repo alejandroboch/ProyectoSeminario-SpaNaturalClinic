@@ -31,13 +31,13 @@
             this.Lbl_Buscar = new System.Windows.Forms.Label();
             this.Txt_BuscarVip = new System.Windows.Forms.TextBox();
             this.Lbl_Clientes = new System.Windows.Forms.Label();
-            this.Btn_LimpiarBusquedas = new System.Windows.Forms.Button();
-            this.Btn_BuscarVip = new System.Windows.Forms.Button();
             this.Dgv_TopClientes = new System.Windows.Forms.DataGridView();
             this.Dgv_Vips = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.Btn_BuscarTop = new System.Windows.Forms.Button();
             this.Txt_BuscarTop = new System.Windows.Forms.TextBox();
+            this.Btn_BuscarTop = new System.Windows.Forms.Button();
+            this.Btn_LimpiarBusquedas = new System.Windows.Forms.Button();
+            this.Btn_BuscarVip = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_TopClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Vips)).BeginInit();
             this.SuspendLayout();
@@ -69,32 +69,6 @@
             this.Lbl_Clientes.TabIndex = 33;
             this.Lbl_Clientes.Text = "Clientes Frecuentes";
             // 
-            // Btn_LimpiarBusquedas
-            // 
-            this.Btn_LimpiarBusquedas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
-            this.Btn_LimpiarBusquedas.FlatAppearance.BorderSize = 0;
-            this.Btn_LimpiarBusquedas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_LimpiarBusquedas.Image = global::Capa_Vista_Seguimiento.Properties.Resources.CANCELAR_V4;
-            this.Btn_LimpiarBusquedas.Location = new System.Drawing.Point(559, 80);
-            this.Btn_LimpiarBusquedas.Name = "Btn_LimpiarBusquedas";
-            this.Btn_LimpiarBusquedas.Size = new System.Drawing.Size(70, 70);
-            this.Btn_LimpiarBusquedas.TabIndex = 28;
-            this.Btn_LimpiarBusquedas.UseVisualStyleBackColor = false;
-            this.Btn_LimpiarBusquedas.Click += new System.EventHandler(this.Btn_LimpiarBusquedas_Click);
-            // 
-            // Btn_BuscarVip
-            // 
-            this.Btn_BuscarVip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
-            this.Btn_BuscarVip.FlatAppearance.BorderSize = 0;
-            this.Btn_BuscarVip.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_BuscarVip.Image = global::Capa_Vista_Seguimiento.Properties.Resources.BUCAR_V4;
-            this.Btn_BuscarVip.Location = new System.Drawing.Point(450, 80);
-            this.Btn_BuscarVip.Name = "Btn_BuscarVip";
-            this.Btn_BuscarVip.Size = new System.Drawing.Size(70, 70);
-            this.Btn_BuscarVip.TabIndex = 24;
-            this.Btn_BuscarVip.UseVisualStyleBackColor = false;
-            this.Btn_BuscarVip.Click += new System.EventHandler(this.Btn_BuscarVip_Click);
-            // 
             // Dgv_TopClientes
             // 
             this.Dgv_TopClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -125,12 +99,21 @@
             this.label1.TabIndex = 50;
             this.label1.Text = "Buscar en Top Clientes";
             // 
+            // Txt_BuscarTop
+            // 
+            this.Txt_BuscarTop.Location = new System.Drawing.Point(663, 128);
+            this.Txt_BuscarTop.Name = "Txt_BuscarTop";
+            this.Txt_BuscarTop.Size = new System.Drawing.Size(382, 22);
+            this.Txt_BuscarTop.TabIndex = 48;
+            // 
             // Btn_BuscarTop
             // 
-            this.Btn_BuscarTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
+            this.Btn_BuscarTop.BackColor = System.Drawing.Color.Transparent;
+            this.Btn_BuscarTop.BackgroundImage = global::Capa_Vista_Seguimiento.Properties.Resources.buscar;
+            this.Btn_BuscarTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Btn_BuscarTop.FlatAppearance.BorderSize = 0;
+            this.Btn_BuscarTop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.OliveDrab;
             this.Btn_BuscarTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_BuscarTop.Image = global::Capa_Vista_Seguimiento.Properties.Resources.BUCAR_V4;
             this.Btn_BuscarTop.Location = new System.Drawing.Point(1068, 80);
             this.Btn_BuscarTop.Name = "Btn_BuscarTop";
             this.Btn_BuscarTop.Size = new System.Drawing.Size(70, 70);
@@ -138,12 +121,35 @@
             this.Btn_BuscarTop.UseVisualStyleBackColor = false;
             this.Btn_BuscarTop.Click += new System.EventHandler(this.Btn_BuscarTop_Click);
             // 
-            // Txt_BuscarTop
+            // Btn_LimpiarBusquedas
             // 
-            this.Txt_BuscarTop.Location = new System.Drawing.Point(663, 128);
-            this.Txt_BuscarTop.Name = "Txt_BuscarTop";
-            this.Txt_BuscarTop.Size = new System.Drawing.Size(382, 22);
-            this.Txt_BuscarTop.TabIndex = 48;
+            this.Btn_LimpiarBusquedas.BackColor = System.Drawing.Color.Transparent;
+            this.Btn_LimpiarBusquedas.BackgroundImage = global::Capa_Vista_Seguimiento.Properties.Resources.cancelar;
+            this.Btn_LimpiarBusquedas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Btn_LimpiarBusquedas.FlatAppearance.BorderSize = 0;
+            this.Btn_LimpiarBusquedas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.OliveDrab;
+            this.Btn_LimpiarBusquedas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_LimpiarBusquedas.Location = new System.Drawing.Point(559, 80);
+            this.Btn_LimpiarBusquedas.Name = "Btn_LimpiarBusquedas";
+            this.Btn_LimpiarBusquedas.Size = new System.Drawing.Size(70, 70);
+            this.Btn_LimpiarBusquedas.TabIndex = 28;
+            this.Btn_LimpiarBusquedas.UseVisualStyleBackColor = false;
+            this.Btn_LimpiarBusquedas.Click += new System.EventHandler(this.Btn_LimpiarBusquedas_Click);
+            // 
+            // Btn_BuscarVip
+            // 
+            this.Btn_BuscarVip.BackColor = System.Drawing.Color.Transparent;
+            this.Btn_BuscarVip.BackgroundImage = global::Capa_Vista_Seguimiento.Properties.Resources.buscar;
+            this.Btn_BuscarVip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Btn_BuscarVip.FlatAppearance.BorderSize = 0;
+            this.Btn_BuscarVip.FlatAppearance.MouseOverBackColor = System.Drawing.Color.OliveDrab;
+            this.Btn_BuscarVip.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_BuscarVip.Location = new System.Drawing.Point(450, 80);
+            this.Btn_BuscarVip.Name = "Btn_BuscarVip";
+            this.Btn_BuscarVip.Size = new System.Drawing.Size(70, 70);
+            this.Btn_BuscarVip.TabIndex = 24;
+            this.Btn_BuscarVip.UseVisualStyleBackColor = false;
+            this.Btn_BuscarVip.Click += new System.EventHandler(this.Btn_BuscarVip_Click);
             // 
             // SeguimientoForm
             // 
