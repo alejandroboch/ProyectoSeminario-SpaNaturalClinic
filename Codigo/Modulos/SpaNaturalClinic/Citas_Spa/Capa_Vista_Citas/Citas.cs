@@ -203,6 +203,11 @@ namespace Capa_Vista_Citas
 
             // 2. Muestra el formulario.
             formAsignarServicios.Show();
+
+            //Form_asignarServicios_aCita formAsignarServicios GD = new Form_asignarServicios_aCita formAsignarServicios();
+            //GD.MdiParent = this;
+            //CentrarFormulario(GD);
+            //GD.Show();
         }
 
         private void Btn_guardar_Click(object sender, EventArgs e)
