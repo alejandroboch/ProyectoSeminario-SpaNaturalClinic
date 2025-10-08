@@ -20,6 +20,12 @@ namespace Capa_Vista_Citas
         string valorSeleccionado;
         string valorSeleccionado2;
 
+
+
+
+        private int idCitaActual = 0; // ✅ NUEVA VARIABLE
+
+
         //logica logicaSeg = new logica();
 
 
@@ -343,11 +349,70 @@ namespace Capa_Vista_Citas
         private void Btn_guardar_Click(object sender, EventArgs e)
         {
 
+            //try
+            //{
+            //    if (Cbo_paquete.SelectedIndex == -1 && Cbo_servicios.SelectedIndex == -1)
+            //    {
+            //        MessageBox.Show("Seleccione un servicio o un paquete");
+            //        return;
+            //    }
+
+            //    int idServicio = 0;
+            //    int idPaquete = 0;
+            //    int numeroSesion = 0;
+            //    decimal costoReferencia = 0;
+
+            //    if (Cbo_servicios.SelectedIndex != -1)
+            //    {
+            //        idServicio = Convert.ToInt32(valorSeleccionado);
+            //        DataRow datos = logica2.ObtenerPrecioServicio(valorSeleccionado);
+            //        costoReferencia = datos != null ? Convert.ToDecimal(datos["Precio"]) : 0;
+            //    }
+            //    else if (Cbo_paquete.SelectedIndex != -1)
+            //    {
+            //        idPaquete = Convert.ToInt32(valorSeleccionado2);
+            //        numeroSesion = 1/*Convert.ToInt32(Nud_numSesion.Value)*/;
+            //        DataRow datos = logica2.ObtenerPrecioPaquete(valorSeleccionado2);
+            //        //costoReferencia = datos != null ? Convert.ToDecimal(datos["PrecioTotal"]) : 0;
+            //    }
+
+            //    // Obtener el último ID de cita
+            //    int ultimoIdCita = logica2.ObtenerUltimoIdCita();
+
+            //    if (idSeleccionado == 0)
+            //    {
+
+            //        // Insertar detalle
+            //        logica2.funcInsertarDetalle(ultimoIdCita, idServicio, idPaquete, numeroSesion);
+            //        MessageBox.Show("Registro insertado exitosamente");
+            //    }
+            //    else { 
+            //        //Para modificar
+
+
+            //    }
+
+            //    CargarDatos();
+            //    LimpiarFormulario();
+            //    ConfigurarControles(false);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error al guardar: " + ex.Message);
+            //}
             try
             {
+                // Validación: Debe seleccionar servicio O paquete
                 if (Cbo_paquete.SelectedIndex == -1 && Cbo_servicios.SelectedIndex == -1)
                 {
                     MessageBox.Show("Seleccione un servicio o un paquete");
+                    return;
+                }
+
+                // Validación: No se puede seleccionar ambos
+                if (Cbo_paquete.SelectedIndex != -1 && Cbo_servicios.SelectedIndex != -1)
+                {
+                    MessageBox.Show("Solo puede seleccionar un servicio O un paquete, no ambos");
                     return;
                 }
 
@@ -356,6 +421,7 @@ namespace Capa_Vista_Citas
                 int numeroSesion = 0;
                 decimal costoReferencia = 0;
 
+                // Determinar qué se seleccionó
                 if (Cbo_servicios.SelectedIndex != -1)
                 {
                     idServicio = Convert.ToInt32(valorSeleccionado);
@@ -365,18 +431,57 @@ namespace Capa_Vista_Citas
                 else if (Cbo_paquete.SelectedIndex != -1)
                 {
                     idPaquete = Convert.ToInt32(valorSeleccionado2);
-                    numeroSesion = 1/*Convert.ToInt32(Nud_numSesion.Value)*/;
+                    numeroSesion = 1; // Siempre 1, el sistema calcula la sesión real
                     DataRow datos = logica2.ObtenerPrecioPaquete(valorSeleccionado2);
-                    //costoReferencia = datos != null ? Convert.ToDecimal(datos["PrecioTotal"]) : 0;
+                    costoReferencia = datos != null ? Convert.ToDecimal(datos["PrecioTotal"]) : 0;
                 }
 
-                // Obtener el último ID de cita
-                int ultimoIdCita = logica2.ObtenerUltimoIdCita();
+                // ============================================
+                // MODO INSERCIÓN (cuando idSeleccionado == 0)
+                // ============================================
+                if (idSeleccionado == 0)
+                {
+                    int ultimoIdCita = logica2.ObtenerUltimoIdCita();
 
-                // Insertar detalle
-                logica2.funcInsertarDetalle(ultimoIdCita, idServicio, idPaquete, numeroSesion);
-                MessageBox.Show("Registro insertado exitosamente");
+                    if (ultimoIdCita == 0)
+                    {
+                        MessageBox.Show("No hay citas registradas. Debe crear una cita primero.");
+                        return;
+                    }
 
+                    // Insertar detalle
+                    logica2.funcInsertarDetalle(ultimoIdCita, idServicio, idPaquete, numeroSesion);
+                    MessageBox.Show("Registro insertado exitosamente");
+                }
+                // ============================================
+                // MODO ACTUALIZACIÓN (cuando idSeleccionado > 0)
+                // ============================================
+                else
+                {
+                    if (idCitaActual == 0)
+                    {
+                        MessageBox.Show("No se pudo obtener el ID de la cita. Intente seleccionar el registro nuevamente.");
+                        return;
+                    }
+
+                    // Confirmar la modificación
+                    DialogResult resultado = MessageBox.Show(
+                        "¿Está seguro de modificar este detalle de cita?\n\n" +
+                        "IMPORTANTE: Si cambia de paquete o servicio, se ajustarán automáticamente las sesiones.",
+                        "Confirmar modificación",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                    );
+
+                    if (resultado == DialogResult.Yes)
+                    {
+                        // Actualizar detalle
+                        logica2.funcActualizarDetalle(idSeleccionado, idCitaActual, idServicio, idPaquete, numeroSesion);
+                        MessageBox.Show("Registro actualizado exitosamente");
+                    }
+                }
+
+                // Limpiar y recargar
                 CargarDatos();
                 LimpiarFormulario();
                 ConfigurarControles(false);
@@ -385,6 +490,8 @@ namespace Capa_Vista_Citas
             {
                 MessageBox.Show("Error al guardar: " + ex.Message);
             }
+
+
         }
 
         private void Btn_nuevoRegistro_Click(object sender, EventArgs e)
@@ -405,6 +512,189 @@ namespace Capa_Vista_Citas
             CargarDatos();
         }
 
- 
+        private void Dgv_asignaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                try
+                {
+                    idSeleccionado = Convert.ToInt32(Dgv_asignaciones.Rows[e.RowIndex].Cells["ID"].Value);
+                    Lbl_NumeroDeCita.Text = idSeleccionado.ToString(); // Añadir esta línea
+
+                    //// Obtener ID del detalle (ID de tbl_cita_servicio)
+                    //idSeleccionado = Convert.ToInt32(Dgv_asignaciones.Rows[e.RowIndex].Cells["ID"].Value);
+
+                    // ✅ IMPORTANTE: También obtener el ID de la cita
+                    if (Dgv_asignaciones.Rows[e.RowIndex].Cells["ID_Cita"] != null)
+                    {
+                        idCitaActual = Convert.ToInt32(Dgv_asignaciones.Rows[e.RowIndex].Cells["ID_Cita"].Value);
+                        Lbl_NumeroDeCita.Text = idCitaActual.ToString();
+                    }
+
+                    Cbo_servicios.SelectedItem = Dgv_asignaciones.Rows[e.RowIndex].Cells["Servicio"].Value.ToString();
+
+                    //// Obtener el valor de la celda y asignarlo al DateTimePicker
+                    //if (Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value != null)
+                    //{
+                    //    DateTime fecha;
+                    //    if (DateTime.TryParse(Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value.ToString(), out fecha))
+                    //    {
+                    //        Dtp_fechaCita.Value = fecha;
+                    //    }
+                    //}
+
+                    Cbo_paquete.SelectedItem = Dgv_asignaciones.Rows[e.RowIndex].Cells["Paquete"].Value.ToString();
+
+                    //Cbo_clase.SelectedItem = Dgv_perp_dec.Rows[e.RowIndex].Cells["Clase"].Value.ToString();
+
+                    //excepcionActiva = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Excepcion"].Value);
+                    //estadoActivo = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Estado"].Value);
+
+                    //ActualizarBotonExcepcion();
+                    //ActualizarBotonEstado();
+
+                    //Txt_monto.Text = Dgv_perp_dec.Rows[e.RowIndex].Cells["Monto"].Value.ToString();
+                    Btn_modificar.Enabled = true;
+                    Btn_eliminar.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al seleccionar registro: " + ex.Message);
+                }
+            }
+        }
+
+        private void Btn_modificar_Click(object sender, EventArgs e)
+        {
+            if (idSeleccionado == 0)
+            {
+                MessageBox.Show("Debe seleccionar un registro para editar");
+                return;
+            }
+            //.Focus();
+            Cbo_servicios.Enabled = true;
+            Cbo_paquete.Enabled = true;
+            Nud_numSesion.Enabled = true;
+            Btn_guardar.Enabled = true;
+        }
+
+        private void Btn_eliminar_Click(object sender, EventArgs e)
+        {
+            // Validar que hay un registro seleccionado
+            if (idSeleccionado == 0)
+            {
+                MessageBox.Show("Debe seleccionar un registro para eliminar",
+                    "Advertencia",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Obtener información del detalle seleccionado para el mensaje
+                string tipoDetalle = "";
+                string nombreDetalle = "";
+
+                DataGridViewRow filaSeleccionada = Dgv_asignaciones.CurrentRow;
+                if (filaSeleccionada != null)
+                {
+                    // Verificar si es servicio o paquete
+                    object valorServicio = filaSeleccionada.Cells["Servicio"].Value;
+                    object valorPaquete = filaSeleccionada.Cells["Paquete"].Value;
+
+                    if (valorServicio != null && !string.IsNullOrEmpty(valorServicio.ToString()))
+                    {
+                        tipoDetalle = "servicio";
+                        nombreDetalle = valorServicio.ToString();
+                    }
+                    else if (valorPaquete != null && !string.IsNullOrEmpty(valorPaquete.ToString()))
+                    {
+                        tipoDetalle = "paquete";
+                        nombreDetalle = valorPaquete.ToString();
+
+                        // Obtener número de sesión si está disponible
+                        object valorSesion = filaSeleccionada.Cells["NumeroSesion"].Value;
+                        if (valorSesion != null && valorSesion != DBNull.Value)
+                        {
+                            nombreDetalle += $" (Sesión {valorSesion})";
+                        }
+                    }
+                    else
+                    {
+                        tipoDetalle = "detalle";
+                        nombreDetalle = "desconocido";
+                    }
+                }
+
+                // Construir mensaje de confirmación personalizado
+                string mensaje = $"¿Está seguro de eliminar este {tipoDetalle}?\n\n";
+                mensaje += $"📋 Detalle: {nombreDetalle}\n\n";
+                mensaje += "Esta acción realizará lo siguiente:\n";
+
+                if (tipoDetalle == "paquete")
+                {
+                    mensaje += "• Se reducirá el contador de sesiones del paquete\n";
+                    mensaje += "• Si el paquete estaba finalizado, volverá a estado 'En uso'\n";
+                    mensaje += "• Si era la única sesión, el paquete puede eliminarse\n";
+                }
+
+                mensaje += "• Se recalcularán los totales de la cita\n";
+                mensaje += "• El registro será marcado como eliminado\n\n";
+                mensaje += "⚠️ Esta acción no se puede deshacer fácilmente.";
+
+                // Mostrar confirmación
+                DialogResult resultado = MessageBox.Show(
+                    mensaje,
+                    "Confirmar eliminación de detalle",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button2 // Por defecto en "No"
+                );
+
+                if (resultado == DialogResult.Yes)
+                {
+                    // Llamar al método de eliminación lógica
+                    bool exito = logica2.funcEliminarDetalle(idSeleccionado);
+
+                    if (exito)
+                    {
+                        // Mensaje de éxito personalizado
+                        string mensajeExito = $"✅ {tipoDetalle.ToUpper()} eliminado correctamente\n\n";
+                        mensajeExito += $"Detalle: {nombreDetalle}\n\n";
+
+                        if (tipoDetalle == "paquete")
+                        {
+                            mensajeExito += "Las sesiones del paquete han sido ajustadas automáticamente.";
+                        }
+                        else
+                        {
+                            mensajeExito += "Los totales de la cita han sido recalculados.";
+                        }
+
+                        MessageBox.Show(mensajeExito,
+                            "Operación Exitosa",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+
+                        // Limpiar formulario y recargar datos
+                        LimpiarFormulario();
+                        CargarDatos();
+
+                        // Opcional: Registrar en bitácora
+                        // string accion = $"Eliminó {tipoDetalle}: {nombreDetalle}";
+                        // logicaSeg.funinsertarabitacora(idUsuario, accion, "tbl_cita_servicio", "XXXX");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"❌ Error al eliminar el detalle:\n\n{ex.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
     }
 }

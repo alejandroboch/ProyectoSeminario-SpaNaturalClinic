@@ -221,5 +221,71 @@ namespace Capa_Controlador_Citas
             }
         }
 
+        // ═══════════════════════════════════════════════════════════════════════════
+        // 2️⃣ CAPA CONTROLADOR - Clase Logica/Controlador
+        // ═══════════════════════════════════════════════════════════════════════════
+        // Agregar este método en tu clase controlador (ejemplo: LogicaCitas.cs)
+
+        /// <summary>
+        /// Actualiza un detalle de cita con validaciones de negocio
+        /// </summary>
+        public bool funcActualizarDetalle(int idDetalle, int fk_id_cita, int fk_id_servicio, int fk_id_paquete, int numero_sesion)
+        {
+            try
+            {
+                // Validaciones de negocio
+                if (idDetalle <= 0)
+                    throw new ArgumentException("ID de detalle inválido");
+
+                if (fk_id_cita <= 0)
+                    throw new ArgumentException("ID de cita inválido");
+
+                if (fk_id_servicio <= 0 && fk_id_paquete <= 0)
+                    throw new ArgumentException("Debe especificar un servicio o un paquete");
+
+                // Validación: No se puede especificar ambos
+                if (fk_id_servicio > 0 && fk_id_paquete > 0)
+                    throw new ArgumentException("Solo puede especificar un servicio O un paquete, no ambos");
+
+                // Llamar al modelo
+                sn.funcActualizarDetalle(idDetalle, fk_id_cita, fk_id_servicio, fk_id_paquete, numero_sesion);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en ActualizarDetalle (Controlador): {ex.Message}");
+                throw new Exception($"Error al actualizar el registro: {ex.Message}");
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════════════
+        // 2️⃣ CAPA CONTROLADOR - Clase Logica/Controlador
+        // ═══════════════════════════════════════════════════════════════════════════
+        // Agregar este método en tu clase controlador (ejemplo: LogicaCitas.cs)
+
+        /// <summary>
+        /// Elimina lógicamente un detalle de cita con validaciones de negocio
+        /// </summary>
+        /// <param name="idDetalle">ID del detalle a eliminar</param>
+        /// <returns>True si se eliminó correctamente</returns>
+        public bool funcEliminarDetalle(int idDetalle)
+        {
+            try
+            {
+                // Validaciones de negocio
+                if (idDetalle <= 0)
+                    throw new ArgumentException("ID de detalle inválido");
+
+                // Llamar al modelo
+                sn.funcEliminarDetalle(idDetalle);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en EliminarDetalle (Controlador): {ex.Message}");
+                throw new Exception($"Error al eliminar el registro: {ex.Message}");
+            }
+        }
+
     }
 }
