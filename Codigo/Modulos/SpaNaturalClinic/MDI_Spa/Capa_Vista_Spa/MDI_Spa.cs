@@ -146,6 +146,8 @@ namespace Capa_Vista_Spa
             GD.Show();
         }
 
+
+
         private void serviciosEnPaquetesToolStripMenuItem_Click(object sender, EventArgs e)
         {
            Capa_Vista_PaqServ.Paquetes_Con_Servicio GD = new Capa_Vista_PaqServ.Paquetes_Con_Servicio();
