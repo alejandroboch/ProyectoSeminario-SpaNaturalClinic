@@ -39,7 +39,6 @@ namespace Capa_Vista_Pagos
             this.Lbl_montoAcancelar = new System.Windows.Forms.Label();
             this.Cbo_numCita = new System.Windows.Forms.ComboBox();
             this.Txt_cliente = new System.Windows.Forms.TextBox();
-            this.Txt_fechaCita = new System.Windows.Forms.TextBox();
             this.Txt_totalCita = new System.Windows.Forms.TextBox();
             this.Txt_saldoPendiente = new System.Windows.Forms.TextBox();
             this.Cbo_tipoPago = new System.Windows.Forms.ComboBox();
@@ -50,6 +49,7 @@ namespace Capa_Vista_Pagos
             this.Btn_editar = new System.Windows.Forms.Button();
             this.Btn_guardar = new System.Windows.Forms.Button();
             this.Btn_nuevo = new System.Windows.Forms.Button();
+            this.Dtp_fechaCita = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_pagos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +59,7 @@ namespace Capa_Vista_Pagos
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_titulo.Location = new System.Drawing.Point(514, 19);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(196, 28);
+            this.Lbl_titulo.Size = new System.Drawing.Size(189, 27);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Control de pagos";
             // 
@@ -97,7 +97,7 @@ namespace Capa_Vista_Pagos
             // 
             this.Lbl_totalCita.AutoSize = true;
             this.Lbl_totalCita.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_totalCita.Location = new System.Drawing.Point(394, 246);
+            this.Lbl_totalCita.Location = new System.Drawing.Point(401, 246);
             this.Lbl_totalCita.Name = "Lbl_totalCita";
             this.Lbl_totalCita.Size = new System.Drawing.Size(89, 23);
             this.Lbl_totalCita.TabIndex = 4;
@@ -107,7 +107,7 @@ namespace Capa_Vista_Pagos
             // 
             this.Lbl_saldoPendiente.AutoSize = true;
             this.Lbl_saldoPendiente.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_saldoPendiente.Location = new System.Drawing.Point(394, 307);
+            this.Lbl_saldoPendiente.Location = new System.Drawing.Point(398, 307);
             this.Lbl_saldoPendiente.Name = "Lbl_saldoPendiente";
             this.Lbl_saldoPendiente.Size = new System.Drawing.Size(148, 23);
             this.Lbl_saldoPendiente.TabIndex = 5;
@@ -140,6 +140,7 @@ namespace Capa_Vista_Pagos
             this.Cbo_numCita.Name = "Cbo_numCita";
             this.Cbo_numCita.Size = new System.Drawing.Size(241, 24);
             this.Cbo_numCita.TabIndex = 8;
+            this.Cbo_numCita.SelectedIndexChanged += new System.EventHandler(this.Cbo_numCita_SelectedIndexChanged);
             // 
             // Txt_cliente
             // 
@@ -148,14 +149,6 @@ namespace Capa_Vista_Pagos
             this.Txt_cliente.Name = "Txt_cliente";
             this.Txt_cliente.Size = new System.Drawing.Size(240, 22);
             this.Txt_cliente.TabIndex = 9;
-            // 
-            // Txt_fechaCita
-            // 
-            this.Txt_fechaCita.Enabled = false;
-            this.Txt_fechaCita.Location = new System.Drawing.Point(135, 307);
-            this.Txt_fechaCita.Name = "Txt_fechaCita";
-            this.Txt_fechaCita.Size = new System.Drawing.Size(241, 22);
-            this.Txt_fechaCita.TabIndex = 10;
             // 
             // Txt_totalCita
             // 
@@ -202,6 +195,7 @@ namespace Capa_Vista_Pagos
             this.Dgv_pagos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.Dgv_pagos.Size = new System.Drawing.Size(1166, 218);
             this.Dgv_pagos.TabIndex = 15;
+            this.Dgv_pagos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_pagos_CellContentClick);
             // 
             // Btn_cancelar
             // 
@@ -211,6 +205,7 @@ namespace Capa_Vista_Pagos
             this.Btn_cancelar.Size = new System.Drawing.Size(77, 77);
             this.Btn_cancelar.TabIndex = 20;
             this.Btn_cancelar.UseVisualStyleBackColor = false;
+            this.Btn_cancelar.Click += new System.EventHandler(this.Btn_cancelar_Click);
             // 
             // Btn_eliminar
             // 
@@ -220,6 +215,7 @@ namespace Capa_Vista_Pagos
             this.Btn_eliminar.Size = new System.Drawing.Size(77, 77);
             this.Btn_eliminar.TabIndex = 19;
             this.Btn_eliminar.UseVisualStyleBackColor = false;
+            this.Btn_eliminar.Click += new System.EventHandler(this.Btn_eliminar_Click);
             // 
             // Btn_editar
             // 
@@ -229,6 +225,7 @@ namespace Capa_Vista_Pagos
             this.Btn_editar.Size = new System.Drawing.Size(77, 77);
             this.Btn_editar.TabIndex = 18;
             this.Btn_editar.UseVisualStyleBackColor = false;
+            this.Btn_editar.Click += new System.EventHandler(this.Btn_editar_Click);
             // 
             // Btn_guardar
             // 
@@ -238,6 +235,7 @@ namespace Capa_Vista_Pagos
             this.Btn_guardar.Size = new System.Drawing.Size(77, 77);
             this.Btn_guardar.TabIndex = 17;
             this.Btn_guardar.UseVisualStyleBackColor = false;
+            this.Btn_guardar.Click += new System.EventHandler(this.Btn_guardar_Click);
             // 
             // Btn_nuevo
             // 
@@ -247,6 +245,15 @@ namespace Capa_Vista_Pagos
             this.Btn_nuevo.Size = new System.Drawing.Size(77, 77);
             this.Btn_nuevo.TabIndex = 16;
             this.Btn_nuevo.UseVisualStyleBackColor = false;
+            this.Btn_nuevo.Click += new System.EventHandler(this.Btn_nuevo_Click);
+            // 
+            // Dtp_fechaCita
+            // 
+            this.Dtp_fechaCita.Enabled = false;
+            this.Dtp_fechaCita.Location = new System.Drawing.Point(135, 307);
+            this.Dtp_fechaCita.Name = "Dtp_fechaCita";
+            this.Dtp_fechaCita.Size = new System.Drawing.Size(253, 22);
+            this.Dtp_fechaCita.TabIndex = 21;
             // 
             // Form_pagos
             // 
@@ -254,6 +261,7 @@ namespace Capa_Vista_Pagos
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(237)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1222, 583);
+            this.Controls.Add(this.Dtp_fechaCita);
             this.Controls.Add(this.Btn_cancelar);
             this.Controls.Add(this.Btn_eliminar);
             this.Controls.Add(this.Btn_editar);
@@ -264,7 +272,6 @@ namespace Capa_Vista_Pagos
             this.Controls.Add(this.Cbo_tipoPago);
             this.Controls.Add(this.Txt_saldoPendiente);
             this.Controls.Add(this.Txt_totalCita);
-            this.Controls.Add(this.Txt_fechaCita);
             this.Controls.Add(this.Txt_cliente);
             this.Controls.Add(this.Cbo_numCita);
             this.Controls.Add(this.Lbl_montoAcancelar);
@@ -276,6 +283,7 @@ namespace Capa_Vista_Pagos
             this.Controls.Add(this.Lbl_numCita);
             this.Controls.Add(this.Lbl_titulo);
             this.Name = "Form_pagos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pagos";
             this.Load += new System.EventHandler(this.Form_pagos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_pagos)).EndInit();
@@ -296,7 +304,6 @@ namespace Capa_Vista_Pagos
         private System.Windows.Forms.Label Lbl_montoAcancelar;
         private System.Windows.Forms.ComboBox Cbo_numCita;
         private System.Windows.Forms.TextBox Txt_cliente;
-        private System.Windows.Forms.TextBox Txt_fechaCita;
         private System.Windows.Forms.TextBox Txt_totalCita;
         private System.Windows.Forms.TextBox Txt_saldoPendiente;
         private System.Windows.Forms.ComboBox Cbo_tipoPago;
@@ -307,5 +314,6 @@ namespace Capa_Vista_Pagos
         private System.Windows.Forms.Button Btn_editar;
         private System.Windows.Forms.Button Btn_eliminar;
         private System.Windows.Forms.Button Btn_cancelar;
+        private System.Windows.Forms.DateTimePicker Dtp_fechaCita;
     }
 }
