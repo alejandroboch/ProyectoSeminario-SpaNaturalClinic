@@ -362,6 +362,10 @@ namespace Capa_Vista_Clientes
         {
         }
 
-
+        private void Btn_Reporte_Click(object sender, EventArgs e)
+        {
+            Reporte reporte = new Reporte();
+            reporte.Show();
+        }
     }
 }

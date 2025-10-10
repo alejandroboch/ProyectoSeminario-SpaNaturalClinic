@@ -290,5 +290,11 @@ namespace Capa_Vista_Servicios
             DataTable dt = cn.fun_buscar_servicio(Txt_Buscar.Text.Trim());
             Dgv_Servicios.DataSource = dt;
         }
+
+        private void Btn_Reporte_Click(object sender, EventArgs e)
+        {
+            frm_Reporte reporte = new frm_Reporte();
+            reporte.Show();
+        }
     }
 }

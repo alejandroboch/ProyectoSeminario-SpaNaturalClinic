@@ -401,5 +401,11 @@ namespace Capa_Vista_Citas
             }
 
         }
+
+        private void Btn_Reporte_Click(object sender, EventArgs e)
+        {
+            frm_ReporteCita reporte = new frm_ReporteCita();
+            reporte.Show();
+        }
     }
 }

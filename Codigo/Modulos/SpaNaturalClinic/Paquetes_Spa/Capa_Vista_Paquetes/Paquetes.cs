@@ -296,5 +296,11 @@ namespace Capa_Vista_Paquetes
         {
             fun_limpiar();
         }
+
+        private void Btn_Reporte_Click(object sender, EventArgs e)
+        {
+            frm_Reporte reporte = new frm_Reporte();
+            reporte.Show();
+        }
     }
 }

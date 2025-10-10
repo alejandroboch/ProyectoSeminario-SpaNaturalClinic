@@ -49,6 +49,7 @@ namespace Capa_Vista_Citas
             this.Lbl_Cita = new System.Windows.Forms.Label();
             this.Lbl_IDCitas = new System.Windows.Forms.Label();
             this.Lbl_NumeroDeCita = new System.Windows.Forms.Label();
+            this.Btn_Reporte = new System.Windows.Forms.Button();
             this.Gpb_paquete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Nud_numSesion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_asignaciones)).BeginInit();
@@ -60,7 +61,7 @@ namespace Capa_Vista_Citas
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_titulo.Location = new System.Drawing.Point(366, 24);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(254, 27);
+            this.Lbl_titulo.Size = new System.Drawing.Size(266, 28);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Asignar servicios a cita";
             // 
@@ -222,7 +223,7 @@ namespace Capa_Vista_Citas
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(26, 469);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 16);
+            this.label1.Size = new System.Drawing.Size(0, 17);
             this.label1.TabIndex = 14;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -231,7 +232,7 @@ namespace Capa_Vista_Citas
             this.Lbl_Cita.AutoSize = true;
             this.Lbl_Cita.Location = new System.Drawing.Point(81, 469);
             this.Lbl_Cita.Name = "Lbl_Cita";
-            this.Lbl_Cita.Size = new System.Drawing.Size(0, 16);
+            this.Lbl_Cita.Size = new System.Drawing.Size(0, 17);
             this.Lbl_Cita.TabIndex = 15;
             // 
             // Lbl_IDCitas
@@ -240,7 +241,7 @@ namespace Capa_Vista_Citas
             this.Lbl_IDCitas.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold);
             this.Lbl_IDCitas.Location = new System.Drawing.Point(32, 469);
             this.Lbl_IDCitas.Name = "Lbl_IDCitas";
-            this.Lbl_IDCitas.Size = new System.Drawing.Size(87, 27);
+            this.Lbl_IDCitas.Size = new System.Drawing.Size(93, 28);
             this.Lbl_IDCitas.TabIndex = 16;
             this.Lbl_IDCitas.Text = "ID Cita:";
             // 
@@ -254,12 +255,23 @@ namespace Capa_Vista_Citas
             this.Lbl_NumeroDeCita.TabIndex = 17;
             this.Lbl_NumeroDeCita.Text = "# de cita";
             // 
+            // Btn_Reporte
+            // 
+            this.Btn_Reporte.Image = global::Capa_Vista_Citas.Properties.Resources.reportes;
+            this.Btn_Reporte.Location = new System.Drawing.Point(797, 83);
+            this.Btn_Reporte.Name = "Btn_Reporte";
+            this.Btn_Reporte.Size = new System.Drawing.Size(77, 77);
+            this.Btn_Reporte.TabIndex = 18;
+            this.Btn_Reporte.UseVisualStyleBackColor = false;
+            this.Btn_Reporte.Click += new System.EventHandler(this.Btn_Reporte_Click);
+            // 
             // Form_asignarServicios_aCita
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(237)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1162, 583);
+            this.Controls.Add(this.Btn_Reporte);
             this.Controls.Add(this.Lbl_NumeroDeCita);
             this.Controls.Add(this.Lbl_IDCitas);
             this.Controls.Add(this.Lbl_Cita);
@@ -311,5 +323,6 @@ namespace Capa_Vista_Citas
         private System.Windows.Forms.Label Lbl_Cita;
         private System.Windows.Forms.Label Lbl_IDCitas;
         private System.Windows.Forms.Label Lbl_NumeroDeCita;
+        private System.Windows.Forms.Button Btn_Reporte;
     }
 }

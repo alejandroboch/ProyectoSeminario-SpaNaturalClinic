@@ -57,9 +57,10 @@ namespace Capa_Vista_Paquetes
             // 
             this.Lbl_Paquetes.AutoSize = true;
             this.Lbl_Paquetes.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Paquetes.Location = new System.Drawing.Point(399, 27);
+            this.Lbl_Paquetes.Location = new System.Drawing.Point(532, 33);
+            this.Lbl_Paquetes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Paquetes.Name = "Lbl_Paquetes";
-            this.Lbl_Paquetes.Size = new System.Drawing.Size(90, 22);
+            this.Lbl_Paquetes.Size = new System.Drawing.Size(113, 28);
             this.Lbl_Paquetes.TabIndex = 1;
             this.Lbl_Paquetes.Text = "Paquetes";
             // 
@@ -67,17 +68,19 @@ namespace Capa_Vista_Paquetes
             // 
             this.Lbl_Buscar.AutoSize = true;
             this.Lbl_Buscar.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Buscar.Location = new System.Drawing.Point(334, 96);
+            this.Lbl_Buscar.Location = new System.Drawing.Point(445, 118);
+            this.Lbl_Buscar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Buscar.Name = "Lbl_Buscar";
-            this.Lbl_Buscar.Size = new System.Drawing.Size(57, 19);
+            this.Lbl_Buscar.Size = new System.Drawing.Size(69, 23);
             this.Lbl_Buscar.TabIndex = 15;
             this.Lbl_Buscar.Text = "Buscar";
             // 
             // Txt_Buscar
             // 
-            this.Txt_Buscar.Location = new System.Drawing.Point(241, 119);
+            this.Txt_Buscar.Location = new System.Drawing.Point(321, 146);
+            this.Txt_Buscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_Buscar.Name = "Txt_Buscar";
-            this.Txt_Buscar.Size = new System.Drawing.Size(245, 20);
+            this.Txt_Buscar.Size = new System.Drawing.Size(325, 22);
             this.Txt_Buscar.TabIndex = 14;
             // 
             // Btn_Actualizar
@@ -85,9 +88,10 @@ namespace Capa_Vista_Paquetes
             this.Btn_Actualizar.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Actualizar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Actualizar.BackgroundImage")));
             this.Btn_Actualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Btn_Actualizar.Location = new System.Drawing.Point(171, 74);
+            this.Btn_Actualizar.Location = new System.Drawing.Point(228, 91);
+            this.Btn_Actualizar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Actualizar.Name = "Btn_Actualizar";
-            this.Btn_Actualizar.Size = new System.Drawing.Size(64, 65);
+            this.Btn_Actualizar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Actualizar.TabIndex = 13;
             this.Btn_Actualizar.UseVisualStyleBackColor = false;
             this.Btn_Actualizar.Click += new System.EventHandler(this.Btn_Actualizar_Click);
@@ -97,9 +101,10 @@ namespace Capa_Vista_Paquetes
             this.Btn_Guardar.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Guardar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Guardar.BackgroundImage")));
             this.Btn_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Btn_Guardar.Location = new System.Drawing.Point(101, 74);
+            this.Btn_Guardar.Location = new System.Drawing.Point(135, 91);
+            this.Btn_Guardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Guardar.Name = "Btn_Guardar";
-            this.Btn_Guardar.Size = new System.Drawing.Size(64, 65);
+            this.Btn_Guardar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Guardar.TabIndex = 12;
             this.Btn_Guardar.UseVisualStyleBackColor = false;
             this.Btn_Guardar.Click += new System.EventHandler(this.Btn_Guardar_Click);
@@ -109,9 +114,10 @@ namespace Capa_Vista_Paquetes
             this.Btn_Nuevo.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Nuevo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Nuevo.BackgroundImage")));
             this.Btn_Nuevo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Btn_Nuevo.Location = new System.Drawing.Point(31, 74);
+            this.Btn_Nuevo.Location = new System.Drawing.Point(41, 91);
+            this.Btn_Nuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Nuevo.Name = "Btn_Nuevo";
-            this.Btn_Nuevo.Size = new System.Drawing.Size(64, 65);
+            this.Btn_Nuevo.Size = new System.Drawing.Size(85, 80);
             this.Btn_Nuevo.TabIndex = 11;
             this.Btn_Nuevo.UseVisualStyleBackColor = false;
             this.Btn_Nuevo.Click += new System.EventHandler(this.Btn_Nuevo_Click);
@@ -121,9 +127,10 @@ namespace Capa_Vista_Paquetes
             this.Btn_Ayuda.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Ayuda.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Ayuda.BackgroundImage")));
             this.Btn_Ayuda.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Btn_Ayuda.Location = new System.Drawing.Point(772, 74);
+            this.Btn_Ayuda.Location = new System.Drawing.Point(1029, 91);
+            this.Btn_Ayuda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Ayuda.Name = "Btn_Ayuda";
-            this.Btn_Ayuda.Size = new System.Drawing.Size(64, 65);
+            this.Btn_Ayuda.Size = new System.Drawing.Size(85, 80);
             this.Btn_Ayuda.TabIndex = 20;
             this.Btn_Ayuda.UseVisualStyleBackColor = false;
             // 
@@ -132,20 +139,23 @@ namespace Capa_Vista_Paquetes
             this.Btn_Reporte.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Reporte.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Reporte.BackgroundImage")));
             this.Btn_Reporte.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Btn_Reporte.Location = new System.Drawing.Point(702, 74);
+            this.Btn_Reporte.Location = new System.Drawing.Point(936, 91);
+            this.Btn_Reporte.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Reporte.Name = "Btn_Reporte";
-            this.Btn_Reporte.Size = new System.Drawing.Size(64, 65);
+            this.Btn_Reporte.Size = new System.Drawing.Size(85, 80);
             this.Btn_Reporte.TabIndex = 19;
             this.Btn_Reporte.UseVisualStyleBackColor = false;
+            this.Btn_Reporte.Click += new System.EventHandler(this.Btn_Reporte_Click);
             // 
             // Btn_Cancelar
             // 
             this.Btn_Cancelar.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Cancelar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Cancelar.BackgroundImage")));
             this.Btn_Cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Btn_Cancelar.Location = new System.Drawing.Point(632, 74);
+            this.Btn_Cancelar.Location = new System.Drawing.Point(843, 91);
+            this.Btn_Cancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
-            this.Btn_Cancelar.Size = new System.Drawing.Size(64, 65);
+            this.Btn_Cancelar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Cancelar.TabIndex = 18;
             this.Btn_Cancelar.UseVisualStyleBackColor = false;
             this.Btn_Cancelar.Click += new System.EventHandler(this.Btn_Cancelar_Click);
@@ -155,9 +165,10 @@ namespace Capa_Vista_Paquetes
             this.Btn_Eliminar.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Eliminar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Eliminar.BackgroundImage")));
             this.Btn_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Btn_Eliminar.Location = new System.Drawing.Point(562, 74);
+            this.Btn_Eliminar.Location = new System.Drawing.Point(749, 91);
+            this.Btn_Eliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Eliminar.Name = "Btn_Eliminar";
-            this.Btn_Eliminar.Size = new System.Drawing.Size(64, 65);
+            this.Btn_Eliminar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Eliminar.TabIndex = 17;
             this.Btn_Eliminar.UseVisualStyleBackColor = false;
             this.Btn_Eliminar.Click += new System.EventHandler(this.Btn_Eliminar_Click);
@@ -167,41 +178,46 @@ namespace Capa_Vista_Paquetes
             this.Btn_Buscar.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Buscar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Buscar.BackgroundImage")));
             this.Btn_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Btn_Buscar.Location = new System.Drawing.Point(492, 74);
+            this.Btn_Buscar.Location = new System.Drawing.Point(656, 91);
+            this.Btn_Buscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Btn_Buscar.Name = "Btn_Buscar";
-            this.Btn_Buscar.Size = new System.Drawing.Size(64, 65);
+            this.Btn_Buscar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Buscar.TabIndex = 16;
             this.Btn_Buscar.UseVisualStyleBackColor = false;
             this.Btn_Buscar.Click += new System.EventHandler(this.Btn_Buscar_Click);
             // 
             // Txt_PrecioPaquete
             // 
-            this.Txt_PrecioPaquete.Location = new System.Drawing.Point(195, 319);
+            this.Txt_PrecioPaquete.Location = new System.Drawing.Point(260, 393);
+            this.Txt_PrecioPaquete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_PrecioPaquete.Name = "Txt_PrecioPaquete";
-            this.Txt_PrecioPaquete.Size = new System.Drawing.Size(141, 20);
+            this.Txt_PrecioPaquete.Size = new System.Drawing.Size(187, 22);
             this.Txt_PrecioPaquete.TabIndex = 26;
             // 
             // Txt_NombrePaquete
             // 
-            this.Txt_NombrePaquete.Location = new System.Drawing.Point(195, 278);
+            this.Txt_NombrePaquete.Location = new System.Drawing.Point(260, 342);
+            this.Txt_NombrePaquete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_NombrePaquete.Name = "Txt_NombrePaquete";
-            this.Txt_NombrePaquete.Size = new System.Drawing.Size(141, 20);
+            this.Txt_NombrePaquete.Size = new System.Drawing.Size(187, 22);
             this.Txt_NombrePaquete.TabIndex = 25;
             // 
             // Txt_IdPaquete
             // 
-            this.Txt_IdPaquete.Location = new System.Drawing.Point(195, 231);
+            this.Txt_IdPaquete.Location = new System.Drawing.Point(260, 284);
+            this.Txt_IdPaquete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_IdPaquete.Name = "Txt_IdPaquete";
-            this.Txt_IdPaquete.Size = new System.Drawing.Size(141, 20);
+            this.Txt_IdPaquete.Size = new System.Drawing.Size(187, 22);
             this.Txt_IdPaquete.TabIndex = 24;
             // 
             // Lbl_Precio
             // 
             this.Lbl_Precio.AutoSize = true;
             this.Lbl_Precio.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Precio.Location = new System.Drawing.Point(32, 318);
+            this.Lbl_Precio.Location = new System.Drawing.Point(43, 391);
+            this.Lbl_Precio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Precio.Name = "Lbl_Precio";
-            this.Lbl_Precio.Size = new System.Drawing.Size(53, 19);
+            this.Lbl_Precio.Size = new System.Drawing.Size(65, 23);
             this.Lbl_Precio.TabIndex = 23;
             this.Lbl_Precio.Text = "Precio";
             // 
@@ -209,9 +225,10 @@ namespace Capa_Vista_Paquetes
             // 
             this.Lbl_NombrePaquete.AutoSize = true;
             this.Lbl_NombrePaquete.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_NombrePaquete.Location = new System.Drawing.Point(32, 277);
+            this.Lbl_NombrePaquete.Location = new System.Drawing.Point(43, 341);
+            this.Lbl_NombrePaquete.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_NombrePaquete.Name = "Lbl_NombrePaquete";
-            this.Lbl_NombrePaquete.Size = new System.Drawing.Size(151, 19);
+            this.Lbl_NombrePaquete.Size = new System.Drawing.Size(185, 23);
             this.Lbl_NombrePaquete.TabIndex = 22;
             this.Lbl_NombrePaquete.Text = "Nombre del Paquete";
             // 
@@ -219,9 +236,10 @@ namespace Capa_Vista_Paquetes
             // 
             this.Lbl_IdPaquete.AutoSize = true;
             this.Lbl_IdPaquete.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_IdPaquete.Location = new System.Drawing.Point(32, 233);
+            this.Lbl_IdPaquete.Location = new System.Drawing.Point(43, 287);
+            this.Lbl_IdPaquete.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_IdPaquete.Name = "Lbl_IdPaquete";
-            this.Lbl_IdPaquete.Size = new System.Drawing.Size(25, 19);
+            this.Lbl_IdPaquete.Size = new System.Drawing.Size(29, 23);
             this.Lbl_IdPaquete.TabIndex = 21;
             this.Lbl_IdPaquete.Text = "ID";
             // 
@@ -229,32 +247,36 @@ namespace Capa_Vista_Paquetes
             // 
             this.Lbl_CantSesiones.AutoSize = true;
             this.Lbl_CantSesiones.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_CantSesiones.Location = new System.Drawing.Point(32, 360);
+            this.Lbl_CantSesiones.Location = new System.Drawing.Point(43, 443);
+            this.Lbl_CantSesiones.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_CantSesiones.Name = "Lbl_CantSesiones";
-            this.Lbl_CantSesiones.Size = new System.Drawing.Size(155, 19);
+            this.Lbl_CantSesiones.Size = new System.Drawing.Size(192, 23);
             this.Lbl_CantSesiones.TabIndex = 27;
             this.Lbl_CantSesiones.Text = "Cantidad de Sesiones";
             // 
             // Txt_CantSesiones
             // 
-            this.Txt_CantSesiones.Location = new System.Drawing.Point(195, 361);
+            this.Txt_CantSesiones.Location = new System.Drawing.Point(260, 444);
+            this.Txt_CantSesiones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_CantSesiones.Name = "Txt_CantSesiones";
-            this.Txt_CantSesiones.Size = new System.Drawing.Size(141, 20);
+            this.Txt_CantSesiones.Size = new System.Drawing.Size(187, 22);
             this.Txt_CantSesiones.TabIndex = 28;
             // 
             // Dgv_Paquetes
             // 
             this.Dgv_Paquetes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgv_Paquetes.Location = new System.Drawing.Point(372, 233);
+            this.Dgv_Paquetes.Location = new System.Drawing.Point(496, 287);
+            this.Dgv_Paquetes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Dgv_Paquetes.Name = "Dgv_Paquetes";
-            this.Dgv_Paquetes.Size = new System.Drawing.Size(464, 253);
+            this.Dgv_Paquetes.RowHeadersWidth = 51;
+            this.Dgv_Paquetes.Size = new System.Drawing.Size(619, 311);
             this.Dgv_Paquetes.TabIndex = 29;
             // 
             // Paquetes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 515);
+            this.ClientSize = new System.Drawing.Size(1188, 634);
             this.Controls.Add(this.Dgv_Paquetes);
             this.Controls.Add(this.Txt_CantSesiones);
             this.Controls.Add(this.Lbl_CantSesiones);
@@ -275,6 +297,7 @@ namespace Capa_Vista_Paquetes
             this.Controls.Add(this.Btn_Guardar);
             this.Controls.Add(this.Btn_Nuevo);
             this.Controls.Add(this.Lbl_Paquetes);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Paquetes";
             this.Text = "Paquetes";
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Paquetes)).EndInit();

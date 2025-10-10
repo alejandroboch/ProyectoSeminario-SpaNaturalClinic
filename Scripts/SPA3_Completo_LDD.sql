@@ -109,6 +109,7 @@ CREATE TABLE IF NOT EXISTS tbl_pagos (
     FOREIGN KEY (fk_id_cita) REFERENCES tbl_citas(pk_id_cita)
 );
 
+select * from tbl_pagos;
 -- Agregar campo 'estado' a tbl_cliente_paquete
 ALTER TABLE tbl_cliente_paquete 
 ADD COLUMN estado_eliminado TINYINT DEFAULT 1;
@@ -119,6 +120,9 @@ ADD COLUMN estado_eliminado TINYINT DEFAULT 1;
 
 -- Agregar campo 'estado' a tbl_cita_servicio
 ALTER TABLE tbl_cita_servicio 
+ADD COLUMN estado_eliminado TINYINT DEFAULT 1;
+
+ALTER TABLE tbl_pagos 
 ADD COLUMN estado_eliminado TINYINT DEFAULT 1;
 
 select* from tbl_cliente_paquete ;
