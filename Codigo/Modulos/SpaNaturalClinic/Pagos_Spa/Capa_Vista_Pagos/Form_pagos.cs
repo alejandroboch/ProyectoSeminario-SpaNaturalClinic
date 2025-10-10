@@ -852,5 +852,11 @@ namespace Capa_Vista_Pagos
                     MessageBoxIcon.Error);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frm_Reporte reporte = new frm_Reporte();
+            reporte.Show();
+        }
     }
 }

@@ -31,12 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="Capa_Controlador_Citas">
       <HintPath>..\Capa_Controlador_Citas\bin\Debug\Capa_Controlador_Citas.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="5.Rpt_Citas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>5.Rpt_Citas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Citas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +71,18 @@
     <Compile Include="Form_asignarServicios_aCita.Designer.cs">
       <DependentUpon>Form_asignarServicios_aCita.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_ReporteCita.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_ReporteCita.Designer.cs">
+      <DependentUpon>frm_ReporteCita.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_ReporteDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_ReporteDetalle.Designer.cs">
+      <DependentUpon>frm_ReporteDetalle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -66,22 +91,35 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="5.Rpt_Citas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>5.Rpt_Citas.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Citas.resx">
       <DependentUpon>Citas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_asignarServicios_aCita.resx">
       <DependentUpon>Form_asignarServicios_aCita.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_ReporteCita.resx">
+      <DependentUpon>frm_ReporteCita.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_ReporteDetalle.resx">
+      <DependentUpon>frm_ReporteDetalle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Iconos_Botones\ayuda.png" />
     <Content Include="Iconos_Botones\borrar.png" />
     <Content Include="Iconos_Botones\buscar.png" />
+    <None Include="Resources\reportes.png" />
     <None Include="Iconos_Botones\cancelar_2.png" />
     <None Include="Iconos_Botones\eliminar_2.png" />
     <None Include="Iconos_Botones\modificar_2.png" />

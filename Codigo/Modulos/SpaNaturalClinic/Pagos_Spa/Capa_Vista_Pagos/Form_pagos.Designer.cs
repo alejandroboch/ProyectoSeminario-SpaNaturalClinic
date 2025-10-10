@@ -44,12 +44,13 @@ namespace Capa_Vista_Pagos
             this.Cbo_tipoPago = new System.Windows.Forms.ComboBox();
             this.Txt_montoAcancelar = new System.Windows.Forms.TextBox();
             this.Dgv_pagos = new System.Windows.Forms.DataGridView();
+            this.Dtp_fechaCita = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.Btn_cancelar = new System.Windows.Forms.Button();
             this.Btn_eliminar = new System.Windows.Forms.Button();
             this.Btn_editar = new System.Windows.Forms.Button();
             this.Btn_guardar = new System.Windows.Forms.Button();
             this.Btn_nuevo = new System.Windows.Forms.Button();
-            this.Dtp_fechaCita = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_pagos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +60,7 @@ namespace Capa_Vista_Pagos
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_titulo.Location = new System.Drawing.Point(514, 19);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(189, 27);
+            this.Lbl_titulo.Size = new System.Drawing.Size(196, 28);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Control de pagos";
             // 
@@ -197,6 +198,24 @@ namespace Capa_Vista_Pagos
             this.Dgv_pagos.TabIndex = 15;
             this.Dgv_pagos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_pagos_CellContentClick);
             // 
+            // Dtp_fechaCita
+            // 
+            this.Dtp_fechaCita.Enabled = false;
+            this.Dtp_fechaCita.Location = new System.Drawing.Point(135, 307);
+            this.Dtp_fechaCita.Name = "Dtp_fechaCita";
+            this.Dtp_fechaCita.Size = new System.Drawing.Size(253, 22);
+            this.Dtp_fechaCita.TabIndex = 21;
+            // 
+            // button1
+            // 
+            this.button1.Image = global::Capa_Vista_Pagos.Properties.Resources.reportes;
+            this.button1.Location = new System.Drawing.Point(914, 75);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(77, 77);
+            this.button1.TabIndex = 22;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Btn_cancelar
             // 
             this.Btn_cancelar.Image = global::Capa_Vista_Pagos.Properties.Resources.cancelar;
@@ -247,20 +266,13 @@ namespace Capa_Vista_Pagos
             this.Btn_nuevo.UseVisualStyleBackColor = false;
             this.Btn_nuevo.Click += new System.EventHandler(this.Btn_nuevo_Click);
             // 
-            // Dtp_fechaCita
-            // 
-            this.Dtp_fechaCita.Enabled = false;
-            this.Dtp_fechaCita.Location = new System.Drawing.Point(135, 307);
-            this.Dtp_fechaCita.Name = "Dtp_fechaCita";
-            this.Dtp_fechaCita.Size = new System.Drawing.Size(253, 22);
-            this.Dtp_fechaCita.TabIndex = 21;
-            // 
             // Form_pagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(237)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1222, 583);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Dtp_fechaCita);
             this.Controls.Add(this.Btn_cancelar);
             this.Controls.Add(this.Btn_eliminar);
@@ -315,5 +327,6 @@ namespace Capa_Vista_Pagos
         private System.Windows.Forms.Button Btn_eliminar;
         private System.Windows.Forms.Button Btn_cancelar;
         private System.Windows.Forms.DateTimePicker Dtp_fechaCita;
+        private System.Windows.Forms.Button button1;
     }
 }

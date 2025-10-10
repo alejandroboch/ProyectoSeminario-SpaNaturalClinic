@@ -42,6 +42,7 @@ namespace Capa_Vista_Citas
             this.Txt_total = new System.Windows.Forms.TextBox();
             this.Dtp_fechaCita = new System.Windows.Forms.DateTimePicker();
             this.Btn_asignarServicios = new System.Windows.Forms.Button();
+            this.Btn_Reporte = new System.Windows.Forms.Button();
             this.Btn_cancelar = new System.Windows.Forms.Button();
             this.Btn_eliminar = new System.Windows.Forms.Button();
             this.Btn_buscar = new System.Windows.Forms.Button();
@@ -57,7 +58,7 @@ namespace Capa_Vista_Citas
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_titulo.Location = new System.Drawing.Point(388, 21);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(247, 27);
+            this.Lbl_titulo.Size = new System.Drawing.Size(258, 28);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Programación de citas";
             this.Lbl_titulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -181,6 +182,16 @@ namespace Capa_Vista_Citas
             this.Btn_asignarServicios.UseVisualStyleBackColor = false;
             this.Btn_asignarServicios.Click += new System.EventHandler(this.Btn_asignarServicios_Click);
             // 
+            // Btn_Reporte
+            // 
+            this.Btn_Reporte.Image = global::Capa_Vista_Citas.Properties.Resources.reportes;
+            this.Btn_Reporte.Location = new System.Drawing.Point(834, 87);
+            this.Btn_Reporte.Name = "Btn_Reporte";
+            this.Btn_Reporte.Size = new System.Drawing.Size(75, 77);
+            this.Btn_Reporte.TabIndex = 19;
+            this.Btn_Reporte.UseVisualStyleBackColor = false;
+            this.Btn_Reporte.Click += new System.EventHandler(this.Btn_Reporte_Click);
+            // 
             // Btn_cancelar
             // 
             this.Btn_cancelar.Image = global::Capa_Vista_Citas.Properties.Resources.cancelar_2;
@@ -247,6 +258,7 @@ namespace Capa_Vista_Citas
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(237)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1026, 583);
+            this.Controls.Add(this.Btn_Reporte);
             this.Controls.Add(this.Btn_asignarServicios);
             this.Controls.Add(this.Btn_cancelar);
             this.Controls.Add(this.Btn_eliminar);
@@ -296,5 +308,6 @@ namespace Capa_Vista_Citas
         private System.Windows.Forms.Button Btn_eliminar;
         private System.Windows.Forms.Button Btn_cancelar;
         private System.Windows.Forms.Button Btn_asignarServicios;
+        private System.Windows.Forms.Button Btn_Reporte;
     }
 }

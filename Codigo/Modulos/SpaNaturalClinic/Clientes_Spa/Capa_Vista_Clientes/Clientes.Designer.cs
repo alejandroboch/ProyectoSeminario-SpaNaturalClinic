@@ -192,6 +192,7 @@ namespace Capa_Vista_Clientes
             this.Btn_Reporte.Size = new System.Drawing.Size(69, 70);
             this.Btn_Reporte.TabIndex = 21;
             this.Btn_Reporte.UseVisualStyleBackColor = false;
+            this.Btn_Reporte.Click += new System.EventHandler(this.Btn_Reporte_Click);
             // 
             // Btn_Cancelar
             // 

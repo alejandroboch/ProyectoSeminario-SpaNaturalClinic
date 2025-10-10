@@ -696,5 +696,11 @@ namespace Capa_Vista_Citas
                     MessageBoxIcon.Error);
             }
         }
+
+        private void Btn_Reporte_Click(object sender, EventArgs e)
+        {
+            frm_ReporteDetalle reporte = new frm_ReporteDetalle();
+            reporte.Show();
+        }
     }
 }
