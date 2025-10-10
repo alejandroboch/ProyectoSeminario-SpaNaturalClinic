@@ -127,7 +127,11 @@ namespace Capa_Vista_Spa
 
         private void usuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            string idusuario= lbl_nombreUsuario.Text;
+            Capa_Vista_Seguridad.frm_usuarios GD = new Capa_Vista_Seguridad.frm_usuarios(idusuario);
+            GD.MdiParent = this;
+            CentrarFormulario(GD);
+            GD.Show();
         }
 
         private void serviciosToolStripMenuItem_Click(object sender, EventArgs e)

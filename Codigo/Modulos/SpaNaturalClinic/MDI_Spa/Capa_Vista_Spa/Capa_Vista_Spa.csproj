@@ -52,6 +52,9 @@
     <Reference Include="Capa_Vista_Seguimiento">
       <HintPath>..\..\Seguimiento_Spa\Capa_Vista_Seguimiento\bin\Debug\Capa_Vista_Seguimiento.dll</HintPath>
     </Reference>
+    <Reference Include="Capa_Vista_Seguridad">
+      <HintPath>..\..\..\..\Componentes\Seguridad2_5\Capa_Vista_Seguridad\bin\Debug\Capa_Vista_Seguridad.dll</HintPath>
+    </Reference>
     <Reference Include="Capa_Vista_Servicios">
       <HintPath>..\..\Catalogo_Servicios\Capa_Vista_Servicios\bin\Debug\Capa_Vista_Servicios.dll</HintPath>
     </Reference>
