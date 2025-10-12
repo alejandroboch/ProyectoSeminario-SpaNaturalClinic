@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO; // Necesario para Directory, File, Path y SearchOption
 using Capa_Controlador_Seguridad;
-using Interfac_V3;
+/*using Interfac_V3*/ //Yo comente esto;
 namespace Capa_Vista_Seguridad
 {
     public partial class MDI_Seguridad : Form
@@ -220,27 +220,30 @@ namespace Capa_Vista_Seguridad
 
         private void CerrarAplicacion()
         {
-            logica l = new logica(idUsuario);
-            l.funinsertarabitacora(idUsuario, "Cerro sesion en el sistema", "Login", "1301");
+            /************Ismar Cortez - 12/10/25****************/
+            //Yo comente esto
+            //logica l = new logica(idUsuario);
+            //l.funinsertarabitacora(idUsuario, "Cerro sesion en el sistema", "Login", "1301");
 
-            // Devolver al FormModulos con el usuario aun en linea Joel López 12/02/2024
-            FormModulos login = new FormModulos(idUsuario);
-            login.FormClosed += (s, args) =>
-            {
-                if (login.DialogResult != DialogResult.OK)
-                {
-                    Application.Exit();
-                }
-            };
+            //// Devolver al FormModulos con el usuario aun en linea Joel López 12/02/2024
+            //FormModulos login = new FormModulos(idUsuario);
+            //login.FormClosed += (s, args) =>
+            //{
+            //    if (login.DialogResult != DialogResult.OK)
+            //    {
+            //        Application.Exit();
+            //    }
+            //};
 
-            // Ocultar la ventana actual
-            this.Hide();
+            //// Ocultar la ventana actual
+            //this.Hide();
 
-            // Mostrar el login
-            login.Show();
+            //// Mostrar el login
+            //login.Show();
 
-            // Cerrar el MDI_Seguridad
-            this.Close();
+            //// Cerrar el MDI_Seguridad
+            //this.Close();
+            /************************************************************/
         }
 
         bool ventanaMostrarUsuarios = false;

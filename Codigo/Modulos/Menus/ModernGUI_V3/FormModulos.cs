@@ -44,8 +44,8 @@ namespace Interfac_V3
             btnSeguridad.MouseEnter += btnSeguridad_MouseEnter;
             btnSeguridad.MouseLeave += btnSeguridad_MouseLeave;
 
-            Btn_MenuSpa.MouseEnter += Btn_MenuP_Spa_MouseEnter;
-            Btn_MenuSpa.MouseLeave += Btn_MenuP_Spa_MouseLeave;
+            //Btn_MenuSpa.MouseEnter += Btn_MenuP_Spa_MouseEnter;
+            //Btn_MenuSpa.MouseLeave += Btn_MenuP_Spa_MouseLeave;
 
             //btnSalir.MouseEnter += btnSalir_MouseEnter;
             //btnSalir.MouseLeave += btnSalir_MouseLeave;
@@ -187,6 +187,11 @@ namespace Interfac_V3
         {
             MDI_Spa Recursos = new MDI_Spa(UsuarioSesion.GetIdUsuario());
             Recursos.Show();
+        }
+
+        private void Btn_MenuSpa_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

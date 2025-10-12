@@ -44,7 +44,7 @@ namespace Capa_Vista_Seguridad
             // 
             // Btn_confirmar
             // 
-            this.Btn_confirmar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(177)))), ((int)(((byte)(252)))));
+            this.Btn_confirmar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.Btn_confirmar.FlatAppearance.BorderSize = 0;
             this.Btn_confirmar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_confirmar.Font = new System.Drawing.Font("Haettenschweiler", 16F);
@@ -121,7 +121,7 @@ namespace Capa_Vista_Seguridad
             // 
             // Btn_verificar
             // 
-            this.Btn_verificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(177)))), ((int)(((byte)(252)))));
+            this.Btn_verificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.Btn_verificar.FlatAppearance.BorderSize = 0;
             this.Btn_verificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_verificar.Font = new System.Drawing.Font("Haettenschweiler", 16F);
@@ -175,6 +175,7 @@ namespace Capa_Vista_Seguridad
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_cambio_contrasenia";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cambiar Contraseña";
             this.Load += new System.EventHandler(this.frm_cambio_contrasenia_Load);
             this.ResumeLayout(false);

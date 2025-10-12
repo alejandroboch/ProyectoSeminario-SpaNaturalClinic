@@ -37,7 +37,6 @@ namespace Interfac_V3
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnSeguridad = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.Btn_MenuSpa = new System.Windows.Forms.Button();
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.Btn_MenuP_Spa = new System.Windows.Forms.Button();
             this.panelBarraSuperior.SuspendLayout();
@@ -112,13 +111,14 @@ namespace Interfac_V3
             this.btnSeguridad.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeguridad.Image = ((System.Drawing.Image)(resources.GetObject("btnSeguridad.Image")));
             this.btnSeguridad.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeguridad.Location = new System.Drawing.Point(6, 41);
+            this.btnSeguridad.Location = new System.Drawing.Point(3, 287);
             this.btnSeguridad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSeguridad.Name = "btnSeguridad";
             this.btnSeguridad.Size = new System.Drawing.Size(367, 68);
             this.btnSeguridad.TabIndex = 0;
             this.btnSeguridad.Text = "Modulo de Seguridad";
             this.btnSeguridad.UseVisualStyleBackColor = true;
+            this.btnSeguridad.Visible = false;
             this.btnSeguridad.Click += new System.EventHandler(this.btnSeguridad_Click);
             // 
             // btnSalir
@@ -128,7 +128,7 @@ namespace Interfac_V3
             this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(4, 202);
+            this.btnSalir.Location = new System.Drawing.Point(4, 143);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(367, 50);
@@ -137,17 +137,9 @@ namespace Interfac_V3
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // Btn_MenuSpa
-            // 
-            this.Btn_MenuSpa.Location = new System.Drawing.Point(0, 0);
-            this.Btn_MenuSpa.Name = "Btn_MenuSpa";
-            this.Btn_MenuSpa.Size = new System.Drawing.Size(75, 23);
-            this.Btn_MenuSpa.TabIndex = 8;
-            // 
             // panelContenedor
             // 
             this.panelContenedor.Controls.Add(this.Btn_MenuP_Spa);
-            this.panelContenedor.Controls.Add(this.Btn_MenuSpa);
             this.panelContenedor.Controls.Add(this.btnSalir);
             this.panelContenedor.Controls.Add(this.btnSeguridad);
             this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -163,7 +155,7 @@ namespace Interfac_V3
             this.Btn_MenuP_Spa.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_MenuP_Spa.Image = ((System.Drawing.Image)(resources.GetObject("Btn_MenuP_Spa.Image")));
             this.Btn_MenuP_Spa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_MenuP_Spa.Location = new System.Drawing.Point(4, 121);
+            this.Btn_MenuP_Spa.Location = new System.Drawing.Point(5, 51);
             this.Btn_MenuP_Spa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btn_MenuP_Spa.Name = "Btn_MenuP_Spa";
             this.Btn_MenuP_Spa.Size = new System.Drawing.Size(367, 68);
@@ -205,7 +197,6 @@ namespace Interfac_V3
         private System.Windows.Forms.PictureBox btnCerrar;
         private System.Windows.Forms.Button btnSeguridad;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button Btn_MenuSpa;
         private System.Windows.Forms.Panel panelContenedor;
         private System.Windows.Forms.Button Btn_MenuP_Spa;
     }

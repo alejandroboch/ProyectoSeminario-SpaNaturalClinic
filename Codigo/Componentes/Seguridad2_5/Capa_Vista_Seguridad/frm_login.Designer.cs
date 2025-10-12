@@ -76,7 +76,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.pictureBox3);
             this.panel1.Location = new System.Drawing.Point(1, -2);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
@@ -216,10 +216,12 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::Capa_Vista_Seguridad.Properties.Resources.Logo;
-            this.pictureBox3.Location = new System.Drawing.Point(-57, -12);
+            this.pictureBox3.BackColor = System.Drawing.Color.White;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox3.Image = global::Capa_Vista_Seguridad.Properties.Resources.Logo2;
+            this.pictureBox3.Location = new System.Drawing.Point(-28, 3);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(588, 553);
+            this.pictureBox3.Size = new System.Drawing.Size(559, 539);
             this.pictureBox3.TabIndex = 0;
             this.pictureBox3.TabStop = false;
             // 

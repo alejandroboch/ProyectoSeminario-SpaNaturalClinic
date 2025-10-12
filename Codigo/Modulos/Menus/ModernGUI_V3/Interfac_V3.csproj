@@ -153,6 +153,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Logo2.jpg" />
     <Content Include="Resources\rabit.png" />
   </ItemGroup>
   <ItemGroup>

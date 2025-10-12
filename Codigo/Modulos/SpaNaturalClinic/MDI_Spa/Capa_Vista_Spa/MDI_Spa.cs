@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Vista_Citas;
+using Capa_Vista_Seguridad;
 
 namespace Capa_Vista_Spa
 {
@@ -159,6 +160,41 @@ namespace Capa_Vista_Spa
             CentrarFormulario(GD);
             GD.Show();
         }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CerrarAplicacion();
+        }
+
+        private void CerrarAplicacion()
+        {
+            /************Ismar Cortez - 12/10/25****************/
+            //Yo comente esto
+            //logica l = new logica(idUsuario);
+            //l.funinsertarabitacora(idUsuario, "Cerro sesion en el sistema", "Login", "1301");
+
+            // Devolver al FormModulos con el usuario aun en linea Joel López 12/02/2024
+            frm_login login = new frm_login();
+            login.FormClosed += (s, args) =>
+            {
+                if (login.DialogResult != DialogResult.OK)
+                {
+                    Application.Exit();
+                }
+            };
+
+            // Ocultar la ventana actual
+            this.Hide();
+
+            // Mostrar el login
+            login.Show();
+
+            // Cerrar el MDI_Seguridad
+            this.Close();
+            /************************************************************/
+        }
+
+
     }
 
 }

@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Capa_Vista_Spa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Modulos\SpaNaturalClinic\MDI_Spa\Capa_Vista_Spa\bin\Debug\Capa_Vista_Spa.dll</HintPath>
+    </Reference>
     <Reference Include="Interfac_V3, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Modulos\Menus\ModernGUI_V3\bin\Debug\Interfac_V3.exe</HintPath>
@@ -323,6 +327,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\preguntas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
