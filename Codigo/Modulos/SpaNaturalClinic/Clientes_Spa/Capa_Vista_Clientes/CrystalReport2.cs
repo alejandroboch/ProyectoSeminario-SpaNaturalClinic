@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Capa_Vista_Servicios {
+namespace Capa_Vista_Clientes {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace Capa_Vista_Servicios {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Crystal_Report12Rpt_Servicios : ReportClass {
+    public class CrystalReport2 : ReportClass {
         
-        public Crystal_Report12Rpt_Servicios() {
+        public CrystalReport2() {
         }
         
         public override string ResourceName {
             get {
-                return "2.Rpt_Servicios.rpt";
+                return "CrystalReport2.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Capa_Vista_Servicios {
         
         public override string FullResourceName {
             get {
-                return "Capa_Vista_Servicios.2.Rpt_Servicios.rpt";
+                return "Capa_Vista_Clientes.CrystalReport2.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace Capa_Vista_Servicios {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCrystal_Report12Rpt_Servicios : Component, ICachedReport {
+    public class CachedCrystalReport2 : Component, ICachedReport {
         
-        public CachedCrystal_Report12Rpt_Servicios() {
+        public CachedCrystalReport2() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace Capa_Vista_Servicios {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Crystal_Report12Rpt_Servicios rpt = new Crystal_Report12Rpt_Servicios();
+            CrystalReport2 rpt = new CrystalReport2();
             rpt.Site = this.Site;
             return rpt;
         }

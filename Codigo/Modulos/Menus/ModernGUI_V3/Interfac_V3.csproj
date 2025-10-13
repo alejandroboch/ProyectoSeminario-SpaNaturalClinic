@@ -26,7 +26,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://ismarcortez.github.io/DespliegueProyectoSpa/</InstallUrl>
     <MinimumRequiredVersion>1.0.0.14</MinimumRequiredVersion>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

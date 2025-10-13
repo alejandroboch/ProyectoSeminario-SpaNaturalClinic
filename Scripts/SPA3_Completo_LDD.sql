@@ -2,9 +2,8 @@
 -- BD SPA con control de paquetes mejorado
 -- Solución para evitar doble cobro en paquetes
 -- ===========================================
+use railway;
 
-CREATE DATABASE IF NOT EXISTS BD_SPADos;
-USE BD_SPADos;
 
 -- ===========================================
 -- 1) Tablas base

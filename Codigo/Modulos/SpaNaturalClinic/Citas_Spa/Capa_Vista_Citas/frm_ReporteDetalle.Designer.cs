@@ -30,6 +30,7 @@ namespace Capa_Vista_Citas
         private void InitializeComponent()
         {
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.Crystal_Report16rpt_DetalleCitas1 = new Capa_Vista_Citas.Crystal_Report16rpt_DetalleCitas();
             this.SuspendLayout();
             // 
             // crystalReportViewer1
@@ -40,8 +41,7 @@ namespace Capa_Vista_Citas
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.ReportSource = "C:\\Users\\leone\\OneDrive\\Escritorio\\NuevoProyectoSeminario\\ProyectoSeminario-SpaNa" +
-    "turalClinic\\Reportes\\Modulos\\Spa\\6.RPT_DetalleCitas.rpt";
+            this.crystalReportViewer1.ReportSource = this.Crystal_Report16rpt_DetalleCitas1;
             this.crystalReportViewer1.Size = new System.Drawing.Size(800, 450);
             this.crystalReportViewer1.TabIndex = 0;
             // 
@@ -60,5 +60,6 @@ namespace Capa_Vista_Citas
         #endregion
 
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
+        private Crystal_Report16rpt_DetalleCitas Crystal_Report16rpt_DetalleCitas1;
     }
 }

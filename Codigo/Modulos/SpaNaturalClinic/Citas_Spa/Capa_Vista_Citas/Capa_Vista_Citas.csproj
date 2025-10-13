@@ -53,10 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="5.Rpt_Citas.cs">
+    <Compile Include="5.rpt_Citas.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>5.Rpt_Citas.rpt</DependentUpon>
+      <DependentUpon>5.rpt_Citas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="6.rpt_DetalleCitas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>6.rpt_DetalleCitas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Citas.cs">
@@ -91,9 +97,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="5.Rpt_Citas.rpt">
+    <EmbeddedResource Include="5.rpt_Citas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>5.Rpt_Citas.cs</LastGenOutput>
+      <LastGenOutput>5.rpt_Citas.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="6.rpt_DetalleCitas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>6.rpt_DetalleCitas.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Citas.resx">
       <DependentUpon>Citas.cs</DependentUpon>

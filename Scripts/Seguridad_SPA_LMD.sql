@@ -1,4 +1,4 @@
-USE BD_SPADos;
+
 
 INSERT INTO `tbl_aplicaciones` (`Pk_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `estado_aplicacion`) VALUES
 (1000, 'MDI SEGURIDAD', 'PARA SEGURIDAD', 1),
