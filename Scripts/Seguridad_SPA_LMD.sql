@@ -36,10 +36,6 @@ INSERT INTO `tbl_aplicaciones` (`Pk_id_aplicacion`, `nombre_aplicacion`, `descri
 (8000, 'MDI CONTRABILIDAD', 'PARA CONTRABILIDAD', 1),
 (9000, 'MDI CUENTAS CORRIENTES', 'PARA CUENTAS CORRIENTES', 1);
 
---
--- Volcado de datos para la tabla `tbl_consultainteligente`
---
-
 INSERT INTO `tbl_consultainteligente` (`Pk_consultaID`, `nombre_consulta`, `tipo_consulta`, `consulta_SQLE`, `consulta_estatus`) VALUES
 (1, '', 0, 'SELECT id_venta FROM venta;', 1),
 (2, '', 0, 'SELECT SELECT id_venta FROM venta;id_venta AS * FROM venta;', 1),
@@ -55,10 +51,6 @@ INSERT INTO `tbl_consultainteligente` (`Pk_consultaID`, `nombre_consulta`, `tipo
 (12, '', 0, 'SELECT * FROM factura;', 1),
 (13, 'jkjkkjk', 0, 'SELECT * FROM factura;', 1);
 
---
--- Volcado de datos para la tabla `tbl_modulos`
---
-
 INSERT INTO `tbl_modulos` (`Pk_id_modulos`, `nombre_modulo`, `descripcion_modulo`, `estado_modulo`) VALUES
 (1000, 'SEGURIDAD', 'Seguridad', 1),
 (2000, 'LOGISTICA', 'Logistica', 1),
@@ -68,9 +60,6 @@ INSERT INTO `tbl_modulos` (`Pk_id_modulos`, `nombre_modulo`, `descripcion_modulo
 (7000, 'BANCOS', 'Bancos', 1),
 (8000, 'CONTABILIDAD', 'Contabilidad', 1),
 (9000, 'CUENTAS CORRIENTES', 'Cuentas Corrientes', 1);
---
--- Volcado de datos para la tabla `tbl_perfiles`
---
 
 INSERT INTO `tbl_perfiles` (`Pk_id_perfil`, `nombre_perfil`, `descripcion_perfil`, `estado_perfil`) VALUES
 (1, 'ADMINISTRADOR', 'contiene todos los permisos del programa', 1),
@@ -87,11 +76,6 @@ INSERT INTO `tbl_perfiles` (`Pk_id_perfil`, `nombre_perfil`, `descripcion_perfil
 (12, 'GESTOR DE PROYECTOS', 'Permite gestionar proyectos y coordinar actividades sin acceso completo a la administración', 1),
 (13, 'GESTOR DE DATOS', 'Permite gestionar y supervisar datos en distintos módulos sin acceso completo a la administración', 1),
 (14, 'CUENTAS CORRIENTES', 'contiene todos los permisos de cuentas corrientes', 1);
-
-
---
--- Volcado de datos para la tabla `tbl_permisos_aplicacion_perfil`
---
 
 INSERT INTO `tbl_permisos_aplicacion_perfil` (`PK_id_Aplicacion_Perfil`, `Fk_id_perfil`, `Fk_id_aplicacion`, `guardar_permiso`, `modificar_permiso`, `eliminar_permiso`, `buscar_permiso`, `imprimir_permiso`) VALUES
 (1, 1, 1000, 1, 1, 1, 1, 1),
@@ -127,7 +111,7 @@ INSERT INTO `tbl_permisos_aplicacion_perfil` (`PK_id_Aplicacion_Perfil`, `Fk_id_
 (31, 1, 6301, 1, 1, 1, 1, 1),
 (32, 1, 7000, 1, 1, 1, 1, 1),
 (33, 1, 8000, 1, 1, 1, 1, 1),
-(34, 1, 9000, 1, 1, 1, 1, 1),--
+(34, 1, 9000, 1, 1, 1, 1, 1),
 (35, 2, 1000, 1, 1, 1, 1, 1),
 (36, 3, 2000, 1, 1, 1, 1, 1),
 (37, 4, 3000, 1, 1, 1, 1, 1),
@@ -323,23 +307,13 @@ INSERT INTO `tbl_permisos_aplicacion_perfil` (`PK_id_Aplicacion_Perfil`, `Fk_id_
 (227, 14, 7000, 1, 1, 1, 1, 1),
 (228, 14, 8000, 1, 1, 1, 1, 1),
 (229, 14, 9000, 1, 1, 1, 1, 1);
---
--- Volcado de datos para la tabla `tbl_usuarios`
---
 
 INSERT INTO `tbl_usuarios` (`Pk_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `email_usuario`, `ultima_conexion_usuario`, `estado_usuario`, `pregunta`, `respuesta`) VALUES
 (1, 'admin', 'admin', 'admin', '52c88f064ed5ed9161d01f634f5e3bfcf5c77fec94fb398b6690e1b41178eb6c', 'esduardo@gmail.com', '2024-09-21 00:55:40', 1, 'COLOR FAVORITO', 'ROJO'),
 (2, 'Ismar', 'Cortez', 'Ismar', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'icortezs@miumg.edu.gt', '2024-09-17 17:32:03', 1, 'Nombre de familiar', 'Eunice');
 
---
-
-
 INSERT INTO `tbl_asignaciones_perfils_usuario` (`PK_id_Perfil_Usuario`, `Fk_id_usuario`, `Fk_id_perfil`) VALUES
 (1, 1, 1);
-
---
--- Volcado de datos para la tabla `tbl_asignacion_modulo_aplicacion`
---
 
 INSERT INTO `tbl_asignacion_modulo_aplicacion` (`Fk_id_modulos`, `Fk_id_aplicacion`) VALUES
 (1000, 1000),
@@ -376,10 +350,6 @@ INSERT INTO `tbl_asignacion_modulo_aplicacion` (`Fk_id_modulos`, `Fk_id_aplicaci
 (8000, 8000),
 (9000, 9000);
 
---
--- Volcado de datos para la tabla `tbl_permisos_aplicaciones_usuario`
---
-
 INSERT INTO `tbl_permisos_aplicaciones_usuario` (`PK_id_Aplicacion_Usuario`, `Fk_id_usuario`, `Fk_id_aplicacion`, `guardar_permiso`, `buscar_permiso`, `modificar_permiso`, `eliminar_permiso`, `imprimir_permiso`) VALUES
 (1, 1, 1002, 1, 1, 1, 1, 0),
 (2, 1, 2000, 0, 0, 0, 0, 0),
@@ -399,5 +369,3 @@ DELETE FROM `tbl_usuarios` WHERE `Pk_id_usuario` = 2;
 UPDATE tbl_usuarios
 SET password_usuario = SHA2('HO0aGo4nM94=', 256) 
 WHERE username_usuario = 'admin';
-
-select* from tbl_cita_servicio;

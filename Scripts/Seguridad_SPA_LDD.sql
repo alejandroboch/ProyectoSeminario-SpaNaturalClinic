@@ -1,6 +1,5 @@
 USE BD_SPADos;
 
-
 DELIMITER $$
 --
 -- Procedimientos
@@ -92,55 +91,39 @@ END$$
 DELIMITER ;
 
 -- --------------------------------------------------------
+-- Eliminar todas las tablas en orden inverso para evitar errores de foreign key
+-- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `ayuda`
---
+DROP TABLE IF EXISTS `tbl_permisos_aplicacion_perfil`;
+DROP TABLE IF EXISTS `tbl_permisos_aplicaciones_usuario`;
+DROP TABLE IF EXISTS `tbl_asignacion_modulo_aplicacion`;
+DROP TABLE IF EXISTS `tbl_asignaciones_perfils_usuario`;
+DROP TABLE IF EXISTS `tbl_bitacora`;
+DROP TABLE IF EXISTS `tbl_consultainteligente`;
+DROP TABLE IF EXISTS `tbl_modulos`;
+DROP TABLE IF EXISTS `tbl_perfiles`;
+DROP TABLE IF EXISTS `tbl_usuarios`;
+DROP TABLE IF EXISTS `tbl_aplicaciones`;
 
 -- --------------------------------------------------------
+-- Crear tablas en el orden correcto (tablas padre primero) - TODO EN MINÚSCULAS
+-- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `tbl_aplicaciones`
 --
-
-DROP TABLE IF EXISTS `Tbl_aplicaciones`;
-CREATE TABLE IF NOT EXISTS `Tbl_aplicaciones` (
+CREATE TABLE `tbl_aplicaciones` (
 	Pk_id_aplicacion INT NOT NULL,
     nombre_aplicacion VARCHAR(50) NOT NULL,
     descripcion_aplicacion VARCHAR(150) NOT NULL,
     estado_aplicacion TINYINT DEFAULT 0,
-    primary key (`Pk_id_aplicacion`)
+    PRIMARY KEY (`Pk_id_aplicacion`)
 );
 
-
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `tbl_asignaciones_perfils_usuario`
---
-
-CREATE TABLE `tbl_asignaciones_perfils_usuario` (
-  `PK_id_Perfil_Usuario` int(11) NOT NULL,
-  `Fk_id_usuario` int(11) NOT NULL,
-  `Fk_id_perfil` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_asignacion_modulo_aplicacion`
---
-
-CREATE TABLE `tbl_asignacion_modulo_aplicacion` (
-  `Fk_id_modulos` int(11) NOT NULL,
-  `Fk_id_aplicacion` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
 -- Estructura de tabla para la tabla `tbl_usuarios`
 --
-
-DROP TABLE IF EXISTS `Tbl_usuarios`;
-CREATE TABLE IF NOT EXISTS `Tbl_usuarios` (
+CREATE TABLE `tbl_usuarios` (
   Pk_id_usuario INT AUTO_INCREMENT NOT NULL,
   nombre_usuario VARCHAR(50) NOT NULL,
   apellido_usuario VARCHAR(50) NOT NULL,
@@ -154,14 +137,44 @@ CREATE TABLE IF NOT EXISTS `Tbl_usuarios` (
   PRIMARY KEY (`Pk_id_usuario`)
 );
 
--- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `tbl_perfiles`
+--
+CREATE TABLE `tbl_perfiles` (
+  `Pk_id_perfil` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_perfil` varchar(50) NOT NULL,
+  `descripcion_perfil` varchar(150) NOT NULL,
+  `estado_perfil` tinyint(4) DEFAULT 0,
+  PRIMARY KEY (`Pk_id_perfil`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Estructura de tabla para la tabla `tbl_modulos`
+--
+CREATE TABLE `tbl_modulos` (
+  `Pk_id_modulos` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_modulo` varchar(50) NOT NULL,
+  `descripcion_modulo` varchar(150) NOT NULL,
+  `estado_modulo` tinyint(4) DEFAULT 0,
+  PRIMARY KEY (`Pk_id_modulos`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Estructura de tabla para la tabla `tbl_consultainteligente`
+--
+CREATE TABLE `tbl_consultainteligente` (
+  `Pk_consultaID` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_consulta` varchar(50) NOT NULL,
+  `tipo_consulta` int(1) NOT NULL,
+  `consulta_SQLE` varchar(100) NOT NULL,
+  `consulta_estatus` int(1) NOT NULL,
+  PRIMARY KEY (`Pk_consultaID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Estructura de tabla para la tabla `tbl_bitacora`
 --
-
-DROP TABLE IF EXISTS Tbl_bitacora;
-CREATE TABLE IF NOT EXISTS Tbl_bitacora (
+CREATE TABLE `tbl_bitacora` (
   Pk_id_bitacora INT AUTO_INCREMENT NOT NULL,
   Fk_id_usuario INT NOT NULL,
   Fk_id_aplicacion INT NOT NULL,
@@ -170,190 +183,101 @@ CREATE TABLE IF NOT EXISTS Tbl_bitacora (
   host_bitacora VARCHAR(45) NOT NULL,
   ip_bitacora VARCHAR(100) NOT NULL,
   accion_bitacora VARCHAR(200) NOT NULL,
-  PRIMARY KEY (`Pk_id_bitacora`),
-  FOREIGN KEY (`Fk_id_usuario`) REFERENCES `Tbl_usuarios` (`Pk_id_usuario`),
-  FOREIGN KEY (`Fk_id_aplicacion`) REFERENCES `Tbl_aplicaciones` (`Pk_id_aplicacion`)
-)ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
-
-
--- --------------------------------------------------------
+  tabla VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`Pk_id_bitacora`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 --
--- Estructura de tabla para la tabla `tbl_consultainteligente`
+-- Estructura de tabla para la tabla `tbl_asignaciones_perfils_usuario`
 --
-
-CREATE TABLE `tbl_consultainteligente` (
-  `Pk_consultaID` int(11) NOT NULL,
-  `nombre_consulta` varchar(50) NOT NULL,
-  `tipo_consulta` int(1) NOT NULL,
-  `consulta_SQLE` varchar(100) NOT NULL,
-  `consulta_estatus` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
--- --------------------------------------------------------
+CREATE TABLE `tbl_asignaciones_perfils_usuario` (
+  `PK_id_Perfil_Usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `Fk_id_usuario` int(11) NOT NULL,
+  `Fk_id_perfil` int(11) NOT NULL,
+  PRIMARY KEY (`PK_id_Perfil_Usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Estructura de tabla para la tabla `tbl_modulos`
+-- Estructura de tabla para la tabla `tbl_asignacion_modulo_aplicacion`
 --
-
-CREATE TABLE `tbl_modulos` (
-  `Pk_id_modulos` int(11) NOT NULL,
-  `nombre_modulo` varchar(50) NOT NULL,
-  `descripcion_modulo` varchar(150) NOT NULL,
-  `estado_modulo` tinyint(4) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_perfiles`
---
-
-CREATE TABLE `tbl_perfiles` (
-  `Pk_id_perfil` int(11) NOT NULL,
-  `nombre_perfil` varchar(50) NOT NULL,
-  `descripcion_perfil` varchar(150) NOT NULL,
-  `estado_perfil` tinyint(4) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
--- --------------------------------------------------------
+CREATE TABLE `tbl_asignacion_modulo_aplicacion` (
+  `PK_id_asignacion` int(11) NOT NULL AUTO_INCREMENT,
+  `Fk_id_modulos` int(11) NOT NULL,
+  `Fk_id_aplicacion` int(11) NOT NULL,
+  PRIMARY KEY (`PK_id_asignacion`),
+  UNIQUE KEY `unique_asignacion` (`Fk_id_modulos`, `Fk_id_aplicacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Estructura de tabla para la tabla `tbl_permisos_aplicaciones_usuario`
 --
-
 CREATE TABLE `tbl_permisos_aplicaciones_usuario` (
-  `PK_id_Aplicacion_Usuario` int(11) NOT NULL,
+  `PK_id_Aplicacion_Usuario` int(11) NOT NULL AUTO_INCREMENT,
   `Fk_id_usuario` int(11) NOT NULL,
   `Fk_id_aplicacion` int(11) NOT NULL,
   `guardar_permiso` tinyint(1) DEFAULT 0,
   `buscar_permiso` tinyint(1) DEFAULT 0,
   `modificar_permiso` tinyint(1) DEFAULT 0,
   `eliminar_permiso` tinyint(1) DEFAULT 0,
-  `imprimir_permiso` tinyint(1) DEFAULT 0
+  `imprimir_permiso` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`PK_id_Aplicacion_Usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tbl_permisos_aplicacion_perfil`
 --
-
 CREATE TABLE `tbl_permisos_aplicacion_perfil` (
-  `PK_id_Aplicacion_Perfil` int(11) NOT NULL,
+  `PK_id_Aplicacion_Perfil` int(11) NOT NULL AUTO_INCREMENT,
   `Fk_id_perfil` int(11) NOT NULL,
   `Fk_id_aplicacion` int(11) NOT NULL,
   `guardar_permiso` tinyint(1) DEFAULT 0,
   `modificar_permiso` tinyint(1) DEFAULT 0,
   `eliminar_permiso` tinyint(1) DEFAULT 0,
   `buscar_permiso` tinyint(1) DEFAULT 0,
-  `imprimir_permiso` tinyint(1) DEFAULT 0
+  `imprimir_permiso` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`PK_id_Aplicacion_Perfil`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+-- --------------------------------------------------------
+-- Agregar índices adicionales
 -- --------------------------------------------------------
 
--- Indices de la tabla `tbl_asignaciones_perfils_usuario`
---
 ALTER TABLE `tbl_asignaciones_perfils_usuario`
-  ADD PRIMARY KEY (`PK_id_Perfil_Usuario`),
   ADD KEY `Fk_id_usuario` (`Fk_id_usuario`),
   ADD KEY `Fk_id_perfil` (`Fk_id_perfil`);
 
---
--- Indices de la tabla `tbl_asignacion_modulo_aplicacion`
---
 ALTER TABLE `tbl_asignacion_modulo_aplicacion`
-  ADD PRIMARY KEY (`Fk_id_modulos`,`Fk_id_aplicacion`),
+  ADD KEY `Fk_id_modulos` (`Fk_id_modulos`),
   ADD KEY `Fk_id_aplicacion` (`Fk_id_aplicacion`);
-  
-  --
-  
-  ALTER TABLE `tbl_modulos`
-  ADD PRIMARY KEY (`Pk_id_modulos`);
 
---
--- Indices de la tabla `tbl_perfiles`
---
-ALTER TABLE `tbl_perfiles`
-  ADD PRIMARY KEY (`Pk_id_perfil`);
-  
--- Indices de la tabla `tbl_permisos_aplicaciones_usuario`
---
 ALTER TABLE `tbl_permisos_aplicaciones_usuario`
-  ADD PRIMARY KEY (`PK_id_Aplicacion_Usuario`),
   ADD KEY `Fk_id_usuario` (`Fk_id_usuario`),
   ADD KEY `Fk_id_aplicacion` (`Fk_id_aplicacion`);
 
---
--- Indices de la tabla `tbl_permisos_aplicacion_perfil`
---
 ALTER TABLE `tbl_permisos_aplicacion_perfil`
-  ADD PRIMARY KEY (`PK_id_Aplicacion_Perfil`),
   ADD KEY `Fk_id_aplicacion` (`Fk_id_aplicacion`),
   ADD KEY `Fk_id_perfil` (`Fk_id_perfil`);
 
---
+-- --------------------------------------------------------
+-- Agregar Foreign Keys - TODO EN MINÚSCULAS
+-- --------------------------------------------------------
 
-ALTER TABLE `tbl_asignaciones_perfils_usuario`
-  MODIFY `PK_id_Perfil_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 ALTER TABLE `tbl_bitacora`
-  MODIFY `Pk_id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
+  ADD CONSTRAINT `tbl_bitacora_ibfk_1` FOREIGN KEY (`Fk_id_usuario`) REFERENCES `tbl_usuarios` (`Pk_id_usuario`),
+  ADD CONSTRAINT `tbl_bitacora_ibfk_2` FOREIGN KEY (`Fk_id_aplicacion`) REFERENCES `tbl_aplicaciones` (`Pk_id_aplicacion`);
 
---
-
-ALTER TABLE `tbl_perfiles`
-  MODIFY `Pk_id_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
-
-ALTER TABLE `tbl_permisos_aplicaciones_usuario`
-  MODIFY `PK_id_Aplicacion_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de la tabla `tbl_permisos_aplicacion_perfil`
---
-ALTER TABLE `tbl_permisos_aplicacion_perfil`
-  MODIFY `PK_id_Aplicacion_Perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
-
-ALTER TABLE `tbl_usuarios`
-  MODIFY `Pk_id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
--- Filtros para la tabla `tbl_asignaciones_perfils_usuario`
---
 ALTER TABLE `tbl_asignaciones_perfils_usuario`
   ADD CONSTRAINT `tbl_asignaciones_perfils_usuario_ibfk_1` FOREIGN KEY (`Fk_id_usuario`) REFERENCES `tbl_usuarios` (`Pk_id_usuario`),
   ADD CONSTRAINT `tbl_asignaciones_perfils_usuario_ibfk_2` FOREIGN KEY (`Fk_id_perfil`) REFERENCES `tbl_perfiles` (`Pk_id_perfil`);
 
---
--- Filtros para la tabla `tbl_asignacion_modulo_aplicacion`
---
 ALTER TABLE `tbl_asignacion_modulo_aplicacion`
   ADD CONSTRAINT `tbl_asignacion_modulo_aplicacion_ibfk_1` FOREIGN KEY (`Fk_id_modulos`) REFERENCES `tbl_modulos` (`Pk_id_modulos`),
   ADD CONSTRAINT `tbl_asignacion_modulo_aplicacion_ibfk_2` FOREIGN KEY (`Fk_id_aplicacion`) REFERENCES `tbl_aplicaciones` (`Pk_id_aplicacion`);
 
---
-
-
---
--- Filtros para la tabla `tbl_permisos_aplicaciones_usuario`
---
 ALTER TABLE `tbl_permisos_aplicaciones_usuario`
   ADD CONSTRAINT `tbl_permisos_aplicaciones_usuario_ibfk_1` FOREIGN KEY (`Fk_id_usuario`) REFERENCES `tbl_usuarios` (`Pk_id_usuario`),
   ADD CONSTRAINT `tbl_permisos_aplicaciones_usuario_ibfk_2` FOREIGN KEY (`Fk_id_aplicacion`) REFERENCES `tbl_aplicaciones` (`Pk_id_aplicacion`);
 
---
--- Filtros para la tabla `tbl_permisos_aplicacion_perfil`
---
 ALTER TABLE `tbl_permisos_aplicacion_perfil`
   ADD CONSTRAINT `tbl_permisos_aplicacion_perfil_ibfk_1` FOREIGN KEY (`Fk_id_aplicacion`) REFERENCES `tbl_aplicaciones` (`Pk_id_aplicacion`),
   ADD CONSTRAINT `tbl_permisos_aplicacion_perfil_ibfk_2` FOREIGN KEY (`Fk_id_perfil`) REFERENCES `tbl_perfiles` (`Pk_id_perfil`);
-
-ALTER TABLE `Tbl_bitacora`
-ADD COLUMN `tabla` VARCHAR(50) NOT NULL;
-

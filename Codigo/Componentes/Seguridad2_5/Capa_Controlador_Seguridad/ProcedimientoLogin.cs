@@ -3,19 +3,19 @@ using System.Data;
 using System.Data.Odbc;
 using Capa_Modelo_Seguridad;
 
-
 namespace Capa_Controlador_Seguridad
 {
     public class ProcedimientoLogin
     {
         sentencia sn;
+
         //Fernando García - 0901-21-581
         public bool llamarProcedimiento(string usuario, string clave)
         {
             try
             {
                 conexion con = new conexion();
-                using (OdbcCommand cmd = new OdbcCommand("CALL procedimientoLogin(?, ?)", con.conectar()))
+                using (OdbcCommand cmd = new OdbcCommand("CALL procedimientologin(?, ?)", con.conectar()))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@usuario", OdbcType.VarChar).Value = usuario;
@@ -35,13 +35,10 @@ namespace Capa_Controlador_Seguridad
             }
             catch (OdbcException ex)
             {
-
                 Console.WriteLine(ex);
                 return false;
-
             }
-
-        }/////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
 
         // Procedimientos siguientes por Brandon Boch 0901-21-13093------------------------------------
         public bool cambioContrasenia(string usuario)
@@ -49,7 +46,7 @@ namespace Capa_Controlador_Seguridad
             try
             {
                 conexion con = new conexion();
-                using (OdbcCommand cmd = new OdbcCommand("CALL cambioContrasenia(?)", con.conectar()))
+                using (OdbcCommand cmd = new OdbcCommand("CALL cambiocontrasenia(?)", con.conectar()))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@usuario", OdbcType.VarChar).Value = usuario;
@@ -69,12 +66,9 @@ namespace Capa_Controlador_Seguridad
             }
             catch (OdbcException ex)
             {
-
                 Console.WriteLine(ex);
                 return false;
-
             }
-
         }
 
         public bool cambiarContrasenia(string usuario, string nuevaContrasenia, string respuestaSeguridad)
@@ -85,7 +79,7 @@ namespace Capa_Controlador_Seguridad
                 bool contraseniaActualizada = false;
                 string resultado = "";
 
-                using (OdbcCommand cmd = new OdbcCommand("CALL cambiarContrasenia(?, ?, ?)", con.conectar()))
+                using (OdbcCommand cmd = new OdbcCommand("CALL cambiarcontrasenia(?, ?, ?)", con.conectar()))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -124,14 +118,13 @@ namespace Capa_Controlador_Seguridad
                 return false;
             }
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////
 
         public bool cambiarContraModulo(int usuario, string nuevaContrasenia)
         {
             try
             {
                 conexion con = new conexion();
-                using (OdbcCommand cmd = new OdbcCommand("CALL cambiarContraModulo(?, ?)", con.conectar()))
+                using (OdbcCommand cmd = new OdbcCommand("CALL cambiarcontramodulo(?, ?)", con.conectar()))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -165,5 +158,4 @@ namespace Capa_Controlador_Seguridad
         }
         //////////////////////////// Fin de código por Brandon Boch 0901-21-13093 //////////////////////
     }
-        
 }

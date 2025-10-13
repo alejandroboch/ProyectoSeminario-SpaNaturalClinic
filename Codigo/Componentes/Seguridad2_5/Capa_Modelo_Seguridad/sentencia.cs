@@ -68,7 +68,7 @@ namespace Capa_Modelo_Seguridad
         public OdbcDataAdapter funmodulos()
         {
             cn.conectar();
-            string smodulos = "SELECT Pk_id_modulos as ID_Modulos, nombre_modulo as Modulo, descripcion_modulo as Descripcion, estado_modulo as Estado FROM Tbl_modulos";
+            string smodulos = "SELECT Pk_id_modulos as ID_Modulos, nombre_modulo as Modulo, descripcion_modulo as Descripcion, estado_modulo as Estado FROM tbl_modulos";
             OdbcDataAdapter datamodulos = new OdbcDataAdapter(smodulos, cn.conectar());
             funInsertarBitacora(idUsuario, "Realizo una consulta a modulos", "tbl_modulos", "1000");
             return datamodulos;
@@ -81,7 +81,7 @@ namespace Capa_Modelo_Seguridad
         public OdbcDataAdapter funperfiles()
         {
             cn.conectar();
-            string sperfiles = "SELECT Pk_id_perfil as ID_Perfiles, nombre_perfil as Perfil, descripcion_perfil as Descripcion, estado_perfil as Estado FROM Tbl_perfiles";
+            string sperfiles = "SELECT Pk_id_perfil as ID_Perfiles, nombre_perfil as Perfil, descripcion_perfil as Descripcion, estado_perfil as Estado FROM tbl_perfiles";
             OdbcDataAdapter dataperfiles = new OdbcDataAdapter(sperfiles, cn.conectar());
             funInsertarBitacora(idUsuario, "Realizo una consulta a perfiles", "tbl_perfiles", "1000");
             return dataperfiles;
@@ -97,9 +97,9 @@ namespace Capa_Modelo_Seguridad
         public OdbcDataAdapter funconsultarmodulos()
         {
             cn.conectar();
-            string sqlModulos = "SELECT nombre_modulo FROM Tbl_modulos WHERE estado_modulo = 1";
+            string sqlModulos = "SELECT nombre_modulo FROM tbl_modulos WHERE estado_modulo = 1";
             OdbcDataAdapter dataModulos = new OdbcDataAdapter(sqlModulos, cn.conectar());
-            funInsertarBitacora(idUsuario, "Realizo una consulta a modulos", "Tbl_modulos", "1000");
+            funInsertarBitacora(idUsuario, "Realizo una consulta a modulos", "tbl_modulos", "1000");
             return dataModulos;
         }
         //****************************************FIN Kevin López***************************************************
@@ -108,9 +108,9 @@ namespace Capa_Modelo_Seguridad
         public OdbcDataAdapter funconsultarperfiles()
         {
             cn.conectar();
-            string sqlPerfiles = "SELECT nombre_perfil FROM Tbl_perfiles WHERE estado_perfil = 1";
+            string sqlPerfiles = "SELECT nombre_perfil FROM tbl_perfiles WHERE estado_perfil = 1";
             OdbcDataAdapter dataPerfiles = new OdbcDataAdapter(sqlPerfiles, cn.conectar());
-            funInsertarBitacora(idUsuario, "Realizo una consulta a perfiles", "Tbl_perfiles", "1000");
+            funInsertarBitacora(idUsuario, "Realizo una consulta a perfiles", "tbl_perfiles", "1000");
             return dataPerfiles;
         }
         //****************************************Kevin López***************************************************
@@ -155,7 +155,7 @@ namespace Capa_Modelo_Seguridad
             try
             {
                 // Obtén el código de la aplicación
-                OdbcCommand sqlCodigoModulo = new OdbcCommand("SELECT Pk_id_aplicacion FROM Tbl_aplicaciones WHERE nombre_aplicacion = '" + sNombreAplicacion + "' ", cn.conectar());
+                OdbcCommand sqlCodigoModulo = new OdbcCommand("SELECT Pk_id_aplicacion FROM tbl_aplicaciones WHERE nombre_aplicacion = '" + sNombreAplicacion + "' ", cn.conectar());
                 OdbcDataReader almacena = sqlCodigoModulo.ExecuteReader();
 
                 while (almacena.Read() == true)
@@ -169,7 +169,7 @@ namespace Capa_Modelo_Seguridad
 
                 // Obtén el código del usuario
                 // Obtén el código del usuario
-                OdbcCommand sqlCodigoUsuario = new OdbcCommand("SELECT Pk_id_usuario FROM Tbl_usuarios WHERE nombre_usuario = '" + sCodigoUsuario + "' ", cn.conectar());
+                OdbcCommand sqlCodigoUsuario = new OdbcCommand("SELECT Pk_id_usuario FROM tbl_usuarios WHERE nombre_usuario = '" + sCodigoUsuario + "' ", cn.conectar());
                 OdbcDataReader almacenaUsuario = sqlCodigoUsuario.ExecuteReader();
 
                 while (almacenaUsuario.Read() == true)
@@ -182,12 +182,12 @@ namespace Capa_Modelo_Seguridad
                 // Inserta los permisos usando el código de la aplicación y el código del usuario
                 /*Ismar Cortez - 30/1/25*/
                 /*Aqui se corrigio el error, era una "s", porque debia ser sCodigoUsuarios en lugar de sCodigoUsuario*/
-                string sqlInsertarPermisosUA = "INSERT INTO Tbl_permisos_aplicaciones_usuario(Fk_id_usuario, Fk_id_aplicacion, guardar_permiso, buscar_permiso, modificar_permiso, eliminar_permiso, imprimir_permiso) VALUES ('" + sNumeroUsuario + "','" + sCodigoAplicacion + "', '" + sIngresar + "', '" + sConsulta + "', '" + sModificar + "', '" + sEliminar + "', '" + sImprimir + "');";
+                string sqlInsertarPermisosUA = "INSERT INTO tbl_permisos_aplicaciones_usuario(Fk_id_usuario, Fk_id_aplicacion, guardar_permiso, buscar_permiso, modificar_permiso, eliminar_permiso, imprimir_permiso) VALUES ('" + sNumeroUsuario + "','" + sCodigoAplicacion + "', '" + sIngresar + "', '" + sConsulta + "', '" + sModificar + "', '" + sEliminar + "', '" + sImprimir + "');";
                 // MessageBox.Show(sqlInsertarPermisosUA);
                 // Ejecuta el comando de inserción
                 OdbcDataAdapter dataPermisosUA = new OdbcDataAdapter(sqlInsertarPermisosUA, cn.conectar());
                 // Inserta en la bitácora
-                funInsertarBitacora(idUsuario, "Asignó aplicación: " + sNombreAplicacion + " a usuario: " + sCodigoUsuario, "Tbl_permisos_aplicaciones_usuario", "1000");
+                funInsertarBitacora(idUsuario, "Asignó aplicación: " + sNombreAplicacion + " a usuario: " + sCodigoUsuario, "tbl_permisos_aplicaciones_usuario", "1000");
 
 
                 almacena.Close();
@@ -220,11 +220,11 @@ namespace Capa_Modelo_Seguridad
                             au.eliminar_permiso AS Eliminar, 
                             au.imprimir_permiso AS Imprimir
                         FROM 
-                            Tbl_permisos_aplicaciones_usuario au
+                            tbl_permisos_aplicaciones_usuario au
                         JOIN 
-                            Tbl_aplicaciones a ON au.Fk_id_aplicacion = a.Pk_id_aplicacion
+                            tbl_aplicaciones a ON au.Fk_id_aplicacion = a.Pk_id_aplicacion
                         JOIN 
-                            Tbl_usuarios u ON au.Fk_id_usuario = u.Pk_id_usuario;
+                            tbl_usuarios u ON au.Fk_id_usuario = u.Pk_id_usuario;
                 ";
 
                 OdbcDataAdapter dataTable = new OdbcDataAdapter(sql, cn.conectar());
@@ -254,14 +254,14 @@ namespace Capa_Modelo_Seguridad
         a.Fk_id_perfil AS PerfilID, 
         ap.nombre_perfil AS NombrePerfil 
     FROM 
-        Tbl_asignaciones_perfils_usuario a  
+        tbl_asignaciones_perfils_usuario a  
     JOIN 
-        Tbl_usuarios m ON a.Fk_id_usuario = m.Pk_id_usuario 
+        tbl_usuarios m ON a.Fk_id_usuario = m.Pk_id_usuario 
     JOIN 
-        Tbl_perfiles ap ON a.Fk_id_perfil = ap.Pk_id_perfil";
+        tbl_perfiles ap ON a.Fk_id_perfil = ap.Pk_id_perfil";
 
             OdbcDataAdapter dataPerfilUsuario = new OdbcDataAdapter(sqlPerfilUsuario, cn.conectar());
-            funInsertarBitacora(idUsuario, "Realizó una consulta a Asignación de perfil a un usuario", "Tbl_asignaciones_perfils_usuario", "1000");
+            funInsertarBitacora(idUsuario, "Realizó una consulta a Asignación de perfil a un usuario", "tbl_asignaciones_perfils_usuario", "1000");
             return dataPerfilUsuario;
         }
 
@@ -287,7 +287,7 @@ namespace Capa_Modelo_Seguridad
             {
 
                 cn.conectar();
-                string ssqlEliminarPerfilUsuario = "DELETE FROM Tbl_asignaciones_perfils_usuario WHERE PK_id_Perfil_Usuario = ?";
+                string ssqlEliminarPerfilUsuario = "DELETE FROM tbl_asignaciones_perfils_usuario WHERE PK_id_Perfil_Usuario = ?";
                 using (OdbcCommand cmd = new OdbcCommand(ssqlEliminarPerfilUsuario, cn.conectar()))
                 {
 
@@ -296,7 +296,7 @@ namespace Capa_Modelo_Seguridad
 
                     if (rowsAffected > 0)
                     {
-                        funInsertarBitacora(idUsuario, "Eliminó un perfil: " + sId_Perfil_Usuario, "Tbl_asignaciones_perfils_usuario", "1000");
+                        funInsertarBitacora(idUsuario, "Eliminó un perfil: " + sId_Perfil_Usuario, "tbl_asignaciones_perfils_usuario", "1000");
                         return true;
                     }
                     else
@@ -324,7 +324,7 @@ namespace Capa_Modelo_Seguridad
 
                 {
                     //
-                    string query = "INSERT INTO Tbl_asignaciones_perfils_usuario(" +
+                    string query = "INSERT INTO tbl_asignaciones_perfils_usuario(" +
                                                      "Fk_id_usuario," +
                                                      "Fk_id_perfil)" +
                                                      "VALUES (?, ?) ";
@@ -337,7 +337,7 @@ namespace Capa_Modelo_Seguridad
                         //MessageBox.Show(cmd.ToString());
                         // Ejecutar el comando
                         cmd.ExecuteNonQuery();
-                        funInsertarBitacora(idUsuario, "Inserto un nuevo modulo: " + scodigoUsuario + " - " + scodigoPerfil, "Tbl_asignaciones_perfils_usuario", "1000");
+                        funInsertarBitacora(idUsuario, "Inserto un nuevo modulo: " + scodigoUsuario + " - " + scodigoPerfil, "tbl_asignaciones_perfils_usuario", "1000");
                     }
 
                 }
@@ -415,7 +415,7 @@ namespace Capa_Modelo_Seguridad
         public OdbcDataAdapter funmostraraplicaciones()
         {
             cn.conectar();
-            string saplicaciones = "SELECT Pk_id_aplicacion as ID_Aplicacion, nombre_aplicacion as Aplicacion, descripcion_aplicacion as Descripcion, estado_aplicacion as Estado FROM Tbl_aplicaciones";
+            string saplicaciones = "SELECT Pk_id_aplicacion as ID_Aplicacion, nombre_aplicacion as Aplicacion, descripcion_aplicacion as Descripcion, estado_aplicacion as Estado FROM tbl_aplicaciones";
             OdbcDataAdapter dataaplicaciones = new OdbcDataAdapter(saplicaciones, cn.conectar());
             funInsertarBitacora(idUsuario, "Realizo una consulta a aplicaciones", "tbl_aplicaciones", "1000");
             return dataaplicaciones;
@@ -459,8 +459,8 @@ namespace Capa_Modelo_Seguridad
         public OdbcDataAdapter funConsultaraplicaciones(string saplicacion)
         {
             cn.conectar();
-            string ssqlAplicaciones = "SELECT * FROM Tbl_aplicaciones WHERE Pk_id_aplicacion = " + saplicacion;
-            funInsertarBitacora(idUsuario, "Realizo una consulta a aplicaciones", "Tbl_aplicaciones", "1000");
+            string ssqlAplicaciones = "SELECT * FROM tbl_aplicaciones WHERE Pk_id_aplicacion = " + saplicacion;
+            funInsertarBitacora(idUsuario, "Realizo una consulta a aplicaciones", "tbl_aplicaciones", "1000");
             OdbcDataAdapter dataTable = new OdbcDataAdapter(ssqlAplicaciones, cn.conectar());
             return dataTable;
         }
@@ -512,7 +512,7 @@ namespace Capa_Modelo_Seguridad
             try
             {
                 // Comenzar a construir la consulta SQL
-                string squery = "UPDATE Tbl_usuarios SET ";
+                string squery = "UPDATE tbl_usuarios SET ";
 
                 // Lista de parámetros a incluir en la consulta
                 List<OdbcParameter> parameters = new List<OdbcParameter>();
@@ -562,7 +562,7 @@ namespace Capa_Modelo_Seguridad
                     {
                         command.Parameters.Add(param);
                     }
-                    funInsertarBitacora(idUsuario, "Se modificó el usuario: " + sId_Usuario, "Tbl_usuarios", "1000");
+                    funInsertarBitacora(idUsuario, "Se modificó el usuario: " + sId_Usuario, "tbl_usuarios", "1000");
 
                     // Ejecutar la consulta
                     int result = command.ExecuteNonQuery();
@@ -574,7 +574,7 @@ namespace Capa_Modelo_Seguridad
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show("Error al intentar modificar el registro: " + ex.Message);
-                funInsertarBitacora(idUsuario, "Ocurrio un error al modificar el usuario: " + sId_Usuario, "Tbl_usuarios", "1000");
+                funInsertarBitacora(idUsuario, "Ocurrio un error al modificar el usuario: " + sId_Usuario, "tbl_usuarios", "1000");
                 return false;
             }
         }
@@ -592,7 +592,7 @@ namespace Capa_Modelo_Seguridad
                 cn.conectar();
 
                 // Crear la consulta SQL para eliminar
-                string sEliminarPerfil = "DELETE FROM Tbl_perfiles WHERE PK_id_perfil = ?";
+                string sEliminarPerfil = "DELETE FROM tbl_perfiles WHERE PK_id_perfil = ?";
 
                 // Usar OdbcCommand para ejecutar el DELETE
                 using (OdbcCommand cmd = new OdbcCommand(sEliminarPerfil, cn.conectar()))
@@ -695,7 +695,7 @@ namespace Capa_Modelo_Seguridad
             try
             {
                 // Consulta SQL para actualizar el estado del usuario
-                string squery = "UPDATE Tbl_usuarios SET estado_usuario = ? WHERE Pk_id_usuario = ?";
+                string squery = "UPDATE tbl_usuarios SET estado_usuario = ? WHERE Pk_id_usuario = ?";
 
                 using (OdbcCommand command = new OdbcCommand(squery, cn.conectar()))
                 {
@@ -819,7 +819,7 @@ namespace Capa_Modelo_Seguridad
             try
             {
 
-                string sqlIDperfil = "SELECT MAX(Pk_id_perfil)+1 FROM Tbl_perfiles";
+                string sqlIDperfil = "SELECT MAX(Pk_id_perfil)+1 FROM tbl_perfiles";
                 OdbcDataAdapter dataIDperfil = new OdbcDataAdapter(sqlIDperfil, cn.conectar());
                 return dataIDperfil;
 
@@ -839,9 +839,9 @@ namespace Capa_Modelo_Seguridad
             cn.conectar();
             try
             {
-                string sqlPerfil = "INSERT INTO Tbl_perfiles (Pk_id_Perfil, nombre_perfil, descripcion_perfil, estado_perfil) VALUES ('" + scodigo + "','" + snombre + "', '" + sdescripcion + "', " + sestado + ");";
+                string sqlPerfil = "INSERT INTO tbl_perfiles (Pk_id_Perfil, nombre_perfil, descripcion_perfil, estado_perfil) VALUES ('" + scodigo + "','" + snombre + "', '" + sdescripcion + "', " + sestado + ");";
                 OdbcDataAdapter datainsertarperfil = new OdbcDataAdapter(sqlPerfil, cn.conectar());
-                funInsertarBitacora(idUsuario, "Inserto un nuevo perfil: " + scodigo + " - " + snombre, "Tbl_perfiles", "1000");
+                funInsertarBitacora(idUsuario, "Inserto un nuevo perfil: " + scodigo + " - " + snombre, "tbl_perfiles", "1000");
                 return datainsertarperfil;
             }
             catch (Exception ex)
@@ -856,9 +856,9 @@ namespace Capa_Modelo_Seguridad
         public OdbcDataAdapter proconsultar(string sperfil)
         {
             cn.conectar();
-            string sqlPerfil = "SELECT * FROM Tbl_perfiles WHERE nombre_perfil = '" + sperfil + "'"; ;
+            string sqlPerfil = "SELECT * FROM tbl_perfiles WHERE nombre_perfil = '" + sperfil + "'"; ;
             OdbcDataAdapter dataTable = new OdbcDataAdapter(sqlPerfil, cn.conectar());
-            funInsertarBitacora(idUsuario, "Realizo una consulta a perfiles ", "Tbl_perfiles", "1000");
+            funInsertarBitacora(idUsuario, "Realizo una consulta a perfiles ", "tbl_perfiles", "1000");
 
             return dataTable;
         }
@@ -869,9 +869,9 @@ namespace Capa_Modelo_Seguridad
             try
             {
                 cn.conectar();
-                string sqlactualizarperfil = "UPDATE Tbl_perfiles SET nombre_perfil = '" + snombre + "', descripcion_perfil = '" + sdescripcion + "', estado_perfil = '" + sestado + "' WHERE Pk_id_perfil ='" + sID_perfil + "'";
+                string sqlactualizarperfil = "UPDATE tbl_perfiles SET nombre_perfil = '" + snombre + "', descripcion_perfil = '" + sdescripcion + "', estado_perfil = '" + sestado + "' WHERE Pk_id_perfil ='" + sID_perfil + "'";
                 OdbcDataAdapter dataTable = new OdbcDataAdapter(sqlactualizarperfil, cn.conectar());
-                funInsertarBitacora(idUsuario, "Actualizo un perfil: " + sID_perfil + " - " + snombre, "Tbl_perfiles", "1000");
+                funInsertarBitacora(idUsuario, "Actualizo un perfil: " + sID_perfil + " - " + snombre, "tbl_perfiles", "1000");
 
                 return dataTable;
             }
@@ -930,7 +930,7 @@ namespace Capa_Modelo_Seguridad
 
             try
             {
-                OdbcCommand sqlCodigoModulo = new OdbcCommand("SELECT Pk_id_aplicacion FROM Tbl_aplicaciones WHERE nombre_aplicacion = '" + snombreaplicacion + "' ", cn.conectar());
+                OdbcCommand sqlCodigoModulo = new OdbcCommand("SELECT Pk_id_aplicacion FROM tbl_aplicaciones WHERE nombre_aplicacion = '" + snombreaplicacion + "' ", cn.conectar());
                 OdbcDataReader almacena = sqlCodigoModulo.ExecuteReader();
 
                 while (almacena.Read() == true)
@@ -938,7 +938,7 @@ namespace Capa_Modelo_Seguridad
                     sCodigoAplicacion = almacena.GetString(0);
                 }
 
-                OdbcCommand sqlCodigoPerfil = new OdbcCommand("SELECT Pk_id_perfil FROM Tbl_perfiles WHERE nombre_perfil = '" + scodigoperfil + "' ", cn.conectar());
+                OdbcCommand sqlCodigoPerfil = new OdbcCommand("SELECT Pk_id_perfil FROM tbl_perfiles WHERE nombre_perfil = '" + scodigoperfil + "' ", cn.conectar());
                 OdbcDataReader almacenaPerfil = sqlCodigoPerfil.ExecuteReader();
 
                 while (almacenaPerfil.Read() == true)
@@ -946,9 +946,9 @@ namespace Capa_Modelo_Seguridad
                     sCodigoPerfil = almacenaPerfil.GetString(0);
                 }
 
-                string sqlInsertarPermisosPerfilApp = "INSERT INTO Tbl_permisos_aplicacion_perfil(Fk_id_perfil, Fk_id_aplicacion, guardar_permiso, modificar_permiso, eliminar_permiso, buscar_permiso, imprimir_permiso) VALUES ('" + sCodigoPerfil + "', '" + sCodigoAplicacion + "', '" + singresar + "', '" + smodificar + "', '" + seliminar + "', '" + sconsulta + "', '" + simprimir + "');";
+                string sqlInsertarPermisosPerfilApp = "INSERT INTO tbl_permisos_aplicacion_perfil(Fk_id_perfil, Fk_id_aplicacion, guardar_permiso, modificar_permiso, eliminar_permiso, buscar_permiso, imprimir_permiso) VALUES ('" + sCodigoPerfil + "', '" + sCodigoAplicacion + "', '" + singresar + "', '" + smodificar + "', '" + seliminar + "', '" + sconsulta + "', '" + simprimir + "');";
                 OdbcDataAdapter dataPermisosPerfilAplicacion = new OdbcDataAdapter(sqlInsertarPermisosPerfilApp, cn.conectar());
-                funInsertarBitacora(idUsuario, "Asigno permiso: " + snombreaplicacion + " a perfil: " + scodigoperfil, "Tbl_permisos_aplicacion_perfil", "1000");
+                funInsertarBitacora(idUsuario, "Asigno permiso: " + snombreaplicacion + " a perfil: " + scodigoperfil, "tbl_permisos_aplicacion_perfil", "1000");
 
 
                 almacena.Close();
@@ -980,9 +980,9 @@ namespace Capa_Modelo_Seguridad
             SELECT p.Fk_id_perfil, a.nombre_aplicacion, 
                    p.guardar_permiso, p.buscar_permiso, p.modificar_permiso, 
                    p.eliminar_permiso, p.imprimir_permiso
-            FROM Tbl_permisos_aplicacion_perfil p
-            JOIN Tbl_aplicaciones a ON p.Fk_id_aplicacion = a.Pk_id_aplicacion
-            JOIN Tbl_perfiles pf ON p.Fk_id_perfil = pf.Pk_id_perfil;
+            FROM tbl_permisos_aplicacion_perfil p
+            JOIN tbl_aplicaciones a ON p.Fk_id_aplicacion = a.Pk_id_aplicacion
+            JOIN tbl_perfiles pf ON p.Fk_id_perfil = pf.Pk_id_perfil;
         ";
 
                 OdbcDataAdapter dataTable = new OdbcDataAdapter(sql, cn.conectar());
@@ -1019,7 +1019,7 @@ namespace Capa_Modelo_Seguridad
             try
             {
                 // Obtener el ID de la aplicación basado en su nombre
-                string sqlObtenerIdAplicacion = "SELECT Pk_id_aplicacion FROM Tbl_aplicaciones WHERE nombre_aplicacion = '" + sNombreAplicacion + "'";
+                string sqlObtenerIdAplicacion = "SELECT Pk_id_aplicacion FROM tbl_aplicaciones WHERE nombre_aplicacion = '" + sNombreAplicacion + "'";
                 OdbcCommand command = new OdbcCommand(sqlObtenerIdAplicacion, cn.conectar());
                 object idAplicacion = command.ExecuteScalar();
 
@@ -1057,7 +1057,7 @@ namespace Capa_Modelo_Seguridad
             try
             {
                 // Obtener el ID de la aplicación basado en su nombre
-                string sqlObtenerIdAplicacion = "SELECT Pk_id_aplicacion FROM Tbl_aplicaciones WHERE nombre_aplicacion = ?";
+                string sqlObtenerIdAplicacion = "SELECT Pk_id_aplicacion FROM tbl_aplicaciones WHERE nombre_aplicacion = ?";
 
                 using (OdbcCommand command = new OdbcCommand(sqlObtenerIdAplicacion, cn.conectar()))
                 {
@@ -1187,7 +1187,7 @@ namespace Capa_Modelo_Seguridad
 
                 using (OdbcConnection conexion = cn.conectar())
                 {
-                    string obtenerIdUsuarioQuery = "SELECT Pk_id_usuario FROM Tbl_usuarios WHERE username_usuario = ?";
+                    string obtenerIdUsuarioQuery = "SELECT Pk_id_usuario FROM tbl_usuarios WHERE username_usuario = ?";
                     OdbcCommand obtenerIdUsuarioCmd = new OdbcCommand(obtenerIdUsuarioQuery, conexion);
                     obtenerIdUsuarioCmd.Parameters.AddWithValue("?", idUsuario);
 
@@ -1249,7 +1249,7 @@ namespace Capa_Modelo_Seguridad
                 switch (iTipoPermiso)
                 {
                     case 1:
-                        OdbcCommand sql = new OdbcCommand("Select guardar_permiso from Tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        OdbcCommand sql = new OdbcCommand("Select guardar_permiso from tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         OdbcDataReader almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1264,9 +1264,9 @@ namespace Capa_Modelo_Seguridad
                             }
                         }
 
-                        sql = new OdbcCommand("Select Tbl_permisos_aplicacion_perfil.guardar_permiso from Tbl_permisos_aplicacion_perfil " +
-                            "INNER JOIN Tbl_asignaciones_perfils_usuario ON Tbl_permisos_aplicacion_perfil.Fk_id_perfil = Tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
-                            " WHERE Tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND Tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        sql = new OdbcCommand("Select tbl_permisos_aplicacion_perfil.guardar_permiso from tbl_permisos_aplicacion_perfil " +
+                            "INNER JOIN tbl_asignaciones_perfils_usuario ON tbl_permisos_aplicacion_perfil.Fk_id_perfil = tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
+                            " WHERE tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1283,7 +1283,7 @@ namespace Capa_Modelo_Seguridad
                         break;
 
                     case 2:
-                        sql = new OdbcCommand("Select buscar_permiso from Tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        sql = new OdbcCommand("Select buscar_permiso from tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1296,9 +1296,9 @@ namespace Capa_Modelo_Seguridad
                             }
                         }
 
-                        sql = new OdbcCommand("Select Tbl_permisos_aplicacion_perfil.buscar_permiso from Tbl_permisos_aplicacion_perfil " +
-                            "INNER JOIN Tbl_asignaciones_perfils_usuario ON Tbl_permisos_aplicacion_perfil.Fk_id_perfil = Tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
-                            " WHERE Tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND Tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        sql = new OdbcCommand("Select tbl_permisos_aplicacion_perfil.buscar_permiso from tbl_permisos_aplicacion_perfil " +
+                            "INNER JOIN tbl_asignaciones_perfils_usuario ON tbl_permisos_aplicacion_perfil.Fk_id_perfil = tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
+                            " WHERE tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1314,7 +1314,7 @@ namespace Capa_Modelo_Seguridad
                         break;
 
                     case 3:
-                        sql = new OdbcCommand("Select modificar_permiso from Tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        sql = new OdbcCommand("Select modificar_permiso from tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1327,9 +1327,9 @@ namespace Capa_Modelo_Seguridad
                             }
                         }
 
-                        sql = new OdbcCommand("Select Tbl_permisos_aplicacion_perfil.modificar_permiso from Tbl_permisos_aplicacion_perfil " +
-                            "INNER JOIN Tbl_asignaciones_perfils_usuario ON Tbl_permisos_aplicacion_perfil.Fk_id_perfil = Tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
-                            " WHERE Tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND Tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        sql = new OdbcCommand("Select tbl_permisos_aplicacion_perfil.modificar_permiso from tbl_permisos_aplicacion_perfil " +
+                            "INNER JOIN tbl_asignaciones_perfils_usuario ON tbl_permisos_aplicacion_perfil.Fk_id_perfil = tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
+                            " WHERE tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1345,7 +1345,7 @@ namespace Capa_Modelo_Seguridad
                         break;
 
                     case 4:
-                        sql = new OdbcCommand("Select eliminar_permiso from Tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        sql = new OdbcCommand("Select eliminar_permiso from tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1358,9 +1358,9 @@ namespace Capa_Modelo_Seguridad
                             }
                         }
 
-                        sql = new OdbcCommand("Select Tbl_permisos_aplicacion_perfil.eliminar_permiso from Tbl_permisos_aplicacion_perfil " +
-                            "INNER JOIN Tbl_asignaciones_perfils_usuario ON Tbl_permisos_aplicacion_perfil.Fk_id_perfil = Tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
-                            " WHERE Tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND Tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        sql = new OdbcCommand("Select tbl_permisos_aplicacion_perfil.eliminar_permiso from tbl_permisos_aplicacion_perfil " +
+                            "INNER JOIN tbl_asignaciones_perfils_usuario ON tbl_permisos_aplicacion_perfil.Fk_id_perfil = tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
+                            " WHERE tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1376,7 +1376,7 @@ namespace Capa_Modelo_Seguridad
                         break;
 
                     case 5:
-                        sql = new OdbcCommand("Select imprimir_permiso from Tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        sql = new OdbcCommand("Select imprimir_permiso from tbl_permisos_aplicaciones_usuario WHERE Fk_id_usuario= '" + sidUsuario + "' AND Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1389,9 +1389,9 @@ namespace Capa_Modelo_Seguridad
                             }
                         }
 
-                        sql = new OdbcCommand("Select Tbl_permisos_aplicacion_perfil.imprimir_permiso from Tbl_permisos_aplicacion_perfil " +
-                            "INNER JOIN Tbl_asignaciones_perfils_usuario ON Tbl_permisos_aplicacion_perfil.Fk_id_perfil = Tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
-                            " WHERE Tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND Tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
+                        sql = new OdbcCommand("Select tbl_permisos_aplicacion_perfil.imprimir_permiso from tbl_permisos_aplicacion_perfil " +
+                            "INNER JOIN tbl_asignaciones_perfils_usuario ON tbl_permisos_aplicacion_perfil.Fk_id_perfil = tbl_asignaciones_perfils_usuario.Fk_id_perfil" +
+                            " WHERE tbl_asignaciones_perfils_usuario.Fk_id_usuario= '" + sidUsuario + "' AND tbl_permisos_aplicacion_perfil.Fk_id_aplicacion ='" + sIdAplicacion + "'", cn.conectar());
                         almacena = sql.ExecuteReader();
 
                         if (almacena.Read() == true)
@@ -1572,7 +1572,7 @@ namespace Capa_Modelo_Seguridad
         public OdbcDataAdapter funConsultarAsignacion_moduloAplicaciones()
         {
             cn.conectar();
-            string ssqlUsuarios = " SELECT  a.Fk_id_modulos AS ModuloID,   m.nombre_modulo AS NombreModulo, a.Fk_id_aplicacion AS AplicacionID,  ap.nombre_aplicacion AS NombreAplicacion  FROM Tbl_asignacion_modulo_aplicacion a  JOIN Tbl_modulos m ON a.Fk_id_modulos = m.Pk_id_modulos JOIN Tbl_aplicaciones ap ON a.Fk_id_aplicacion = ap.Pk_id_aplicacion";
+            string ssqlUsuarios = " SELECT  a.Fk_id_modulos AS ModuloID,   m.nombre_modulo AS NombreModulo, a.Fk_id_aplicacion AS AplicacionID,  ap.nombre_aplicacion AS NombreAplicacion  FROM tbl_asignacion_modulo_aplicacion a  JOIN tbl_modulos m ON a.Fk_id_modulos = m.Pk_id_modulos JOIN tbl_aplicaciones ap ON a.Fk_id_aplicacion = ap.Pk_id_aplicacion";
             OdbcDataAdapter dataUsuarios = new OdbcDataAdapter(ssqlUsuarios, cn.conectar());
             funInsertarBitacora(idUsuario, "Realizo una consulta  a Asignacion modulo aplicaciones", "tbl_asignacion_modulo_aplicacion", "1101");
             return dataUsuarios;
@@ -1589,7 +1589,7 @@ namespace Capa_Modelo_Seguridad
 
                 try
                 {
-                    string query = "SELECT Pk_id_modulos FROM Tbl_modulos WHERE nombre_modulo = ?";
+                    string query = "SELECT Pk_id_modulos FROM tbl_modulos WHERE nombre_modulo = ?";
                     using (OdbcCommand command = new OdbcCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@nombre_modulo", sNombreModulo);
@@ -1602,7 +1602,7 @@ namespace Capa_Modelo_Seguridad
                         else
                         {
                             // Si no existe, inserta el módulo
-                            string insertQuery = "INSERT INTO Tbl_modulos (nombre_modulo, descripcion_modulo) VALUES (?, ?)";
+                            string insertQuery = "INSERT INTO tbl_modulos (nombre_modulo, descripcion_modulo) VALUES (?, ?)";
                             using (OdbcCommand insertCommand = new OdbcCommand(insertQuery, connection))
                             {
                                 insertCommand.Parameters.AddWithValue("@nombre_modulo", sNombreModulo);
@@ -1636,7 +1636,7 @@ namespace Capa_Modelo_Seguridad
 
                 try
                 {
-                    string query = "SELECT Pk_id_aplicacion FROM Tbl_aplicaciones WHERE nombre_aplicacion = ?";
+                    string query = "SELECT Pk_id_aplicacion FROM tbl_aplicaciones WHERE nombre_aplicacion = ?";
                     using (OdbcCommand command = new OdbcCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@nombre_aplicacion", sNombreAplicacion);
@@ -1649,7 +1649,7 @@ namespace Capa_Modelo_Seguridad
                         else
                         {
                             // Si no existe, inserta la aplicación
-                            string insertQuery = "INSERT INTO Tbl_aplicaciones (nombre_aplicacion, descripcion_aplicacion) VALUES (?, ?)";
+                            string insertQuery = "INSERT INTO tbl_aplicaciones (nombre_aplicacion, descripcion_aplicacion) VALUES (?, ?)";
                             using (OdbcCommand insertCommand = new OdbcCommand(insertQuery, connection))
                             {
                                 insertCommand.Parameters.AddWithValue("@nombre_aplicacion", sNombreAplicacion);
@@ -1683,7 +1683,7 @@ namespace Capa_Modelo_Seguridad
 
                 try
                 {
-                    string query = "INSERT INTO Tbl_asignacion_modulo_aplicacion (Fk_id_modulos, Fk_id_aplicacion) VALUES (?, ?)";
+                    string query = "INSERT INTO tbl_asignacion_modulo_aplicacion (Fk_id_modulos, Fk_id_aplicacion) VALUES (?, ?)";
                     using (OdbcCommand command = new OdbcCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Fk_id_modulos", sIdModulo);
@@ -1883,8 +1883,8 @@ namespace Capa_Modelo_Seguridad
         public OdbcDataAdapter proconsultarPerfiles()
         {
             cn.conectar();
-            string sqlPerfiles = "SELECT nombre_perfil FROM Tbl_perfiles";
-            funInsertarBitacora(idUsuario, "Realizo una consulta a perfiles", "Tbl_perfiles", "1000");
+            string sqlPerfiles = "SELECT nombre_perfil FROM tbl_perfiles";
+            funInsertarBitacora(idUsuario, "Realizo una consulta a perfiles", "tbl_perfiles", "1000");
             OdbcDataAdapter dataTable = new OdbcDataAdapter(sqlPerfiles, cn.conectar());
             return dataTable;
         }
@@ -1896,7 +1896,7 @@ namespace Capa_Modelo_Seguridad
             try
             {
                 string nombrePerfil = "";
-                string consulta = "SELECT nombre_perfil FROM Tbl_perfiles WHERE Pk_id_perfil = '" + idPerfil + "'";
+                string consulta = "SELECT nombre_perfil FROM tbl_perfiles WHERE Pk_id_perfil = '" + idPerfil + "'";
                 OdbcCommand comando = new OdbcCommand(consulta, cn.conectar());
                 OdbcDataReader reader = comando.ExecuteReader();
 
@@ -1923,7 +1923,7 @@ namespace Capa_Modelo_Seguridad
             string sCodigoPerfil = "";
             try
             {
-                OdbcCommand sqlCodigoModulo = new OdbcCommand("SELECT Pk_id_aplicacion FROM Tbl_aplicaciones WHERE nombre_aplicacion = '" + snombreaplicacion + "' ", cn.conectar());
+                OdbcCommand sqlCodigoModulo = new OdbcCommand("SELECT Pk_id_aplicacion FROM tbl_aplicaciones WHERE nombre_aplicacion = '" + snombreaplicacion + "' ", cn.conectar());
                 OdbcDataReader almacena = sqlCodigoModulo.ExecuteReader();
 
                 if (almacena.Read())
@@ -1931,7 +1931,7 @@ namespace Capa_Modelo_Seguridad
                     sCodigoAplicacion = almacena.GetString(0);
                 }
 
-                OdbcCommand sqlCodigoPerfil = new OdbcCommand("SELECT Pk_id_perfil FROM Tbl_perfiles WHERE nombre_perfil = '" + scodigoperfil + "' ", cn.conectar());
+                OdbcCommand sqlCodigoPerfil = new OdbcCommand("SELECT Pk_id_perfil FROM tbl_perfiles WHERE nombre_perfil = '" + scodigoperfil + "' ", cn.conectar());
                 OdbcDataReader almacenaPerfil = sqlCodigoPerfil.ExecuteReader();
                 // Para Pk_id_perfil
                 if (almacenaPerfil.Read())
@@ -1939,13 +1939,13 @@ namespace Capa_Modelo_Seguridad
                     sCodigoPerfil = almacenaPerfil.GetString(0);
                 }
 
-                string sqlModificarPermisosPerfilApp = "UPDATE Tbl_permisos_aplicacion_perfil SET guardar_permiso = '" + singresar + "', modificar_permiso = '" + smodificar +
+                string sqlModificarPermisosPerfilApp = "UPDATE tbl_permisos_aplicacion_perfil SET guardar_permiso = '" + singresar + "', modificar_permiso = '" + smodificar +
                                                    "', eliminar_permiso = '" + seliminar + "', buscar_permiso = '" + sconsulta + "', imprimir_permiso = '" +
                                                    simprimir + "' WHERE Fk_id_perfil = '" + sCodigoPerfil + "' AND Fk_id_aplicacion = '" + sCodigoAplicacion + "';";
 
                 OdbcDataAdapter dataPermisosPerfilAplicacion = new OdbcDataAdapter(sqlModificarPermisosPerfilApp, cn.conectar());
 
-                funInsertarBitacora(idUsuario, "Modificó permiso: " + snombreaplicacion + " para perfil: " + scodigoperfil, "Tbl_permisos_aplicacion_perfil", "1000");
+                funInsertarBitacora(idUsuario, "Modificó permiso: " + snombreaplicacion + " para perfil: " + scodigoperfil, "tbl_permisos_aplicacion_perfil", "1000");
 
                 almacena.Close();
                 sqlCodigoModulo.Connection.Close();
@@ -1965,7 +1965,7 @@ namespace Capa_Modelo_Seguridad
             try
             {
                 // Obtener ID de la aplicación basado en el nombre de la aplicación
-                string sqlObtenerIdAplicacion = "SELECT Pk_id_aplicacion FROM Tbl_aplicaciones WHERE nombre_aplicacion = ?";
+                string sqlObtenerIdAplicacion = "SELECT Pk_id_aplicacion FROM tbl_aplicaciones WHERE nombre_aplicacion = ?";
                 using (OdbcCommand command = new OdbcCommand(sqlObtenerIdAplicacion, cn.conectar()))
                 {
                     command.Parameters.AddWithValue("?", snombreaplicacion);
@@ -1977,7 +1977,7 @@ namespace Capa_Modelo_Seguridad
                     }
 
                     // Generar la consulta SQL para eliminar registro en la base de datos
-                    string sqlEliminarPermisos = "DELETE FROM Tbl_permisos_aplicacion_perfil WHERE Fk_id_perfil = ? AND Fk_id_aplicacion = ?";
+                    string sqlEliminarPermisos = "DELETE FROM tbl_permisos_aplicacion_perfil WHERE Fk_id_perfil = ? AND Fk_id_aplicacion = ?";
                     using (OdbcCommand deleteCommand = new OdbcCommand(sqlEliminarPermisos, cn.conectar()))
                     {
                         deleteCommand.Parameters.AddWithValue("?", sIdPerfil);
@@ -1988,7 +1988,7 @@ namespace Capa_Modelo_Seguridad
                         // Si se eliminó al menos un registro, registrar en la bitácora
                         if (rowsAffected > 0)
                         {
-                            funInsertarBitacora(idUsuario, $"Eliminó el registro para perfil: {sIdPerfil} en aplicación: {snombreaplicacion}", "Tbl_permisos_aplicacion_perfil", "1000");
+                            funInsertarBitacora(idUsuario, $"Eliminó el registro para perfil: {sIdPerfil} en aplicación: {snombreaplicacion}", "tbl_permisos_aplicacion_perfil", "1000");
                             return true; // Indica que la eliminación fue exitosa
                         }
                         else
