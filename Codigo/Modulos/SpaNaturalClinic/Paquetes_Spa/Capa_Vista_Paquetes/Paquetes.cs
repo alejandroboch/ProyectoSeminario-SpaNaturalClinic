@@ -46,7 +46,38 @@ namespace Capa_Vista_Paquetes
             toolTip1.SetToolTip(Btn_Cancelar, "Cancelar operación y limpiar formulario");
             toolTip1.SetToolTip(Btn_Reporte, "Generar reporte de paquetes");
             toolTip1.SetToolTip(Btn_Ayuda, "Abrir ayuda del módulo");
+
+            // ✅ CRÍTICO: Prevenir entrada inválida
+            Txt_PrecioPaquete.KeyPress += Txt_Precio_KeyPress;
+            Txt_CantSesiones.KeyPress += Txt_Sesiones_KeyPress;
         }
+
+        // Solo números y punto/coma para precio
+        private void Txt_Precio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar)) return; // Permitir backspace, delete, etc.
+
+            if (e.KeyChar == '.' || e.KeyChar == ',')
+            {
+                // Solo permitir un separador decimal
+                if (Txt_PrecioPaquete.Text.Contains(".") || Txt_PrecioPaquete.Text.Contains(","))
+                    e.Handled = true;
+                return;
+            }
+
+            if (!char.IsDigit(e.KeyChar))
+                e.Handled = true; // Bloquear todo excepto números
+        }
+
+        // Solo números enteros para sesiones
+        private void Txt_Sesiones_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar)) return; // Permitir backspace, delete, etc.
+
+            if (!char.IsDigit(e.KeyChar))
+                e.Handled = true; // Bloquear todo excepto números
+        }
+
 
         private void Txt_Buscar_KeyPress_SoloLetras(object sender, KeyPressEventArgs e)
         {
@@ -132,22 +163,70 @@ namespace Capa_Vista_Paquetes
 
         private bool fun_validar_obligatorios()
         {
+            // 1. Validar nombre
             if (string.IsNullOrWhiteSpace(Txt_NombrePaquete.Text))
             {
-                MessageBox.Show("El nombre es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El nombre del paquete es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Txt_NombrePaquete.Focus();
                 return false;
             }
+
+            // 2. Validar precio no vacío
             if (string.IsNullOrWhiteSpace(Txt_PrecioPaquete.Text))
             {
                 MessageBox.Show("El precio es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Txt_PrecioPaquete.Focus();
                 return false;
             }
+
+            // 3. ✅ CRÍTICO: Validar que precio sea número
+            decimal precio;
+            if (!decimal.TryParse(Txt_PrecioPaquete.Text.Trim().Replace(',', '.'),
+                System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out precio))
+            {
+                MessageBox.Show("El precio debe ser un número válido (ejemplo: 150.50)",
+                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_PrecioPaquete.Focus();
+                Txt_PrecioPaquete.SelectAll();
+                return false;
+            }
+
+            // 4. ✅ Validar que precio sea positivo
+            if (precio <= 0)
+            {
+                MessageBox.Show("El precio debe ser mayor a 0.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_PrecioPaquete.Focus();
+                Txt_PrecioPaquete.SelectAll();
+                return false;
+            }
+
+            // 5. Validar sesiones no vacío
             if (string.IsNullOrWhiteSpace(Txt_CantSesiones.Text))
             {
                 MessageBox.Show("La cantidad de sesiones es obligatoria.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Txt_CantSesiones.Focus();
+                return false;
+            }
+
+            // 6. ✅ CRÍTICO: Validar que sesiones sea número entero
+            int sesiones;
+            if (!int.TryParse(Txt_CantSesiones.Text.Trim(), out sesiones))
+            {
+                MessageBox.Show("La cantidad de sesiones debe ser un número entero (ejemplo: 5)",
+                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_CantSesiones.Focus();
+                Txt_CantSesiones.SelectAll();
+                return false;
+            }
+
+            // 7. ✅ Validar que sesiones sea positivo
+            if (sesiones <= 0)
+            {
+                MessageBox.Show("La cantidad de sesiones debe ser mayor a 0.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_CantSesiones.Focus();
+                Txt_CantSesiones.SelectAll();
                 return false;
             }
 
@@ -156,21 +235,42 @@ namespace Capa_Vista_Paquetes
 
         private Paquete fun_capturar()
         {
-            return new Paquete
+            try
             {
-                iId = string.IsNullOrWhiteSpace(Txt_IdPaquete.Text)
-                        ? 0
-                        : int.Parse(Txt_IdPaquete.Text),
-                sNombrePaquete = Txt_NombrePaquete.Text.Trim(),
-                dPrecioPaquete = string.IsNullOrWhiteSpace(Txt_PrecioPaquete.Text)
-                        ? 0
-                        : decimal.Parse(
-                            Txt_PrecioPaquete.Text.Trim().Replace(',', '.'),
-                            System.Globalization.CultureInfo.InvariantCulture),
-                iNumSesiones = string.IsNullOrWhiteSpace(Txt_CantSesiones.Text)
-                        ? 0
-                        : int.Parse(Txt_CantSesiones.Text),
-            };
+                return new Paquete
+                {
+                    iId = string.IsNullOrWhiteSpace(Txt_IdPaquete.Text)
+                            ? 0
+                            : int.Parse(Txt_IdPaquete.Text),
+
+                    sNombrePaquete = Txt_NombrePaquete.Text.Trim(),
+
+                    dPrecioPaquete = decimal.Parse(
+                        Txt_PrecioPaquete.Text.Trim().Replace(',', '.'),
+                        System.Globalization.NumberStyles.Any,
+                        System.Globalization.CultureInfo.InvariantCulture),
+
+                    iNumSesiones = int.Parse(Txt_CantSesiones.Text.Trim())
+                };
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Error: Verifica que el precio y las sesiones sean números válidos.",
+                    "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("Error: Los números ingresados son demasiado grandes.",
+                    "Error de rango", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al capturar datos:\n{ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private bool fun_busqueda_valida()
@@ -198,20 +298,54 @@ namespace Capa_Vista_Paquetes
 
         private void Btn_Guardar_Click(object sender, EventArgs e)
         {
-            // CAMBIO: Validación estricta de todos los obligatorios
-            if (!fun_validar_obligatorios()) return;
-
-            var s = fun_capturar();
-
-            if (cn.pro_guardar(s))
+            try
             {
-                MessageBox.Show("Paquete guardado.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                actualizardatagriew();
-                fun_limpiar();
+                // 1. Validar primero
+                if (!fun_validar_obligatorios())
+                    return;
+
+                // 2. Capturar datos
+                var p = fun_capturar();
+
+                // 3. Verificar que captura fue exitosa
+                if (p == null)
+                {
+                    MessageBox.Show("No se pudieron capturar los datos. Verifica los valores ingresados.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 4. Guardar
+                if (cn.pro_guardar(p))
+                {
+                    MessageBox.Show("Paquete guardado correctamente.",
+                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    actualizardatagriew();
+                    fun_limpiar();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo guardar el paquete.",
+                        "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            catch (System.Data.Odbc.OdbcException ex)
             {
-                MessageBox.Show("Verifica los datos.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (ex.Message.Contains("Duplicate entry"))
+                {
+                    MessageBox.Show("Ya existe un paquete con ese nombre.",
+                        "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"Error de base de datos:\n{ex.Message}",
+                        "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar:\n{ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

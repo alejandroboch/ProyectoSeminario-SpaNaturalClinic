@@ -360,17 +360,80 @@ namespace Capa_Vista_Citas
 
         private void Dgv_citas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //if (e.RowIndex >= 0)
+            //{
+            //    try
+            //    {
+            //        idSeleccionado = Convert.ToInt32(Dgv_citas.Rows[e.RowIndex].Cells["ID"].Value);
+            //        //txt_ID.Text = idSeleccionado.ToString(); // Añadir esta línea
+
+
+            //        Cbo_nombreCliente.SelectedItem = Dgv_citas.Rows[e.RowIndex].Cells["Cliente"].Value.ToString();
+
+            //        // Obtener el valor de la celda y asignarlo al DateTimePicker
+            //        if (Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value != null)
+            //        {
+            //            DateTime fecha;
+            //            if (DateTime.TryParse(Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value.ToString(), out fecha))
+            //            {
+            //                Dtp_fechaCita.Value = fecha;
+            //            }
+            //        }
+
+            //        Cbo_estadoCita.SelectedItem = Dgv_citas.Rows[e.RowIndex].Cells["Estado"].Value.ToString();
+
+            //        //Cbo_clase.SelectedItem = Dgv_perp_dec.Rows[e.RowIndex].Cells["Clase"].Value.ToString();
+
+            //        //excepcionActiva = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Excepcion"].Value);
+            //        //estadoActivo = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Estado"].Value);
+
+            //        //ActualizarBotonExcepcion();
+            //        //ActualizarBotonEstado();
+
+            //        //Txt_monto.Text = Dgv_perp_dec.Rows[e.RowIndex].Cells["Monto"].Value.ToString();
+            //        Btn_modificar.Enabled = true;
+            //        Btn_eliminar.Enabled = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error al seleccionar registro: " + ex.Message);
+            //    }
+            //}
             if (e.RowIndex >= 0)
             {
                 try
                 {
                     idSeleccionado = Convert.ToInt32(Dgv_citas.Rows[e.RowIndex].Cells["ID"].Value);
-                    //txt_ID.Text = idSeleccionado.ToString(); // Añadir esta línea
 
+                    // ✅ Cargar Cliente en el ComboBox (búsqueda mejorada)
+                    string clienteNombre = Dgv_citas.Rows[e.RowIndex].Cells["Cliente"].Value.ToString();
 
-                    Cbo_nombreCliente.SelectedItem = Dgv_citas.Rows[e.RowIndex].Cells["Cliente"].Value.ToString();
+                    bool clienteEncontrado = false;
 
-                    // Obtener el valor de la celda y asignarlo al DateTimePicker
+                    // Intentar buscar por nombre
+                    foreach (var item in Cbo_nombreCliente.Items)
+                    {
+                        ComboBoxItem comboItem = (ComboBoxItem)item;
+
+                        // Buscar por nombre exacto o que contenga el nombre
+                        if (comboItem.Display == clienteNombre ||
+                            comboItem.Display.Contains(clienteNombre) ||
+                            clienteNombre.Contains(comboItem.Display))
+                        {
+                            Cbo_nombreCliente.SelectedItem = item;
+                            valorSeleccionado = comboItem.Value;
+                            clienteEncontrado = true;
+                            break;
+                        }
+                    }
+
+                    // Si no se encontró, mostrar el nombre directamente
+                    if (!clienteEncontrado)
+                    {
+                        Cbo_nombreCliente.Text = clienteNombre;
+                    }
+
+                    // ✅ Cargar Fecha
                     if (Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value != null)
                     {
                         DateTime fecha;
@@ -380,23 +443,49 @@ namespace Capa_Vista_Citas
                         }
                     }
 
-                    Cbo_estadoCita.SelectedItem = Dgv_citas.Rows[e.RowIndex].Cells["Estado"].Value.ToString();
+                    // ✅ Cargar Estado
+                    string estadoCita = Dgv_citas.Rows[e.RowIndex].Cells["Estado"].Value.ToString();
 
-                    //Cbo_clase.SelectedItem = Dgv_perp_dec.Rows[e.RowIndex].Cells["Clase"].Value.ToString();
+                    // Buscar el estado en el ComboBox
+                    for (int i = 0; i < Cbo_estadoCita.Items.Count; i++)
+                    {
+                        if (Cbo_estadoCita.Items[i].ToString() == estadoCita)
+                        {
+                            Cbo_estadoCita.SelectedIndex = i;
+                            estadoSeleccionado = estadoCita;
+                            break;
+                        }
+                    }
 
-                    //excepcionActiva = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Excepcion"].Value);
-                    //estadoActivo = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Estado"].Value);
+                    // ✅ Cargar Total
+                    if (Dgv_citas.Rows[e.RowIndex].Cells["Total"].Value != null)
+                    {
+                        decimal total = Convert.ToDecimal(Dgv_citas.Rows[e.RowIndex].Cells["Total"].Value);
+                        Txt_total.Text = total.ToString("F2");
+                    }
+                    else
+                    {
+                        Txt_total.Text = "0.00";
+                    }
 
-                    //ActualizarBotonExcepcion();
-                    //ActualizarBotonEstado();
+                    // ✅ Cargar Saldo Pendiente
+                    if (Dgv_citas.Rows[e.RowIndex].Cells["SaldoPendiente"].Value != null)
+                    {
+                        decimal saldoPendiente = Convert.ToDecimal(Dgv_citas.Rows[e.RowIndex].Cells["SaldoPendiente"].Value);
+                        Txt_saldoPendiente.Text = saldoPendiente.ToString("F2");
+                    }
+                    else
+                    {
+                        Txt_saldoPendiente.Text = "0.00";
+                    }
 
-                    //Txt_monto.Text = Dgv_perp_dec.Rows[e.RowIndex].Cells["Monto"].Value.ToString();
+                    // Habilitar botones
                     Btn_modificar.Enabled = true;
                     Btn_eliminar.Enabled = true;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al seleccionar registro: " + ex.Message);
+                    MessageBox.Show($"Error al seleccionar registro:\n{ex.Message}\n\nDetalles:\n{ex.StackTrace}");
                 }
             }
 
@@ -406,6 +495,11 @@ namespace Capa_Vista_Citas
         {
             frm_ReporteCita reporte = new frm_ReporteCita();
             reporte.Show();
+        }
+
+        private void Btn_Actualizar_Click(object sender, EventArgs e)
+        {
+            CargarDatos();
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Capa_Vista_Pagos
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_titulo.Location = new System.Drawing.Point(514, 19);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(196, 28);
+            this.Lbl_titulo.Size = new System.Drawing.Size(189, 27);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Control de pagos";
             // 
@@ -161,9 +161,9 @@ namespace Capa_Vista_Pagos
             // 
             // Txt_saldoPendiente
             // 
-            this.Txt_saldoPendiente.Enabled = false;
             this.Txt_saldoPendiente.Location = new System.Drawing.Point(557, 307);
             this.Txt_saldoPendiente.Name = "Txt_saldoPendiente";
+            this.Txt_saldoPendiente.ReadOnly = true;
             this.Txt_saldoPendiente.Size = new System.Drawing.Size(223, 22);
             this.Txt_saldoPendiente.TabIndex = 12;
             // 

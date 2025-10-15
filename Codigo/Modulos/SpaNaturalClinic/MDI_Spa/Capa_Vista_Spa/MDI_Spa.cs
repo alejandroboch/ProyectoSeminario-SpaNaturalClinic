@@ -194,6 +194,18 @@ namespace Capa_Vista_Spa
             /************************************************************/
         }
 
+        private void detalleCitaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Capa_Vista_Citas.Form_asignarServicios_aCita GD = new Form_asignarServicios_aCita();
+            GD.MdiParent = this;
+            CentrarFormulario(GD);
+            GD.Show();
+        }
+
+        private void FMDI_Spa_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
+        }
 
     }
 

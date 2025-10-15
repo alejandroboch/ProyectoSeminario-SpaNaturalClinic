@@ -27,6 +27,8 @@ namespace Capa_Modelo_PaqServ
             string sSql = @"
         SELECT 
             ps.pk_id_paquete_servicio,
+            ps.fk_id_paquete,
+            ps.fk_id_servicio,
             p.nombre AS nombre_paquete,
             s.nombre AS nombre_servicio,
             ps.numero_sesion

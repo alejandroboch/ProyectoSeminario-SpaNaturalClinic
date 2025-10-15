@@ -114,8 +114,8 @@ namespace Capa_Vista_Citas
                 // Obtener el valor del ValueMember seleccionado
                 var selectedItem = (ComboBoxItem)(Cbo_servicios.SelectedItem);
                 valorSeleccionado = selectedItem.Value;
-                // Mostrar el valor en un MessageBox
-                MessageBox.Show($"Valor seleccionado: {valorSeleccionado}", "Valor Seleccionado");
+                //// Mostrar el valor en un MessageBox
+                //MessageBox.Show($"Valor seleccionado: {valorSeleccionado}", "Valor Seleccionado");
                 Cbo_paquete.Enabled = false;
                 Nud_numSesion.Enabled = false;
 
@@ -191,7 +191,7 @@ namespace Capa_Vista_Citas
                 var selectedItem = (ComboBoxItem)(Cbo_paquete.SelectedItem);
                 valorSeleccionado2 = selectedItem.Value;
                 // Mostrar el valor en un MessageBox
-                MessageBox.Show($"Valor seleccionado: {valorSeleccionado2}", "Valor Seleccionado");
+                //MessageBox.Show($"Valor seleccionado: {valorSeleccionado2}", "Valor Seleccionado");
                 Cbo_servicios.Enabled = false;
 
                 DataRow datos = logica2.ObtenerPrecioPaquete(valorSeleccionado2);
@@ -514,52 +514,177 @@ namespace Capa_Vista_Citas
 
         private void Dgv_asignaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //if (e.RowIndex >= 0)
+            //{
+            //    try
+            //    {
+            //        idSeleccionado = Convert.ToInt32(Dgv_asignaciones.Rows[e.RowIndex].Cells["ID"].Value);
+            //        Lbl_NumeroDeCita.Text = idSeleccionado.ToString(); // Añadir esta línea
+
+            //        //// Obtener ID del detalle (ID de tbl_cita_servicio)
+            //        //idSeleccionado = Convert.ToInt32(Dgv_asignaciones.Rows[e.RowIndex].Cells["ID"].Value);
+
+            //        // ✅ IMPORTANTE: También obtener el ID de la cita
+            //        if (Dgv_asignaciones.Rows[e.RowIndex].Cells["ID_Cita"] != null)
+            //        {
+            //            idCitaActual = Convert.ToInt32(Dgv_asignaciones.Rows[e.RowIndex].Cells["ID_Cita"].Value);
+            //            Lbl_NumeroDeCita.Text = idCitaActual.ToString();
+            //        }
+
+            //        Cbo_servicios.SelectedItem = Dgv_asignaciones.Rows[e.RowIndex].Cells["Servicio"].Value.ToString();
+
+            //        //// Obtener el valor de la celda y asignarlo al DateTimePicker
+            //        //if (Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value != null)
+            //        //{
+            //        //    DateTime fecha;
+            //        //    if (DateTime.TryParse(Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value.ToString(), out fecha))
+            //        //    {
+            //        //        Dtp_fechaCita.Value = fecha;
+            //        //    }
+            //        //}
+
+            //        Cbo_paquete.SelectedItem = Dgv_asignaciones.Rows[e.RowIndex].Cells["Paquete"].Value.ToString();
+
+            //        //Cbo_clase.SelectedItem = Dgv_perp_dec.Rows[e.RowIndex].Cells["Clase"].Value.ToString();
+
+            //        //excepcionActiva = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Excepcion"].Value);
+            //        //estadoActivo = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Estado"].Value);
+
+            //        //ActualizarBotonExcepcion();
+            //        //ActualizarBotonEstado();
+
+            //        //Txt_monto.Text = Dgv_perp_dec.Rows[e.RowIndex].Cells["Monto"].Value.ToString();
+            //        Btn_modificar.Enabled = true;
+            //        Btn_eliminar.Enabled = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error al seleccionar registro: " + ex.Message);
+            //    }
+            //}
             if (e.RowIndex >= 0)
             {
                 try
                 {
+                    // Obtener ID del detalle
                     idSeleccionado = Convert.ToInt32(Dgv_asignaciones.Rows[e.RowIndex].Cells["ID"].Value);
-                    Lbl_NumeroDeCita.Text = idSeleccionado.ToString(); // Añadir esta línea
 
-                    //// Obtener ID del detalle (ID de tbl_cita_servicio)
-                    //idSeleccionado = Convert.ToInt32(Dgv_asignaciones.Rows[e.RowIndex].Cells["ID"].Value);
-
-                    // ✅ IMPORTANTE: También obtener el ID de la cita
-                    if (Dgv_asignaciones.Rows[e.RowIndex].Cells["ID_Cita"] != null)
+                    // ✅ Obtener el ID de la cita
+                    if (Dgv_asignaciones.Rows[e.RowIndex].Cells["ID_Cita"].Value != null)
                     {
                         idCitaActual = Convert.ToInt32(Dgv_asignaciones.Rows[e.RowIndex].Cells["ID_Cita"].Value);
                         Lbl_NumeroDeCita.Text = idCitaActual.ToString();
                     }
 
-                    Cbo_servicios.SelectedItem = Dgv_asignaciones.Rows[e.RowIndex].Cells["Servicio"].Value.ToString();
+                    // ✅ Limpiar selecciones previas
+                    Cbo_servicios.SelectedIndex = -1;
+                    Cbo_paquete.SelectedIndex = -1;
+                    Nud_numSesion.Value = 0;
+                    Txt_costo.Text = "0.00";
 
-                    //// Obtener el valor de la celda y asignarlo al DateTimePicker
-                    //if (Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value != null)
-                    //{
-                    //    DateTime fecha;
-                    //    if (DateTime.TryParse(Dgv_citas.Rows[e.RowIndex].Cells["Fecha"].Value.ToString(), out fecha))
-                    //    {
-                    //        Dtp_fechaCita.Value = fecha;
-                    //    }
-                    //}
+                    // Habilitar ambos ComboBox temporalmente
+                    Cbo_servicios.Enabled = true;
+                    Cbo_paquete.Enabled = true;
+                    Nud_numSesion.Enabled = true;
 
-                    Cbo_paquete.SelectedItem = Dgv_asignaciones.Rows[e.RowIndex].Cells["Paquete"].Value.ToString();
+                    // ✅ Verificar si es un Servicio
+                    object valorServicio = Dgv_asignaciones.Rows[e.RowIndex].Cells["Servicio"].Value;
+                    bool esServicio = valorServicio != null &&
+                                     valorServicio != DBNull.Value &&
+                                     !string.IsNullOrEmpty(valorServicio.ToString());
 
-                    //Cbo_clase.SelectedItem = Dgv_perp_dec.Rows[e.RowIndex].Cells["Clase"].Value.ToString();
+                    // ✅ Verificar si es un Paquete
+                    object valorPaquete = Dgv_asignaciones.Rows[e.RowIndex].Cells["Paquete"].Value;
+                    bool esPaquete = valorPaquete != null &&
+                                    valorPaquete != DBNull.Value &&
+                                    !string.IsNullOrEmpty(valorPaquete.ToString());
 
-                    //excepcionActiva = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Excepcion"].Value);
-                    //estadoActivo = Convert.ToInt32(Dgv_perp_dec.Rows[e.RowIndex].Cells["Estado"].Value);
+                    if (esServicio)
+                    {
+                        // ===== CARGAR SERVICIO =====
+                        string nombreServicio = valorServicio.ToString();
+                        bool servicioEncontrado = false;
 
-                    //ActualizarBotonExcepcion();
-                    //ActualizarBotonEstado();
+                        foreach (var item in Cbo_servicios.Items)
+                        {
+                            ComboBoxItem comboItem = (ComboBoxItem)item;
+                            if (comboItem.Display.Equals(nombreServicio, StringComparison.OrdinalIgnoreCase) ||
+                                comboItem.Display.Contains(nombreServicio) ||
+                                nombreServicio.Contains(comboItem.Display))
+                            {
+                                Cbo_servicios.SelectedItem = item;
+                                valorSeleccionado = comboItem.Value;
+                                servicioEncontrado = true;
+                                break;
+                            }
+                        }
 
-                    //Txt_monto.Text = Dgv_perp_dec.Rows[e.RowIndex].Cells["Monto"].Value.ToString();
+                        if (!servicioEncontrado)
+                        {
+                            Cbo_servicios.Text = nombreServicio;
+                        }
+
+                        // Deshabilitar paquete
+                        Cbo_paquete.Enabled = false;
+                        Nud_numSesion.Enabled = false;
+                    }
+                    else if (esPaquete)
+                    {
+                        // ===== CARGAR PAQUETE =====
+                        string nombrePaquete = valorPaquete.ToString();
+                        bool paqueteEncontrado = false;
+
+                        foreach (var item in Cbo_paquete.Items)
+                        {
+                            ComboBoxItem comboItem = (ComboBoxItem)item;
+                            if (comboItem.Display.Equals(nombrePaquete, StringComparison.OrdinalIgnoreCase) ||
+                                comboItem.Display.Contains(nombrePaquete) ||
+                                nombrePaquete.Contains(comboItem.Display))
+                            {
+                                Cbo_paquete.SelectedItem = item;
+                                valorSeleccionado2 = comboItem.Value;
+                                paqueteEncontrado = true;
+                                break;
+                            }
+                        }
+
+                        if (!paqueteEncontrado)
+                        {
+                            Cbo_paquete.Text = nombrePaquete;
+                        }
+
+                        // ✅ Cargar Número de Sesión
+                        object valorNumeroSesion = Dgv_asignaciones.Rows[e.RowIndex].Cells["NumeroSesion"].Value;
+                        if (valorNumeroSesion != null && valorNumeroSesion != DBNull.Value)
+                        {
+                            int numeroSesion = Convert.ToInt32(valorNumeroSesion);
+                            Nud_numSesion.Value = numeroSesion;
+                        }
+
+                        // Deshabilitar servicio
+                        Cbo_servicios.Enabled = false;
+                    }
+
+                    // ✅ Cargar Costo de Referencia
+                    object valorCosto = Dgv_asignaciones.Rows[e.RowIndex].Cells["CostoReferencia"].Value;
+                    if (valorCosto != null && valorCosto != DBNull.Value)
+                    {
+                        decimal costo = Convert.ToDecimal(valorCosto);
+                        Txt_costo.Text = costo.ToString("F2");
+                    }
+                    else
+                    {
+                        Txt_costo.Text = "0.00";
+                    }
+
+                    // Habilitar botones
                     Btn_modificar.Enabled = true;
                     Btn_eliminar.Enabled = true;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al seleccionar registro: " + ex.Message);
+                    MessageBox.Show($"Error al seleccionar registro:\n{ex.Message}\n\nDetalles:\n{ex.StackTrace}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -576,6 +701,13 @@ namespace Capa_Vista_Citas
             Cbo_paquete.Enabled = true;
             Nud_numSesion.Enabled = true;
             Btn_guardar.Enabled = true;
+
+            Cbo_servicios.SelectedIndex = -1;
+            Cbo_paquete.SelectedIndex = -1;
+            Nud_numSesion.ResetText();
+
+
+
         }
 
         private void Btn_eliminar_Click(object sender, EventArgs e)
@@ -701,6 +833,11 @@ namespace Capa_Vista_Citas
         {
             frm_ReporteDetalle reporte = new frm_ReporteDetalle();
             reporte.Show();
+        }
+
+        private void Btn_Actualizar_Click(object sender, EventArgs e)
+        {
+            CargarDatos();
         }
     }
 }

@@ -49,6 +49,7 @@ namespace Capa_Vista_Citas
             this.Btn_modificar = new System.Windows.Forms.Button();
             this.Btn_guardar = new System.Windows.Forms.Button();
             this.Btn_nuevoRegistro = new System.Windows.Forms.Button();
+            this.Btn_Actualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_citas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@ namespace Capa_Vista_Citas
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_titulo.Location = new System.Drawing.Point(388, 21);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(258, 28);
+            this.Lbl_titulo.Size = new System.Drawing.Size(247, 27);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Programación de citas";
             this.Lbl_titulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -173,6 +174,7 @@ namespace Capa_Vista_Citas
             // Btn_asignarServicios
             // 
             this.Btn_asignarServicios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
+            this.Btn_asignarServicios.Enabled = false;
             this.Btn_asignarServicios.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_asignarServicios.Location = new System.Drawing.Point(234, 509);
             this.Btn_asignarServicios.Name = "Btn_asignarServicios";
@@ -180,12 +182,13 @@ namespace Capa_Vista_Citas
             this.Btn_asignarServicios.TabIndex = 18;
             this.Btn_asignarServicios.Text = "Asignar servicios";
             this.Btn_asignarServicios.UseVisualStyleBackColor = false;
+            this.Btn_asignarServicios.Visible = false;
             this.Btn_asignarServicios.Click += new System.EventHandler(this.Btn_asignarServicios_Click);
             // 
             // Btn_Reporte
             // 
             this.Btn_Reporte.Image = global::Capa_Vista_Citas.Properties.Resources.reportes;
-            this.Btn_Reporte.Location = new System.Drawing.Point(834, 87);
+            this.Btn_Reporte.Location = new System.Drawing.Point(718, 64);
             this.Btn_Reporte.Name = "Btn_Reporte";
             this.Btn_Reporte.Size = new System.Drawing.Size(75, 77);
             this.Btn_Reporte.TabIndex = 19;
@@ -195,7 +198,7 @@ namespace Capa_Vista_Citas
             // Btn_cancelar
             // 
             this.Btn_cancelar.Image = global::Capa_Vista_Citas.Properties.Resources.cancelar_2;
-            this.Btn_cancelar.Location = new System.Drawing.Point(722, 87);
+            this.Btn_cancelar.Location = new System.Drawing.Point(603, 64);
             this.Btn_cancelar.Name = "Btn_cancelar";
             this.Btn_cancelar.Size = new System.Drawing.Size(75, 77);
             this.Btn_cancelar.TabIndex = 17;
@@ -205,7 +208,7 @@ namespace Capa_Vista_Citas
             // Btn_eliminar
             // 
             this.Btn_eliminar.Image = global::Capa_Vista_Citas.Properties.Resources.eliminar_2;
-            this.Btn_eliminar.Location = new System.Drawing.Point(623, 87);
+            this.Btn_eliminar.Location = new System.Drawing.Point(505, 64);
             this.Btn_eliminar.Name = "Btn_eliminar";
             this.Btn_eliminar.Size = new System.Drawing.Size(75, 77);
             this.Btn_eliminar.TabIndex = 16;
@@ -214,18 +217,20 @@ namespace Capa_Vista_Citas
             // 
             // Btn_buscar
             // 
+            this.Btn_buscar.Enabled = false;
             this.Btn_buscar.Image = global::Capa_Vista_Citas.Properties.Resources.buscar_2;
-            this.Btn_buscar.Location = new System.Drawing.Point(422, 87);
+            this.Btn_buscar.Location = new System.Drawing.Point(855, 64);
             this.Btn_buscar.Name = "Btn_buscar";
             this.Btn_buscar.Size = new System.Drawing.Size(75, 77);
             this.Btn_buscar.TabIndex = 15;
             this.Btn_buscar.UseVisualStyleBackColor = false;
+            this.Btn_buscar.Visible = false;
             this.Btn_buscar.Click += new System.EventHandler(this.Btn_buscar_Click);
             // 
             // Btn_modificar
             // 
             this.Btn_modificar.Image = global::Capa_Vista_Citas.Properties.Resources.modificar_2;
-            this.Btn_modificar.Location = new System.Drawing.Point(522, 87);
+            this.Btn_modificar.Location = new System.Drawing.Point(393, 64);
             this.Btn_modificar.Name = "Btn_modificar";
             this.Btn_modificar.Size = new System.Drawing.Size(75, 77);
             this.Btn_modificar.TabIndex = 14;
@@ -235,7 +240,7 @@ namespace Capa_Vista_Citas
             // Btn_guardar
             // 
             this.Btn_guardar.Image = global::Capa_Vista_Citas.Properties.Resources.guardar_2;
-            this.Btn_guardar.Location = new System.Drawing.Point(321, 87);
+            this.Btn_guardar.Location = new System.Drawing.Point(274, 64);
             this.Btn_guardar.Name = "Btn_guardar";
             this.Btn_guardar.Size = new System.Drawing.Size(75, 77);
             this.Btn_guardar.TabIndex = 13;
@@ -245,12 +250,24 @@ namespace Capa_Vista_Citas
             // Btn_nuevoRegistro
             // 
             this.Btn_nuevoRegistro.Image = global::Capa_Vista_Citas.Properties.Resources.nuevo_registro_2;
-            this.Btn_nuevoRegistro.Location = new System.Drawing.Point(219, 87);
+            this.Btn_nuevoRegistro.Location = new System.Drawing.Point(172, 64);
             this.Btn_nuevoRegistro.Name = "Btn_nuevoRegistro";
             this.Btn_nuevoRegistro.Size = new System.Drawing.Size(77, 77);
             this.Btn_nuevoRegistro.TabIndex = 12;
             this.Btn_nuevoRegistro.UseVisualStyleBackColor = false;
             this.Btn_nuevoRegistro.Click += new System.EventHandler(this.Btn_nuevoRegistro_Click);
+            // 
+            // Btn_Actualizar
+            // 
+            this.Btn_Actualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
+            this.Btn_Actualizar.Font = new System.Drawing.Font("Cambria", 12F);
+            this.Btn_Actualizar.Location = new System.Drawing.Point(668, 162);
+            this.Btn_Actualizar.Name = "Btn_Actualizar";
+            this.Btn_Actualizar.Size = new System.Drawing.Size(125, 38);
+            this.Btn_Actualizar.TabIndex = 20;
+            this.Btn_Actualizar.Text = "Actualizar";
+            this.Btn_Actualizar.UseVisualStyleBackColor = false;
+            this.Btn_Actualizar.Click += new System.EventHandler(this.Btn_Actualizar_Click);
             // 
             // Form_citas
             // 
@@ -258,6 +275,7 @@ namespace Capa_Vista_Citas
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(237)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1026, 583);
+            this.Controls.Add(this.Btn_Actualizar);
             this.Controls.Add(this.Btn_Reporte);
             this.Controls.Add(this.Btn_asignarServicios);
             this.Controls.Add(this.Btn_cancelar);
@@ -309,5 +327,6 @@ namespace Capa_Vista_Citas
         private System.Windows.Forms.Button Btn_cancelar;
         private System.Windows.Forms.Button Btn_asignarServicios;
         private System.Windows.Forms.Button Btn_Reporte;
+        private System.Windows.Forms.Button Btn_Actualizar;
     }
 }

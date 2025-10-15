@@ -50,6 +50,7 @@ namespace Capa_Vista_Citas
             this.Lbl_IDCitas = new System.Windows.Forms.Label();
             this.Lbl_NumeroDeCita = new System.Windows.Forms.Label();
             this.Btn_Reporte = new System.Windows.Forms.Button();
+            this.Btn_Actualizar = new System.Windows.Forms.Button();
             this.Gpb_paquete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Nud_numSesion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_asignaciones)).BeginInit();
@@ -59,9 +60,9 @@ namespace Capa_Vista_Citas
             // 
             this.Lbl_titulo.AutoSize = true;
             this.Lbl_titulo.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_titulo.Location = new System.Drawing.Point(366, 24);
+            this.Lbl_titulo.Location = new System.Drawing.Point(436, 9);
             this.Lbl_titulo.Name = "Lbl_titulo";
-            this.Lbl_titulo.Size = new System.Drawing.Size(266, 28);
+            this.Lbl_titulo.Size = new System.Drawing.Size(254, 27);
             this.Lbl_titulo.TabIndex = 0;
             this.Lbl_titulo.Text = "Asignar servicios a cita";
             // 
@@ -162,7 +163,6 @@ namespace Capa_Vista_Citas
             this.Dgv_asignaciones.ReadOnly = true;
             this.Dgv_asignaciones.RowHeadersWidth = 51;
             this.Dgv_asignaciones.RowTemplate.Height = 24;
-            this.Dgv_asignaciones.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.Dgv_asignaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.Dgv_asignaciones.Size = new System.Drawing.Size(682, 362);
             this.Dgv_asignaciones.TabIndex = 8;
@@ -171,7 +171,7 @@ namespace Capa_Vista_Citas
             // Btn_nuevoRegistro
             // 
             this.Btn_nuevoRegistro.Image = global::Capa_Vista_Citas.Properties.Resources.nuevo_registro_2;
-            this.Btn_nuevoRegistro.Location = new System.Drawing.Point(239, 83);
+            this.Btn_nuevoRegistro.Location = new System.Drawing.Point(244, 60);
             this.Btn_nuevoRegistro.Name = "Btn_nuevoRegistro";
             this.Btn_nuevoRegistro.Size = new System.Drawing.Size(77, 77);
             this.Btn_nuevoRegistro.TabIndex = 9;
@@ -181,7 +181,7 @@ namespace Capa_Vista_Citas
             // Btn_guardar
             // 
             this.Btn_guardar.Image = global::Capa_Vista_Citas.Properties.Resources.guardar_2;
-            this.Btn_guardar.Location = new System.Drawing.Point(348, 83);
+            this.Btn_guardar.Location = new System.Drawing.Point(353, 60);
             this.Btn_guardar.Name = "Btn_guardar";
             this.Btn_guardar.Size = new System.Drawing.Size(77, 77);
             this.Btn_guardar.TabIndex = 10;
@@ -191,7 +191,7 @@ namespace Capa_Vista_Citas
             // Btn_modificar
             // 
             this.Btn_modificar.Image = global::Capa_Vista_Citas.Properties.Resources.modificar_2;
-            this.Btn_modificar.Location = new System.Drawing.Point(459, 83);
+            this.Btn_modificar.Location = new System.Drawing.Point(464, 60);
             this.Btn_modificar.Name = "Btn_modificar";
             this.Btn_modificar.Size = new System.Drawing.Size(77, 77);
             this.Btn_modificar.TabIndex = 11;
@@ -201,7 +201,7 @@ namespace Capa_Vista_Citas
             // Btn_eliminar
             // 
             this.Btn_eliminar.Image = global::Capa_Vista_Citas.Properties.Resources.eliminar_2;
-            this.Btn_eliminar.Location = new System.Drawing.Point(566, 83);
+            this.Btn_eliminar.Location = new System.Drawing.Point(571, 60);
             this.Btn_eliminar.Name = "Btn_eliminar";
             this.Btn_eliminar.Size = new System.Drawing.Size(77, 77);
             this.Btn_eliminar.TabIndex = 12;
@@ -211,7 +211,7 @@ namespace Capa_Vista_Citas
             // Btn_cancelar
             // 
             this.Btn_cancelar.Image = global::Capa_Vista_Citas.Properties.Resources.cancelar_2;
-            this.Btn_cancelar.Location = new System.Drawing.Point(677, 83);
+            this.Btn_cancelar.Location = new System.Drawing.Point(682, 60);
             this.Btn_cancelar.Name = "Btn_cancelar";
             this.Btn_cancelar.Size = new System.Drawing.Size(77, 77);
             this.Btn_cancelar.TabIndex = 13;
@@ -223,7 +223,7 @@ namespace Capa_Vista_Citas
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(26, 469);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 17);
+            this.label1.Size = new System.Drawing.Size(0, 16);
             this.label1.TabIndex = 14;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -232,7 +232,7 @@ namespace Capa_Vista_Citas
             this.Lbl_Cita.AutoSize = true;
             this.Lbl_Cita.Location = new System.Drawing.Point(81, 469);
             this.Lbl_Cita.Name = "Lbl_Cita";
-            this.Lbl_Cita.Size = new System.Drawing.Size(0, 17);
+            this.Lbl_Cita.Size = new System.Drawing.Size(0, 16);
             this.Lbl_Cita.TabIndex = 15;
             // 
             // Lbl_IDCitas
@@ -241,7 +241,7 @@ namespace Capa_Vista_Citas
             this.Lbl_IDCitas.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold);
             this.Lbl_IDCitas.Location = new System.Drawing.Point(32, 469);
             this.Lbl_IDCitas.Name = "Lbl_IDCitas";
-            this.Lbl_IDCitas.Size = new System.Drawing.Size(93, 28);
+            this.Lbl_IDCitas.Size = new System.Drawing.Size(87, 27);
             this.Lbl_IDCitas.TabIndex = 16;
             this.Lbl_IDCitas.Text = "ID Cita:";
             // 
@@ -258,12 +258,24 @@ namespace Capa_Vista_Citas
             // Btn_Reporte
             // 
             this.Btn_Reporte.Image = global::Capa_Vista_Citas.Properties.Resources.reportes;
-            this.Btn_Reporte.Location = new System.Drawing.Point(797, 83);
+            this.Btn_Reporte.Location = new System.Drawing.Point(795, 60);
             this.Btn_Reporte.Name = "Btn_Reporte";
             this.Btn_Reporte.Size = new System.Drawing.Size(77, 77);
             this.Btn_Reporte.TabIndex = 18;
             this.Btn_Reporte.UseVisualStyleBackColor = false;
             this.Btn_Reporte.Click += new System.EventHandler(this.Btn_Reporte_Click);
+            // 
+            // Btn_Actualizar
+            // 
+            this.Btn_Actualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(168)))), ((int)(((byte)(120)))));
+            this.Btn_Actualizar.Font = new System.Drawing.Font("Cambria", 12F);
+            this.Btn_Actualizar.Location = new System.Drawing.Point(711, 159);
+            this.Btn_Actualizar.Name = "Btn_Actualizar";
+            this.Btn_Actualizar.Size = new System.Drawing.Size(170, 34);
+            this.Btn_Actualizar.TabIndex = 19;
+            this.Btn_Actualizar.Text = "Actualizar";
+            this.Btn_Actualizar.UseVisualStyleBackColor = false;
+            this.Btn_Actualizar.Click += new System.EventHandler(this.Btn_Actualizar_Click);
             // 
             // Form_asignarServicios_aCita
             // 
@@ -271,6 +283,7 @@ namespace Capa_Vista_Citas
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(237)))), ((int)(((byte)(230)))));
             this.ClientSize = new System.Drawing.Size(1162, 583);
+            this.Controls.Add(this.Btn_Actualizar);
             this.Controls.Add(this.Btn_Reporte);
             this.Controls.Add(this.Lbl_NumeroDeCita);
             this.Controls.Add(this.Lbl_IDCitas);
@@ -324,5 +337,6 @@ namespace Capa_Vista_Citas
         private System.Windows.Forms.Label Lbl_IDCitas;
         private System.Windows.Forms.Label Lbl_NumeroDeCita;
         private System.Windows.Forms.Button Btn_Reporte;
+        private System.Windows.Forms.Button Btn_Actualizar;
     }
 }

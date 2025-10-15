@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nóminaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantemientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desarrolloDeCarreraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +49,7 @@
             this.Pnl_Usuario = new System.Windows.Forms.Panel();
             this.lbl_nombreUsuario = new System.Windows.Forms.Label();
             this.Lbl_Usuario = new System.Windows.Forms.Label();
-            this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.detalleCitaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.Pnl_inferior.SuspendLayout();
             this.Pnl_Fecha.SuspendLayout();
@@ -83,10 +84,18 @@
             this.inicioToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.inicioToolStripMenuItem.Text = "Inicio";
             // 
+            // cerrarSesiónToolStripMenuItem
+            // 
+            this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
+            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
+            this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
+            // 
             // nóminaToolStripMenuItem
             // 
             this.nóminaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mantemientosToolStripMenuItem});
+            this.mantemientosToolStripMenuItem,
+            this.detalleCitaToolStripMenuItem});
             this.nóminaToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.nóminaToolStripMenuItem.Name = "nóminaToolStripMenuItem";
             this.nóminaToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
@@ -252,12 +261,12 @@
             this.Lbl_Usuario.TabIndex = 0;
             this.Lbl_Usuario.Text = "Usuario:";
             // 
-            // cerrarSesiónToolStripMenuItem
+            // detalleCitaToolStripMenuItem
             // 
-            this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
-            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
-            this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
+            this.detalleCitaToolStripMenuItem.Name = "detalleCitaToolStripMenuItem";
+            this.detalleCitaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.detalleCitaToolStripMenuItem.Text = "Detalle Cita";
+            this.detalleCitaToolStripMenuItem.Click += new System.EventHandler(this.detalleCitaToolStripMenuItem_Click);
             // 
             // MDI_Spa
             // 
@@ -270,8 +279,9 @@
             this.Controls.Add(this.menuStrip1);
             this.Name = "MDI_Spa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MDI_Spa";
+            this.Text = "Menu Principal Spa";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FMDI_Spa_FormClosing);
             this.Load += new System.EventHandler(this.MDI_Spa_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -308,5 +318,6 @@
         private System.Windows.Forms.ToolStripMenuItem paquetesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviciosEnPaquetesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem detalleCitaToolStripMenuItem;
     }
 }

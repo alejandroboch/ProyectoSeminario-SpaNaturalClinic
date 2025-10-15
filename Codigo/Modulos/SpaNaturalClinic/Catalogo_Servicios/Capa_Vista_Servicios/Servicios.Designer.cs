@@ -68,7 +68,7 @@ namespace Capa_Vista_Servicios
             this.Btn_Nuevo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Nuevo.BackgroundImage")));
             this.Btn_Nuevo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Nuevo.Location = new System.Drawing.Point(39, 103);
-            this.Btn_Nuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Nuevo.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Nuevo.Name = "Btn_Nuevo";
             this.Btn_Nuevo.Size = new System.Drawing.Size(85, 80);
             this.Btn_Nuevo.TabIndex = 1;
@@ -81,7 +81,7 @@ namespace Capa_Vista_Servicios
             this.Btn_Guardar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Guardar.BackgroundImage")));
             this.Btn_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Guardar.Location = new System.Drawing.Point(132, 103);
-            this.Btn_Guardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Guardar.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Guardar.Name = "Btn_Guardar";
             this.Btn_Guardar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Guardar.TabIndex = 2;
@@ -94,7 +94,7 @@ namespace Capa_Vista_Servicios
             this.Btn_Actualizar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Actualizar.BackgroundImage")));
             this.Btn_Actualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Actualizar.Location = new System.Drawing.Point(225, 103);
-            this.Btn_Actualizar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Actualizar.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Actualizar.Name = "Btn_Actualizar";
             this.Btn_Actualizar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Actualizar.TabIndex = 3;
@@ -104,7 +104,7 @@ namespace Capa_Vista_Servicios
             // Txt_Buscar
             // 
             this.Txt_Buscar.Location = new System.Drawing.Point(319, 159);
-            this.Txt_Buscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Txt_Buscar.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_Buscar.Name = "Txt_Buscar";
             this.Txt_Buscar.Size = new System.Drawing.Size(325, 22);
             this.Txt_Buscar.TabIndex = 4;
@@ -115,7 +115,7 @@ namespace Capa_Vista_Servicios
             this.Btn_Buscar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Buscar.BackgroundImage")));
             this.Btn_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Buscar.Location = new System.Drawing.Point(653, 103);
-            this.Btn_Buscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Buscar.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Buscar.Name = "Btn_Buscar";
             this.Btn_Buscar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Buscar.TabIndex = 5;
@@ -128,7 +128,7 @@ namespace Capa_Vista_Servicios
             this.Btn_Eliminar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Eliminar.BackgroundImage")));
             this.Btn_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Eliminar.Location = new System.Drawing.Point(747, 103);
-            this.Btn_Eliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Eliminar.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Eliminar.Name = "Btn_Eliminar";
             this.Btn_Eliminar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Eliminar.TabIndex = 6;
@@ -141,7 +141,7 @@ namespace Capa_Vista_Servicios
             this.Btn_Cancelar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Cancelar.BackgroundImage")));
             this.Btn_Cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Cancelar.Location = new System.Drawing.Point(840, 103);
-            this.Btn_Cancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Cancelar.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
             this.Btn_Cancelar.Size = new System.Drawing.Size(85, 80);
             this.Btn_Cancelar.TabIndex = 7;
@@ -154,7 +154,7 @@ namespace Capa_Vista_Servicios
             this.Btn_Reporte.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Reporte.BackgroundImage")));
             this.Btn_Reporte.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Reporte.Location = new System.Drawing.Point(933, 103);
-            this.Btn_Reporte.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Reporte.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Reporte.Name = "Btn_Reporte";
             this.Btn_Reporte.Size = new System.Drawing.Size(85, 80);
             this.Btn_Reporte.TabIndex = 8;
@@ -165,13 +165,15 @@ namespace Capa_Vista_Servicios
             // 
             this.Btn_Ayuda.BackColor = System.Drawing.Color.Transparent;
             this.Btn_Ayuda.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Ayuda.BackgroundImage")));
+            this.Btn_Ayuda.Enabled = false;
             this.Btn_Ayuda.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_Ayuda.Location = new System.Drawing.Point(1027, 103);
-            this.Btn_Ayuda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Ayuda.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Ayuda.Name = "Btn_Ayuda";
             this.Btn_Ayuda.Size = new System.Drawing.Size(85, 80);
             this.Btn_Ayuda.TabIndex = 9;
             this.Btn_Ayuda.UseVisualStyleBackColor = false;
+            this.Btn_Ayuda.Visible = false;
             // 
             // Lbl_Buscar
             // 
@@ -220,7 +222,7 @@ namespace Capa_Vista_Servicios
             // Txt_IdServicio
             // 
             this.Txt_IdServicio.Location = new System.Drawing.Point(265, 267);
-            this.Txt_IdServicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Txt_IdServicio.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_IdServicio.Name = "Txt_IdServicio";
             this.Txt_IdServicio.Size = new System.Drawing.Size(187, 22);
             this.Txt_IdServicio.TabIndex = 14;
@@ -228,7 +230,7 @@ namespace Capa_Vista_Servicios
             // Txt_NombreServicio
             // 
             this.Txt_NombreServicio.Location = new System.Drawing.Point(265, 325);
-            this.Txt_NombreServicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Txt_NombreServicio.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_NombreServicio.Name = "Txt_NombreServicio";
             this.Txt_NombreServicio.Size = new System.Drawing.Size(187, 22);
             this.Txt_NombreServicio.TabIndex = 15;
@@ -236,7 +238,7 @@ namespace Capa_Vista_Servicios
             // Txt_PrecioServicio
             // 
             this.Txt_PrecioServicio.Location = new System.Drawing.Point(265, 375);
-            this.Txt_PrecioServicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Txt_PrecioServicio.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_PrecioServicio.Name = "Txt_PrecioServicio";
             this.Txt_PrecioServicio.Size = new System.Drawing.Size(187, 22);
             this.Txt_PrecioServicio.TabIndex = 16;
@@ -245,11 +247,12 @@ namespace Capa_Vista_Servicios
             // 
             this.Dgv_Servicios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dgv_Servicios.Location = new System.Drawing.Point(493, 267);
-            this.Dgv_Servicios.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Dgv_Servicios.Margin = new System.Windows.Forms.Padding(4);
             this.Dgv_Servicios.Name = "Dgv_Servicios";
             this.Dgv_Servicios.RowHeadersWidth = 51;
             this.Dgv_Servicios.Size = new System.Drawing.Size(619, 311);
             this.Dgv_Servicios.TabIndex = 17;
+            this.Dgv_Servicios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_Servicios_CellContentClick);
             // 
             // Servicios
             // 
@@ -274,7 +277,7 @@ namespace Capa_Vista_Servicios
             this.Controls.Add(this.Btn_Guardar);
             this.Controls.Add(this.Btn_Nuevo);
             this.Controls.Add(this.Lbl_Servicios);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Servicios";
             this.Text = "Servicios";
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Servicios)).EndInit();
