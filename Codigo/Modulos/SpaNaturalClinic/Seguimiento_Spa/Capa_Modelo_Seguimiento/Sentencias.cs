@@ -29,17 +29,17 @@ namespace Capa_Modelo_Seguimiento
         public OdbcDataAdapter fun_obtener_top_clientes(string textoBusqueda)
         {
             string filtro = string.IsNullOrWhiteSpace(textoBusqueda) ? "1=1" : $"c.nombre LIKE '%{textoBusqueda}%'";
-            // MEJORA: Ahora también calculamos SUM(t.total) para el gasto y MAX(t.fecha_cita) para la última visita.
-            string sql = $@"SELECT 
-                                c.nombre, 
-                                COUNT(t.pk_id_cita) AS total_citas,
-                                SUM(t.total) AS total_gastado,
-                                MAX(t.fecha_cita) AS ultima_visita
-                            FROM tbl_clientes c
-                            JOIN tbl_citas t ON c.pk_id_cliente = t.fk_id_cliente
-                            WHERE {filtro} AND t.estado = 'Finalizado' -- Solo contamos citas finalizadas
-                            GROUP BY c.pk_id_cliente, c.nombre
-                            ORDER BY total_citas DESC, total_gastado DESC;";
+            string sql = $@"
+        SELECT 
+            c.nombre, 
+            COUNT(CASE WHEN t.estado = 'Finalizado' THEN t.pk_id_cita END) AS total_citas,
+            SUM(CASE WHEN t.estado = 'Finalizado' THEN t.total ELSE 0 END) AS total_gastado,
+            MAX(CASE WHEN t.estado = 'Finalizado' THEN t.fecha_cita END) AS ultima_visita
+        FROM tbl_clientes c
+        LEFT JOIN tbl_citas t ON c.pk_id_cliente = t.fk_id_cliente
+        WHERE {filtro}
+        GROUP BY c.pk_id_cliente, c.nombre
+        ORDER BY total_citas DESC, total_gastado DESC;";
             return new OdbcDataAdapter(sql, con.conexion());
         }
     }
