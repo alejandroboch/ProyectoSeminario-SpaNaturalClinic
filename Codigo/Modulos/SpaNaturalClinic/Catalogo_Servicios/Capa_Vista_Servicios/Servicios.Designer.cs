@@ -277,8 +277,10 @@ namespace Capa_Vista_Servicios
             this.Controls.Add(this.Btn_Guardar);
             this.Controls.Add(this.Btn_Nuevo);
             this.Controls.Add(this.Lbl_Servicios);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Servicios";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Servicios";
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Servicios)).EndInit();
             this.ResumeLayout(false);

@@ -29,6 +29,7 @@ namespace Capa_Vista_Clientes
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Clientes));
             this.Txt_Id = new System.Windows.Forms.TextBox();
             this.Txt_Nombre = new System.Windows.Forms.TextBox();
             this.Txt_Telefono = new System.Windows.Forms.TextBox();
@@ -174,7 +175,7 @@ namespace Capa_Vista_Clientes
             this.Lbl_Clientes.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Clientes.Location = new System.Drawing.Point(531, 17);
             this.Lbl_Clientes.Name = "Lbl_Clientes";
-            this.Lbl_Clientes.Size = new System.Drawing.Size(101, 28);
+            this.Lbl_Clientes.Size = new System.Drawing.Size(96, 27);
             this.Lbl_Clientes.TabIndex = 23;
             this.Lbl_Clientes.Text = "Clientes";
             // 
@@ -316,8 +317,10 @@ namespace Capa_Vista_Clientes
             this.Controls.Add(this.Txt_Telefono);
             this.Controls.Add(this.Txt_Nombre);
             this.Controls.Add(this.Txt_Id);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Clientes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.Clientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Clientes)).EndInit();

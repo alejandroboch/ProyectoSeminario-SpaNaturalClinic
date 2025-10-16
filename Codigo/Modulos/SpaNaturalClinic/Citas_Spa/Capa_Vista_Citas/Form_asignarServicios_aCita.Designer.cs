@@ -29,6 +29,7 @@ namespace Capa_Vista_Citas
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_asignarServicios_aCita));
             this.Lbl_titulo = new System.Windows.Forms.Label();
             this.Lbl_servicio = new System.Windows.Forms.Label();
             this.Lbl_paquete = new System.Windows.Forms.Label();
@@ -156,7 +157,6 @@ namespace Capa_Vista_Citas
             // 
             this.Dgv_asignaciones.AllowUserToAddRows = false;
             this.Dgv_asignaciones.AllowUserToDeleteRows = false;
-            this.Dgv_asignaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Dgv_asignaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dgv_asignaciones.Location = new System.Drawing.Point(468, 199);
             this.Dgv_asignaciones.Name = "Dgv_asignaciones";
@@ -301,9 +301,11 @@ namespace Capa_Vista_Citas
             this.Controls.Add(this.Gpb_paquete);
             this.Controls.Add(this.Lbl_servicio);
             this.Controls.Add(this.Lbl_titulo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_asignarServicios_aCita";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Asignar servicios a cita";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_asignarServicios_aCita_FormClosed);
             this.Load += new System.EventHandler(this.Form_asignarServicios_aCita_Load);
             this.Gpb_paquete.ResumeLayout(false);
             this.Gpb_paquete.PerformLayout();

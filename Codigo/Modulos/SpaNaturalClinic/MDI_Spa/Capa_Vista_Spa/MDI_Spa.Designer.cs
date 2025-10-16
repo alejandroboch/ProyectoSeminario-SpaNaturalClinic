@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MDI_Spa));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nóminaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantemientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.detalleCitaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desarrolloDeCarreraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reclutamientoYSelecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capacitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +51,6 @@
             this.Pnl_Usuario = new System.Windows.Forms.Panel();
             this.lbl_nombreUsuario = new System.Windows.Forms.Label();
             this.Lbl_Usuario = new System.Windows.Forms.Label();
-            this.detalleCitaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.Pnl_inferior.SuspendLayout();
             this.Pnl_Fecha.SuspendLayout();
@@ -105,9 +106,16 @@
             // mantemientosToolStripMenuItem
             // 
             this.mantemientosToolStripMenuItem.Name = "mantemientosToolStripMenuItem";
-            this.mantemientosToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
+            this.mantemientosToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
             this.mantemientosToolStripMenuItem.Text = "Cita";
             this.mantemientosToolStripMenuItem.Click += new System.EventHandler(this.mantemientosToolStripMenuItem_Click);
+            // 
+            // detalleCitaToolStripMenuItem
+            // 
+            this.detalleCitaToolStripMenuItem.Name = "detalleCitaToolStripMenuItem";
+            this.detalleCitaToolStripMenuItem.Size = new System.Drawing.Size(170, 26);
+            this.detalleCitaToolStripMenuItem.Text = "Detalle Cita";
+            this.detalleCitaToolStripMenuItem.Click += new System.EventHandler(this.detalleCitaToolStripMenuItem_Click);
             // 
             // desarrolloDeCarreraToolStripMenuItem
             // 
@@ -179,7 +187,7 @@
             // usuarioToolStripMenuItem
             // 
             this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
-            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
+            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.usuarioToolStripMenuItem.Text = "Usuario";
             this.usuarioToolStripMenuItem.Click += new System.EventHandler(this.usuarioToolStripMenuItem_Click);
             // 
@@ -261,13 +269,6 @@
             this.Lbl_Usuario.TabIndex = 0;
             this.Lbl_Usuario.Text = "Usuario:";
             // 
-            // detalleCitaToolStripMenuItem
-            // 
-            this.detalleCitaToolStripMenuItem.Name = "detalleCitaToolStripMenuItem";
-            this.detalleCitaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.detalleCitaToolStripMenuItem.Text = "Detalle Cita";
-            this.detalleCitaToolStripMenuItem.Click += new System.EventHandler(this.detalleCitaToolStripMenuItem_Click);
-            // 
             // MDI_Spa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -277,6 +278,7 @@
             this.ClientSize = new System.Drawing.Size(1169, 750);
             this.Controls.Add(this.Pnl_inferior);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MDI_Spa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu Principal Spa";

@@ -300,9 +300,11 @@ namespace Capa_Vista_PaqServ
             this.Controls.Add(this.Btn_Guardar);
             this.Controls.Add(this.Btn_Nuevo);
             this.Controls.Add(this.Lbl_PaquetesServicio);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Paquetes_Con_Servicio";
-            this.Text = "Paquetes_Con_Servicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Asignar Servicios a Paquetes";
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_PaquetesServicios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

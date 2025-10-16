@@ -29,6 +29,7 @@ namespace Capa_Vista_Pagos
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_pagos));
             this.Lbl_titulo = new System.Windows.Forms.Label();
             this.Lbl_numCita = new System.Windows.Forms.Label();
             this.Lbl_Cliente = new System.Windows.Forms.Label();
@@ -294,6 +295,7 @@ namespace Capa_Vista_Pagos
             this.Controls.Add(this.Lbl_Cliente);
             this.Controls.Add(this.Lbl_numCita);
             this.Controls.Add(this.Lbl_titulo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_pagos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pagos";

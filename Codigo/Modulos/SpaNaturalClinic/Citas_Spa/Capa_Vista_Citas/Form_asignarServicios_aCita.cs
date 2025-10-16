@@ -839,5 +839,10 @@ namespace Capa_Vista_Citas
         {
             CargarDatos();
         }
+
+        private void Form_asignarServicios_aCita_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
     }
 }

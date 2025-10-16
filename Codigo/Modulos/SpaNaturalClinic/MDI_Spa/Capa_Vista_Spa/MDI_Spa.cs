@@ -204,6 +204,20 @@ namespace Capa_Vista_Spa
 
         private void FMDI_Spa_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (this.MdiChildren.Length > 0)
+            {
+                DialogResult result = MessageBox.Show(
+                    "Hay formularios abiertos. ¿Deseas cerrar todo?",
+                    "Confirmar cierre",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
             Environment.Exit(0);
         }
 

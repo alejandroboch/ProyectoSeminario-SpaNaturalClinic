@@ -29,6 +29,7 @@ namespace Capa_Vista_Citas
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_citas));
             this.Lbl_titulo = new System.Windows.Forms.Label();
             this.Lbl_cliente = new System.Windows.Forms.Label();
             this.Lbl_fecha = new System.Windows.Forms.Label();
@@ -118,7 +119,6 @@ namespace Capa_Vista_Citas
             // 
             this.Dgv_citas.AllowUserToAddRows = false;
             this.Dgv_citas.AllowUserToDeleteRows = false;
-            this.Dgv_citas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Dgv_citas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dgv_citas.Location = new System.Drawing.Point(438, 206);
             this.Dgv_citas.Name = "Dgv_citas";
@@ -296,6 +296,7 @@ namespace Capa_Vista_Citas
             this.Controls.Add(this.Lbl_fecha);
             this.Controls.Add(this.Lbl_cliente);
             this.Controls.Add(this.Lbl_titulo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_citas";
             this.Text = "Programación de Citas";
             this.Load += new System.EventHandler(this.Form_citas_Load);

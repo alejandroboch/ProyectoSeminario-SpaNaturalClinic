@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SeguimientoForm));
             this.Lbl_Buscar = new System.Windows.Forms.Label();
             this.Txt_BuscarVip = new System.Windows.Forms.TextBox();
             this.Lbl_Clientes = new System.Windows.Forms.Label();
@@ -65,7 +66,7 @@
             this.Lbl_Clientes.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Clientes.Location = new System.Drawing.Point(489, 29);
             this.Lbl_Clientes.Name = "Lbl_Clientes";
-            this.Lbl_Clientes.Size = new System.Drawing.Size(228, 28);
+            this.Lbl_Clientes.Size = new System.Drawing.Size(219, 27);
             this.Lbl_Clientes.TabIndex = 33;
             this.Lbl_Clientes.Text = "Clientes Frecuentes";
             // 
@@ -167,7 +168,9 @@
             this.Controls.Add(this.Btn_LimpiarBusquedas);
             this.Controls.Add(this.Btn_BuscarVip);
             this.Controls.Add(this.Txt_BuscarVip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SeguimientoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seguimiento";
             this.Load += new System.EventHandler(this.SeguimientoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_TopClientes)).EndInit();
