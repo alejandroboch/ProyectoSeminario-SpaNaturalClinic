@@ -2,7 +2,9 @@
 -- BD SPA con control de paquetes mejorado
 -- Solución para evitar doble cobro en paquetes
 -- ===========================================
-use railway;
+Create database DB_SPADos;
+use DB_SPADos;
+-- use railway;
 
 
 -- ===========================================

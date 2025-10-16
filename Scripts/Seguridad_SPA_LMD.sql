@@ -1,4 +1,4 @@
-
+use DB_SPADos;
 
 INSERT INTO `tbl_aplicaciones` (`Pk_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `estado_aplicacion`) VALUES
 (1000, 'MDI SEGURIDAD', 'PARA SEGURIDAD', 1),
@@ -358,6 +358,8 @@ INSERT INTO `tbl_permisos_aplicaciones_usuario` (`PK_id_Aplicacion_Usuario`, `Fk
 (6, 1, 1000, 1, 1, 1, 1, 1),
 (7, 1, 1000, 0, 0, 0, 0, 1),
 (8, 1, 9000, 0, 0, 0, 0, 0);
+
+SET SQL_SAFE_UPDATES = 0; -- desactivar el modo seguro
 
 -- Se actualiza la contraseña de admin, ya que no debe ingresarse hasheado manualmente
 UPDATE `tbl_usuarios` SET `password_usuario` = 'HO0aGo4nM94=' WHERE `Pk_id_usuario` = 1;

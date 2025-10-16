@@ -1,7 +1,7 @@
 -- ===========================================
 -- 3) Datos de ejemplo
 -- ===========================================
-
+use DB_SPADos;
 -- Cliente
 INSERT INTO tbl_clientes (nombre, telefono, es_vip)
 VALUES ('Juan Pérez', '555-1234', 1);
